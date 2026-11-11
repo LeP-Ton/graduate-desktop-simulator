@@ -71,12 +71,28 @@ export function Writer({ state: s, dispatch, open }: AppProps) {
         </div>
       </aside>
       <main className="writer-main">
+        <div className="word-ribbon">
+          <strong>文件</strong>
+          <span>开始</span>
+          <span>插入</span>
+          <span>页面布局</span>
+          <span>引用</span>
+          <span>审阅</span>
+          <span>视图</span>
+          <b>Microsoft Word 2010</b>
+        </div>
+        {s.flags.includes("era-2012-migrated") && (
+          <Hint>
+            这份存档含旧版导入文稿，原文已保留。可手动修订为 2012
+            年课题；迁移前原始存档可在控制面板导出。
+          </Hint>
+        )}
         {tab === "write" ? (
           <>
             <div className="editor-toolbar">
               <span>
                 <i className="online-dot" />
-                文稿已同步
+                宋体 · 小四　|　文稿已保存
               </span>
               <div>
                 <button title="引用文献" onClick={() => open("library")}>
@@ -85,16 +101,16 @@ export function Writer({ state: s, dispatch, open }: AppProps) {
                 <button title="插入图表" onClick={() => open("analysis")}>
                   插入图表
                 </button>
-                <button title="AI 润色" onClick={() => open("ai")}>
-                  AI 润色
+                <button title="文稿检查" onClick={() => open("ai")}>
+                  文稿检查
                 </button>
               </div>
             </div>
             <div className="editor-paper">
-              <span className="eyebrow">研究论文 · 工作稿</span>
+              <span className="eyebrow">Microsoft Word 2010 · 研究论文</span>
               <h2>{SECTIONS.find((x) => x.id === section)!.name}</h2>
               <div className="editor-meta">
-                {s.profile.name} · 计算机与人工智能学院{" "}
+                {s.profile.name} · 计算机学院{" "}
                 <span>{s.manuscript.sections[section].length} 字</span>
               </div>
               <textarea
@@ -173,7 +189,7 @@ export function Writer({ state: s, dispatch, open }: AppProps) {
           <div className="page">
             <PageHead
               eyebrow="同行评审"
-              title="让你的发现，接受检验。"
+              title="论文投稿与评审记录"
               text="评审依据投稿时的证据快照。等待期间补写内容不会改变已投稿件。"
             />
             <div className="quality-grid">
@@ -280,7 +296,7 @@ export function Writer({ state: s, dispatch, open }: AppProps) {
                     <p>{v.description}</p>
                     <small>
                       学术门槛 {v.threshold}/100 · 审稿约 {v.hours}h ·{" "}
-                      {v.direction === "all" ? "综合方向" : "偏好智能体研究"}
+                      {v.direction === "all" ? "综合方向" : "偏好信息检索研究"}
                     </small>
                   </div>
                 </button>

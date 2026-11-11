@@ -9,7 +9,15 @@ import {
   Users,
 } from "lucide-react";
 import { MENTORS, NPCS, gameDate } from "../game/data";
-import { Button, Empty, Hint, Meter, PageHead, Pill } from "./shared";
+import {
+  Button,
+  Empty,
+  Hint,
+  Meter,
+  PageHead,
+  Pill,
+  PeriodAvatar,
+} from "./shared";
 import type { AppProps } from "./shared";
 export function Chat({ state: s, dispatch, isActive = true }: AppProps) {
   const [contact, setContact] = useState("mentor"),
@@ -27,10 +35,10 @@ export function Chat({ state: s, dispatch, isActive = true }: AppProps) {
     <div className="chat-layout">
       <aside className="chat-contacts">
         <div>
-          <h3>课题组通讯</h3>
+          <h3>QQ2012 · 课题组</h3>
           <span>
             <i className="online-dot" />
-            实验室里，故事正在发生
+            在线 · 2012 级研究生课题组
           </span>
         </div>
         {NPCS.map((n) => {
@@ -45,9 +53,7 @@ export function Chat({ state: s, dispatch, isActive = true }: AppProps) {
               onClick={() => setContact(n.id)}
             >
               <span className="contact-avatar" style={{ background: n.color }}>
-                {n.id === "mentor"
-                  ? MENTORS[s.profile.mentor].name[0]
-                  : n.avatar}
+                <PeriodAvatar value={n.id} />
               </span>
               <div>
                 <b>
@@ -113,7 +119,7 @@ export function Chat({ state: s, dispatch, isActive = true }: AppProps) {
                   className="bubble-avatar"
                   style={{ background: m.player ? "#d5e7de" : npc.color }}
                 >
-                  {m.player ? s.profile.avatar : name[0]}
+                  <PeriodAvatar value={m.player ? s.profile.avatar : contact} />
                 </span>
                 <div>
                   <small>
@@ -188,7 +194,7 @@ export function Chat({ state: s, dispatch, isActive = true }: AppProps) {
               <Send size={16} />
             </button>
           </div>
-          <small>每次认真交流消耗 0.5 小时，合作会带来实际帮助。</small>
+          <small>发送与讨论占用 0.5 小时；支持保存聊天记录和约定日程。</small>
         </div>
       </main>
     </div>
@@ -208,7 +214,7 @@ export function Calendar({ state: s, dispatch }: AppProps) {
       <PageHead
         eyebrow="给重要的事留些时间"
         title="给重要的事，留些时间。"
-        text={`2026 秋季学期 · 今天是第 ${current.day} 天，${current.weekday}`}
+        text={`2012 秋季学期 · 今天是第 ${current.day} 天，${current.weekday}`}
         action={<Pill>第 {current.week} / 4 周</Pill>}
       />
       <div className="week-tabs">

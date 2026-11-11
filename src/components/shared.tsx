@@ -1,3 +1,4 @@
+import { avatarUrl, iconUrl } from "../period";
 import {
   Activity,
   ArrowRight,
@@ -53,42 +54,42 @@ export const APPS: {
   },
   {
     id: "chat",
-    name: "课题组通讯",
+    name: "QQ 2012 · 课题组",
     subtitle: "保持联系，共同探索",
     icon: MessageCircle,
     color: "green",
   },
   {
     id: "search",
-    name: "学术搜索",
+    name: "学术搜索 · IE9",
     subtitle: "每个好问题，都有来处",
     icon: Search,
     color: "blue",
   },
   {
     id: "library",
-    name: "文献管理",
+    name: "文献管理 · Zotero 3",
     subtitle: "整理知识，连接想法",
     icon: BookMarked,
     color: "orange",
   },
   {
     id: "ide",
-    name: "代码编辑器",
+    name: "Vim 7.3 代码编辑器",
     subtitle: "把假设写成代码",
     icon: Code2,
     color: "sky",
   },
   {
     id: "terminal",
-    name: "实验终端",
+    name: "PuTTY 实验终端",
     subtitle: "让数据回答问题",
     icon: Terminal,
     color: "dark",
   },
   {
     id: "gpu",
-    name: "GPU 管理器",
+    name: "服务器管理器",
     subtitle: "让每一份算力都有价值",
     icon: Cpu,
     color: "purple",
@@ -102,7 +103,7 @@ export const APPS: {
   },
   {
     id: "writer",
-    name: "论文编辑器",
+    name: "Word 2010 论文编辑器",
     subtitle: "让你的发现被看见",
     icon: FilePenLine,
     color: "indigo",
@@ -116,7 +117,7 @@ export const APPS: {
   },
   {
     id: "mail",
-    name: "校园邮箱",
+    name: "校园邮箱 · Outlook 2010",
     subtitle: "消息，也可能是机会",
     icon: Mail,
     color: "blue",
@@ -137,7 +138,7 @@ export const APPS: {
   },
   {
     id: "ai",
-    name: "AI 科研助手",
+    name: "科研工具箱",
     subtitle: "一起思考，独立判断",
     icon: Sparkles,
     color: "purple",
@@ -151,7 +152,7 @@ export const APPS: {
   },
   {
     id: "settings",
-    name: "存档与设置",
+    name: "控制面板",
     subtitle: "保存这段旅程",
     icon: Settings2,
     color: "slate",
@@ -166,13 +167,19 @@ export function AppIcon({
   size?: number;
   bare?: boolean;
 }) {
-  const app = APPS.find((a) => a.id === id)!;
   return (
-    <span className={`${bare ? "bare-icon" : "app-icon"} ${app.color}`}>
-      <app.icon size={size} strokeWidth={1.65} />
+    <span className={bare ? "bare-icon period-icon" : "app-icon period-icon"}>
+      <img
+        src={iconUrl(id, size)}
+        width={size}
+        height={size}
+        alt=""
+        draggable={false}
+      />
     </span>
   );
 }
+
 export function Button({
   children,
   onClick,
@@ -308,3 +315,14 @@ export function SectionTitle({
   );
 }
 export { Activity, ArrowRight, Bell, Check, ChevronRight, Monitor, X };
+
+export function PeriodAvatar({ value }: { value: string }) {
+  return (
+    <img
+      className="period-avatar"
+      src={avatarUrl(value)}
+      alt=""
+      draggable={false}
+    />
+  );
+}

@@ -40,7 +40,7 @@ export function tickNpcs(s: GameState) {
       message(
         s,
         "sister",
-        "我正在补论文实验，明天会用 A100。如果愿意一起做数据检查，可以共享清洗流程。合作前先约定分工与署名哦。",
+        "我正在补论文实验，明天会用 Tesla M2090。如果愿意一起做数据检查，可以共享清洗流程。合作前先约定分工与署名哦。",
       ),
     );
   if (day >= 2 && time >= 10)
@@ -48,7 +48,7 @@ export function tickNpcs(s: GameState) {
       message(
         s,
         "peer",
-        "我今天 10:00–14:00 在 A100 上跑推理评测，RTX 还有空位。晚点我们可以交换一下实验现象。",
+        "我今天 10:00–14:00 在共享服务器上跑分区评测，实验机还有空位。晚点我们可以交换一下实验现象。",
       ),
     );
   if (day >= 3 && time >= 11)
@@ -81,7 +81,7 @@ export function tickNpcs(s: GameState) {
       s.mails.unshift({
         id: "career-invite",
         from: "星河科技 · 校园招聘",
-        subject: "AI 工程实习交流邀请",
+        subject: "算法与软件研发实习交流邀请",
         text: "我们关注工程实践和问题解决能力，欢迎参加第 12 天 14:00 的实习交流。你可以参加，也可以继续科研。本次交流会计入职业积累，不会替你决定未来路线。",
         hour: s.hour,
         read: false,
@@ -103,7 +103,7 @@ export function tickNpcs(s: GameState) {
       message(
         s,
         "mentor",
-        "合作项目需要一个推理演示，这周帮忙完成两次工程任务吧。我会另外补充 40 GPUh，也请你留意自己的论文时间。",
+        "合作项目需要一个检索演示，这周帮忙完成两次工程任务吧。我会另外补充 40 GPUh，也请你留意自己的论文时间。",
       );
       s.stats.compute += 40;
       s.calendar.push({

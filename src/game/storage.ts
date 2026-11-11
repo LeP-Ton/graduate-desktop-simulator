@@ -1,9 +1,46 @@
 import { NPCS, PAPERS, SECTIONS, TOPICS, VENUES } from "./data";
 import { validConfig } from "./research";
+import { migrate2012 } from "./migrations";
 import type { GameState, Stats, ExperimentResult } from "./types";
 
 const AUTO_KEY = "grados-auto-v1";
 const MANUAL_KEY = "grados-manual-v1";
+const LEGACY_KEY = "grados-v1-before-2012";
+const backupHash = (text: string) => {
+  let value = 2166136261;
+  for (let i = 0; i < text.length; i++)
+    value = Math.imul(value ^ text.charCodeAt(i), 16777619) >>> 0;
+  return value.toString(16);
+};
+function rememberLegacySave(text: string) {
+  if (typeof localStorage === "undefined") return;
+  const existing = localStorage.getItem(LEGACY_KEY);
+  if (existing === text) return;
+  // 新导入档更新快捷备份入口，原有备份仍按内容摘要保留，避免覆盖另一个旧进度。
+  if (existing)
+    localStorage.setItem(`${LEGACY_KEY}-${backupHash(existing)}`, existing);
+  localStorage.setItem(LEGACY_KEY, text);
+}
+export function getLegacyBackup(): string | null {
+  try {
+    return localStorage.getItem(LEGACY_KEY);
+  } catch {
+    return null;
+  }
+}
+export function exportLegacyBackup(): boolean {
+  const raw = getLegacyBackup();
+  if (!raw) return false;
+  const url = URL.createObjectURL(
+    new Blob([raw], { type: "application/json" }),
+  );
+  const link = document.createElement("a");
+  link.href = url;
+  link.download = "研究生桌面模拟器-旧版原始存档.json";
+  link.click();
+  setTimeout(() => URL.revokeObjectURL(url), 1000);
+  return true;
+}
 const finite = (n: unknown, min = 0, max = 1e9): n is number =>
   typeof n === "number" && Number.isFinite(n) && n >= min && n <= max;
 const record = (x: unknown): x is Record<string, unknown> =>
@@ -40,6 +77,7 @@ export function validateSave(value: unknown): value is GameState {
   const s = value as unknown as GameState;
   if (
     s.version !== 1 ||
+    (s.era !== undefined && s.era !== 2012) ||
     !isHour(s.hour) ||
     s.hour < 8 ||
     s.hour > 672 ||
@@ -316,7 +354,7 @@ export function exportGame(s: GameState) {
   const url = URL.createObjectURL(blob);
   const link = document.createElement("a");
   link.href = url;
-  link.download = `GradOS-${s.profile.name}-第${Math.min(28, Math.floor(s.hour / 24) + 1)}天.json`;
+  link.download = `研究生桌面模拟器2012-${s.profile.name}-第${Math.min(28, Math.floor(s.hour / 24) + 1)}天.json`;
   link.click();
   setTimeout(() => URL.revokeObjectURL(url), 1000);
 }
@@ -325,5 +363,6 @@ export function parseSave(text: string) {
   const data: unknown = JSON.parse(text);
   if (!validateSave(data))
     throw new Error("存档格式不正确或版本不兼容，当前进度未受影响。");
-  return data;
+  if (data.era !== 2012) rememberLegacySave(text);
+  return migrate2012(data);
 }

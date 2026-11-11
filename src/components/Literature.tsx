@@ -39,6 +39,10 @@ export function Literature({
   if (paper)
     return (
       <div className="page paper-detail">
+        <div className="period-browser-bar">
+          <b>{library ? "Zotero 3.0" : "Internet Explorer 9"}</b>
+          <span>http://scholar.lab.edu.cn/paper/{paper.id}</span>
+        </div>
         <button className="back-link" onClick={() => setSelected(null)}>
           <ArrowLeft size={15} />
           返回{library ? "知识库" : "搜索结果"}
@@ -149,9 +153,22 @@ export function Literature({
     );
   return (
     <div className="page">
+      <div className="period-browser-bar">
+        <b>{library ? "Zotero 3.0" : "Internet Explorer 9"}</b>
+        <span>
+          {library ? "我的文献 / 本地资料库" : "http://scholar.lab.edu.cn/"}
+        </span>
+        <button onClick={() => open(library ? "search" : "library")}>
+          {library ? "学术检索" : "收藏夹 / 文献库"}
+        </button>
+      </div>
       <PageHead
-        eyebrow={library ? "你的文献知识库" : "探索学术世界"}
-        title={library ? "让知识，彼此连接。" : "每个好问题，都有来处。"}
+        eyebrow={
+          library
+            ? "Zotero 3.0 · 我的文献"
+            : "Internet Explorer 9 · 学术文献检索"
+        }
+        title={library ? "Zotero 文献库" : "学术搜索"}
         text={
           library
             ? `${s.read.length} 篇已读 · ${s.saved.length} 篇收藏 · ${s.manuscript.references.length} 篇引用`

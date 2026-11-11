@@ -188,6 +188,7 @@ export interface Notice {
 }
 export interface GameState {
   version: 1;
+  era?: 2012;
   profile: Profile;
   hour: number;
   rng: number;

@@ -22,6 +22,8 @@ import {
   METHODS,
   MODELS,
   TOPICS,
+  SERVERS,
+  RESEARCH_CONTEXT,
 } from "../game/data";
 import { serverBusyUntil } from "../game/engine";
 import {
@@ -49,25 +51,34 @@ const STATUS = {
 };
 export function IDE({ state: s, dispatch, open }: AppProps) {
   const topic = TOPICS.find((t) => t.id === s.topicId);
+  const systems = s.profile.direction === "systems";
   const [tab, setTab] = useState("experiment.py");
   const risk = s.aiIssues.some((i) => i.kind === "code" && !i.resolved);
   const code =
     tab === "experiment.py"
       ? [
           "# 通过控制变量，把研究假设变成实验",
-          "from research import Model, Dataset, Evaluator",
+          systems
+            ? "from hadoop_lab import Job, Dataset, Evaluator"
+            : "from research_lab import Model, Dataset, Evaluator",
           "",
           `# 课题：${topic?.title || "等待确定研究问题"}`,
           "def run_experiment(config):",
           "    dataset = Dataset.load(config.dataset)",
           "    train, validation = dataset.independent_split()",
-          "    model = Model.load(config.model)",
+          systems
+            ? "    job = Job.load(config.model)"
+            : "    model = Model.load(config.model)",
           "",
           risk
-            ? "    # 待核验：AI 代码未正确隔离验证集"
+            ? "    # 待核验：第三方代码未正确隔离验证集"
             : "    # 验证集独立保存，不参与参数选择",
-          "    model.fit(train, epochs=config.epochs)",
-          "    result = Evaluator.evaluate(model, validation)",
+          systems
+            ? "    job.run(train, passes=config.epochs)"
+            : "    model.fit(train, epochs=config.epochs)",
+          systems
+            ? "    result = Evaluator.evaluate(job, validation)"
+            : "    result = Evaluator.evaluate(model, validation)",
           "    return result.with_seed(config.seed)",
           "",
           'if __name__ == "__main__":',
@@ -90,7 +101,7 @@ export function IDE({ state: s, dispatch, open }: AppProps) {
   return (
     <div className="ide-layout">
       <aside className="ide-explorer">
-        <span>资源管理器</span>
+        <span>gVim 7.3 · 工程文件</span>
         <b>
           <ChevronRight size={12} /> research-project
         </b>
@@ -117,13 +128,16 @@ export function IDE({ state: s, dispatch, open }: AppProps) {
         </div>
       </aside>
       <main className="ide-main">
+        <div className="ide-menu">
+          文件(F)　编辑(E)　工具(T)　缓冲区(B)　窗口(W)　帮助(H)
+        </div>
         <div className="ide-tabs">
           <button>
             <FileCode2 size={14} />
             {tab}
             <span>●</span>
           </button>
-          <span>Python 3.12</span>
+          <span>Vim 7.3 · Python 2.7</span>
         </div>
         <div className="code-area">
           {code.map((line, i) => (
@@ -148,13 +162,13 @@ export function IDE({ state: s, dispatch, open }: AppProps) {
             <ShieldCheck size={17} />
             <b>实现质量 {Math.round(s.codeQuality)}%</b>
             <Pill tone={risk ? "orange" : "teal"}>
-              {risk ? "AI 代码待核验" : "数据隔离已启用"}
+              {risk ? "第三方代码待核验" : "数据隔离已启用"}
             </Pill>
           </div>
           <Meter value={s.codeQuality} />
           <p>
-            代码质量会影响实验的可复现性。编写、测试与合作都能改善实现，AI
-            代码需先核验。
+            代码质量会影响实验的可复现性。编写、测试与合作都能改善实现，第三方脚本
+            需先核验。
           </p>
           <div className="button-row">
             <Button onClick={() => dispatch({ type: "code", mode: "write" })}>
@@ -172,7 +186,7 @@ export function IDE({ state: s, dispatch, open }: AppProps) {
               secondary
               onClick={() => dispatch({ type: "code", mode: "ai" })}
             >
-              AI 生成 · 0.5h
+              导入开源代码 · 0.5h
             </Button>
             <button className="text-button" onClick={() => open("terminal")}>
               配置实验
@@ -190,8 +204,9 @@ export function TerminalApp({ state: s, dispatch, open }: AppProps) {
     [mode, setMode] = useState<"new" | "logs">("new");
   const tasks = [...s.tasks].reverse(),
     task = tasks.find((t) => t.id === selected) || tasks[0];
+  const context = RESEARCH_CONTEXT[s.profile.direction];
   const memory = requiredMemory(config),
-    capacity = config.server === "rtx" ? 24 : 48;
+    capacity = SERVERS[config.server].capacity;
   function update<K extends keyof ExperimentConfig>(
     key: K,
     value: ExperimentConfig[K],
@@ -200,9 +215,13 @@ export function TerminalApp({ state: s, dispatch, open }: AppProps) {
   }
   return (
     <div className="page terminal-page">
+      <div className="period-program-bar">
+        <b>PuTTY 0.62</b>
+        <span>SSH — lab-server / 研究任务提交</span>
+      </div>
       <PageHead
-        eyebrow="科研实验终端"
-        title="把假设，交给实验。"
+        eyebrow="PuTTY 0.62 · 实验服务器"
+        title="新建实验任务"
         text={
           TOPICS.find((t) => t.id === s.topicId)?.title ||
           "先选择研究问题，并在代码编辑器完成实现。"
@@ -242,7 +261,7 @@ export function TerminalApp({ state: s, dispatch, open }: AppProps) {
               />
             </label>
             <label className="field">
-              <span>模型规模</span>
+              <span>实验规模与实现方案</span>
               <select
                 value={config.model}
                 onChange={(e) =>
@@ -251,7 +270,7 @@ export function TerminalApp({ state: s, dispatch, open }: AppProps) {
               >
                 {MODELS.map((m) => (
                   <option key={m.id} value={m.id}>
-                    {m.name}
+                    {context.modelNames[m.id]}
                   </option>
                 ))}
               </select>
@@ -269,7 +288,7 @@ export function TerminalApp({ state: s, dispatch, open }: AppProps) {
               >
                 {DATASETS.map((m) => (
                   <option key={m.id} value={m.id}>
-                    {m.name}
+                    {context.datasetNames[m.id]}
                   </option>
                 ))}
               </select>
@@ -300,7 +319,13 @@ export function TerminalApp({ state: s, dispatch, open }: AppProps) {
               </div>
             </label>
             <label className="field">
-              <span>学习率</span>
+              <span>
+                {s.profile.direction === "ml"
+                  ? "学习率"
+                  : s.profile.direction === "systems"
+                    ? "分区调整步长"
+                    : "优化步长"}
+              </span>
               <select
                 value={config.learningRate}
                 onChange={(e) => update("learningRate", +e.target.value)}
@@ -313,7 +338,13 @@ export function TerminalApp({ state: s, dispatch, open }: AppProps) {
               </select>
             </label>
             <label className="field">
-              <span>训练轮数（epochs）</span>
+              <span>
+                {s.profile.direction === "systems"
+                  ? "调度迭代次数（passes）"
+                  : s.profile.direction === "agent"
+                    ? "优化迭代次数（passes）"
+                    : "训练轮数（epochs）"}
+              </span>
               <select
                 value={config.epochs}
                 onChange={(e) => update("epochs", +e.target.value)}
@@ -359,11 +390,10 @@ export function TerminalApp({ state: s, dispatch, open }: AppProps) {
                   >
                     <Cpu size={22} />
                     <div>
-                      <b>{id === "rtx" ? "NVIDIA RTX 4090" : "NVIDIA A100"}</b>
+                      <b>{context.serverNames[id]}</b>
                       <small>
-                        {id === "rtx"
-                          ? "24 GB 显存 · 1 GPUh / 小时"
-                          : "48 GB 显存 · 3 GPUh / 小时"}
+                        {SERVERS[id].capacity} GB {context.resourceLabel} ·{" "}
+                        {SERVERS[id].rate} {context.unit} / 小时
                       </small>
                     </div>
                     {config.server === id && <Check size={16} />}
@@ -382,16 +412,16 @@ export function TerminalApp({ state: s, dispatch, open }: AppProps) {
                 <Clock3 size={18} />
               )}
               <b>预计 {experimentDuration(config)}h</b> · {memory.toFixed(1)} /{" "}
-              {capacity} GB 显存 ·{" "}
+              {capacity} GB {context.resourceLabel} ·{" "}
               {(
-                experimentDuration(config) * (config.server === "a100" ? 3 : 1)
+                experimentDuration(config) * SERVERS[config.server].rate
               ).toFixed(1)}{" "}
-              GPUh
+              {context.unit}
             </span>
             <small>
               {memory > capacity
-                ? "显存不足，提交后将无法启动。缩小模型 / batch，或换用 A100。"
-                : `当前额度 ${s.stats.compute.toFixed(1)} GPUh；任务会后台运行。`}
+                ? `${context.resourceLabel}不足，提交后将无法启动。缩小实验规模 / batch，或换用${context.serverNames.a100}。`
+                : `当前额度 ${s.stats.compute.toFixed(1)} ${context.unit}；任务会后台运行。`}
             </small>
           </div>
           <div className="button-row">
@@ -426,8 +456,7 @@ export function TerminalApp({ state: s, dispatch, open }: AppProps) {
                 <div>
                   <b>{t.config.name}</b>
                   <small>
-                    {STATUS[t.status]} ·{" "}
-                    {t.config.server === "rtx" ? "RTX 4090" : "A100"}
+                    {STATUS[t.status]} · {context.serverNames[t.config.server]}
                   </small>
                 </div>
                 <ChevronRight size={13} />
@@ -521,13 +550,18 @@ export function TerminalApp({ state: s, dispatch, open }: AppProps) {
   );
 }
 export function GPU({ state: s, dispatch, open }: AppProps) {
+  const context = RESEARCH_CONTEXT[s.profile.direction];
   return (
     <div className="page">
       <PageHead
-        eyebrow="实验室计算集群"
-        title="有限算力，无限想法。"
+        eyebrow="实验室共享计算平台 · 2012"
+        title="实验室服务器资源管理"
         text="计算资源按队列共享，运行、排队和维护会真实影响实验进度。"
-        action={<Pill>{s.stats.compute.toFixed(1)} GPUh 可用</Pill>}
+        action={
+          <Pill>
+            {s.stats.compute.toFixed(1)} {context.unit} 可用
+          </Pill>
+        }
       />
       <div className="gpu-grid">
         {(["rtx", "a100"] as const).map((server) => {
@@ -545,20 +579,22 @@ export function GPU({ state: s, dispatch, open }: AppProps) {
                   <Cpu size={26} />
                 </span>
                 <Pill tone={busy ? "orange" : running ? "teal" : "slate"}>
-                  {busy ? "共享占用" : running ? "训练中" : "空闲"}
+                  {busy ? "共享占用" : running ? "运行中" : "空闲"}
                 </Pill>
               </div>
-              <h3>{server === "rtx" ? "NVIDIA RTX 4090" : "NVIDIA A100"}</h3>
+              <h3>{context.serverNames[server]}</h3>
               <p>
-                {server === "rtx" ? "24" : "48"} GB 显存 ·{" "}
-                {server === "rtx" ? 1 : 3} GPUh / 小时
+                {SERVERS[server].capacity} GB {context.resourceLabel} ·{" "}
+                {SERVERS[server].rate} {context.unit} / 小时
               </p>
               <div className="gpu-util">
                 <b>
                   {busy || running ? "94" : "0"}
                   <small>%</small>
                 </b>
-                <span>GPU 利用率</span>
+                <span>
+                  {context.unit === "GPUh" ? "GPU 利用率" : "节点利用率"}
+                </span>
                 <div className="gpu-spark">
                   {Array.from({ length: 23 }, (_, i) => (
                     <i
@@ -577,11 +613,11 @@ export function GPU({ state: s, dispatch, open }: AppProps) {
                     ? 80
                     : running
                       ? (requiredMemory(running.config) /
-                          (server === "rtx" ? 24 : 48)) *
+                          SERVERS[server].capacity) *
                         100
                       : 0
                 }
-                label="显存占用"
+                label={`${context.resourceLabel}占用`}
                 color="#8b89b5"
               />
               <div className="gpu-current">
@@ -645,7 +681,7 @@ export function GPU({ state: s, dispatch, open }: AppProps) {
                       {requiredMemory(t.config).toFixed(1)} GB
                     </small>
                   </td>
-                  <td>{t.config.server === "rtx" ? "RTX 4090" : "A100"}</td>
+                  <td>{context.serverNames[t.config.server]}</td>
                   <td>
                     <Pill tone={t.status === "failed" ? "orange" : "teal"}>
                       {STATUS[t.status]}
@@ -655,7 +691,9 @@ export function GPU({ state: s, dispatch, open }: AppProps) {
                       <Meter value={(t.progress / t.duration) * 100} />
                     )}
                   </td>
-                  <td>{t.spent.toFixed(1)} GPUh</td>
+                  <td>
+                    {t.spent.toFixed(1)} {context.unit}
+                  </td>
                   <td>
                     {t.status === "queued" && (
                       <button
@@ -688,7 +726,8 @@ export function GPU({ state: s, dispatch, open }: AppProps) {
         />
       )}
       <Hint>
-        两台服务器可同时运行不同任务。训练额度不足时会暂停；可在课题组通讯中向导师或管理员申请额外额度。
+        两台服务器可同时运行不同任务。计算额度不足时会暂停；可在QQ2012 ·
+        课题组中向导师或管理员申请额外额度。
       </Hint>
       <Button secondary onClick={() => open("chat")}>
         协商算力资源
@@ -699,6 +738,8 @@ export function GPU({ state: s, dispatch, open }: AppProps) {
 }
 function LossChart({ task }: { task: TrainingTask }) {
   const result = task.result!;
+  const systems =
+    TOPICS.find((t) => t.id === task.topicId)?.direction === "systems";
   const max = Math.max(...result.trainLoss, ...result.valLoss) * 1.1,
     toPoints = (values: number[]) =>
       values
@@ -709,7 +750,7 @@ function LossChart({ task }: { task: TrainingTask }) {
         .join(" ");
   return (
     <div className="loss-chart">
-      <svg viewBox="0 0 590 235" role="img" aria-label="训练与验证损失曲线">
+      <svg viewBox="0 0 590 235" role="img" aria-label="实验迭代与留出验证曲线">
         {[0, 1, 2, 3, 4].map((i) => (
           <g key={i}>
             <line
@@ -751,18 +792,23 @@ function LossChart({ task }: { task: TrainingTask }) {
       <div className="chart-legend">
         <span>
           <i />
-          训练损失
+          {systems ? "当前负载代价" : "训练损失"}
         </span>
         <span>
           <i />
-          验证损失
+          {systems ? "留出负载代价" : "验证损失"}
         </span>
-        <small>横轴：训练轮次 · 纵轴：损失（越低越好）</small>
+        <small>
+          {systems
+            ? "横轴：调度迭代 · 纵轴：负载代价（越低越好）"
+            : "横轴：训练轮次 · 纵轴：损失（越低越好）"}
+        </small>
       </div>
     </div>
   );
 }
 export function Analysis({ state: s, dispatch, open }: AppProps) {
+  const context = RESEARCH_CONTEXT[s.profile.direction];
   const tasks = s.tasks.filter((t) => t.status === "done" && t.result),
     [selected, setSelected] = useState(""),
     task = tasks.find((t) => t.id === selected) || tasks.at(-1),
@@ -770,7 +816,10 @@ export function Analysis({ state: s, dispatch, open }: AppProps) {
   if (!task)
     return (
       <div className="page">
-        <PageHead eyebrow="实验数据工作室" title="让结果，讲出它的故事。" />
+        <PageHead
+          eyebrow="科研数据分析 · Python / Matplotlib"
+          title="实验结果分析"
+        />
         <Empty
           title="数据还在路上"
           text="完成实验后，将结果导入这里，查看学习曲线与因果诊断。"
@@ -788,8 +837,8 @@ export function Analysis({ state: s, dispatch, open }: AppProps) {
   return (
     <div className="page">
       <PageHead
-        eyebrow="实验数据工作室"
-        title="分数之外，还有答案。"
+        eyebrow="科研数据分析 · Python / Matplotlib"
+        title="实验数据与对照分析"
         action={
           <select
             aria-label="选择分析实验"
@@ -823,7 +872,7 @@ export function Analysis({ state: s, dispatch, open }: AppProps) {
       )}
       <div className="result-metrics">
         <div>
-          <span>评测分数</span>
+          <span>{context.metric}</span>
           <b>
             {result.score}
             <small>%</small>
@@ -854,9 +903,9 @@ export function Analysis({ state: s, dispatch, open }: AppProps) {
           <span>计算成本</span>
           <b>
             {result.cost}
-            <small>GPUh</small>
+            <small>{context.unit}</small>
           </b>
-          <em>所有训练均计入预算</em>
+          <em>实际运行时间计入预算</em>
         </div>
       </div>
       <SectionTitle
@@ -881,7 +930,9 @@ export function Analysis({ state: s, dispatch, open }: AppProps) {
           </Button>
         }
       >
-        学习曲线
+        {s.profile.direction === "systems"
+          ? "迭代目标与留出负载曲线"
+          : "训练与验证曲线"}
       </SectionTitle>
       <LossChart task={task} />
       <div className="diagnosis">

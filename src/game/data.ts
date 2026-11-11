@@ -5,21 +5,21 @@ export const DIRECTIONS: Record<
   { name: string; short: string; description: string; icon: string }
 > = {
   agent: {
-    name: "AI Agent 与智能体",
-    short: "智能体研究",
-    description: "工具调用、智能体架构与多智能体协作，在不确定中寻找可靠性。",
+    name: "自然语言处理与信息检索",
+    short: "信息检索",
+    description: "文本特征、排序学习与语料评测，在点击噪声中寻找可靠证据。",
     icon: "bot",
   },
   ml: {
-    name: "机器学习与大模型",
+    name: "机器学习与模式识别",
     short: "机器学习",
-    description: "模型训练、参数优化与泛化评测，让模型学会真正重要的事。",
+    description: "支持向量机、小型卷积网络与图像分类，研究特征和泛化能力。",
     icon: "brain",
   },
   systems: {
-    name: "计算机系统与工程",
+    name: "分布式系统与数据处理",
     short: "系统工程",
-    description: "推理加速、分布式计算与性能分析，在资源约束中突破效率。",
+    description: "MapReduce、任务调度与数据倾斜，改善共享节点上的处理效率。",
     icon: "cpu",
   },
 };
@@ -46,7 +46,7 @@ export const MENTORS: Record<
   free: {
     name: "林清禾",
     style: "自由放养型",
-    lab: "开放智能研究组",
+    lab: "机器学习与信息处理研究组",
     description:
       "“有意思的方向，值得自己走一走。” 自主空间大，需要独立规划与争取资源。",
     quota: 100,
@@ -55,7 +55,7 @@ export const MENTORS: Record<
   resource: {
     name: "周予川",
     style: "项目资源型",
-    lab: "先进 AI 工程实验室",
+    lab: "计算机应用与软件工程实验室",
     description:
       "“在真实问题里，找到研究的价值。” 算力充裕，横向项目也会占据你的时间。",
     quota: 200,
@@ -70,7 +70,7 @@ export const NPCS = [
     avatar: "沈",
     color: "#d7e7e3",
     personality: "重视证据与研究价值",
-    direction: "可信智能",
+    direction: "统计学习与实验方法",
     schedule: "工作日 09:00–18:00",
     task: "指导课题与基金评审",
     abilities: { coding: 86, insight: 95 },
@@ -83,9 +83,9 @@ export const NPCS = [
     avatar: "陈",
     color: "#e2e4f3",
     personality: "务实、乐于合作",
-    direction: "智能体可靠性",
+    direction: "搜索排序与点击日志",
     schedule: "10:00–23:00",
-    task: "验证工具调用基线",
+    task: "复现实验室检索基线",
     abilities: { coding: 94, insight: 88 },
     workHours: { start: 10, end: 23 },
   },
@@ -96,7 +96,7 @@ export const NPCS = [
     avatar: "许",
     color: "#fae3d8",
     personality: "细心、重视署名约定",
-    direction: "大模型对齐",
+    direction: "图像特征与模式识别",
     schedule: "09:00–21:00",
     task: "准备论文补充实验",
     abilities: { coding: 86, insight: 92 },
@@ -109,9 +109,9 @@ export const NPCS = [
     avatar: "方",
     color: "#e1eed3",
     personality: "好奇、竞争意识强",
-    direction: "模型推理优化",
+    direction: "分布式数据处理",
     schedule: "10:00–22:00",
-    task: "排队测试推理服务",
+    task: "排队测试 MapReduce 作业",
     abilities: { coding: 85, insight: 72 },
     workHours: { start: 10, end: 22 },
   },
@@ -122,7 +122,7 @@ export const NPCS = [
     avatar: "陆",
     color: "#dae9f4",
     personality: "热情、编程经验少",
-    direction: "工具学习",
+    direction: "文本分类",
     schedule: "课程后 16:00–20:00",
     task: "学习数据处理",
     abilities: { coding: 46, insight: 55 },
@@ -158,145 +158,157 @@ export const NPCS = [
 export const PAPERS: Literature[] = [
   {
     id: "p1",
-    title: "让智能体知道何时重试：工具调用的自适应验证",
+    title: "点击日志不等于相关性：自适应重加权的排序实验",
     authors: "Y. Chen, Z. Xu, M. Lin",
-    year: 2026,
+    year: 2011,
     field: "agent",
     abstract:
-      "工具返回格式正确，并不意味着答案可靠。本文研究在有限调用预算下，使用置信度判断何时验证、何时重试，减少智能体错误传播。",
+      "用户更容易点击排在前面的结果，点击并不等于真实相关性。本文在小规模校园检索语料中，研究对点击样本自适应重加权能否改善线性排序器。",
     method:
-      "先使用置信度门控，再对低置信度工具结果独立校验；与固定次数重试进行对照。",
+      "以 TF-IDF 与线性排序为基线，固定查询划分，降低高曝光但低相关样本的训练权重。",
     result:
-      "在 800 个干净任务中，成功率从 68% 提升至 79%，平均调用次数为 2.3。",
+      "在虚构的 800 条查询评测中，综合相关性评分从 68 提升到 79；额外统计开销较小。",
     limitation:
-      "只在单一、干净的数据集上评估，未验证分布变化与脏数据下的表现。",
+      "只在同一栏目新闻中验证，尚未确认跨栏目、词汇变化与稀疏点击下的效果。",
     insight:
-      "有选择地验证，比盲目增加模型规模更节省资源。需要分布外评测确认可靠性。",
-    citations: 128,
+      "先保留匹配基线，再单独改变样本权重；需要独立语料验证改进是否稳定。",
+    citations: 28,
     related: ["p2", "p3"],
-    tag: "工具调用",
+    tag: "排序学习",
   },
   {
     id: "p2",
-    title: "干净的分数，脆弱的智能体：评测数据污染研究",
+    title: "先分组，再评测：新闻检索中的近重复样本泄漏",
     authors: "S. Luo, K. Wang",
-    year: 2025,
+    year: 2010,
     field: "agent",
     abstract:
-      "常用工具评测中存在格式泄漏与训练集重叠，导致成绩虚高。我们构造含噪声与分布外样本的评测套件，重新审视可靠性。",
-    method: "去重、模板替换与跨领域留出，比较原始集、清洗集和分布外测试。",
-    result: "原始集评分平均高估 12 个百分点；清洗后结论更稳定。",
-    limitation: "数据清洗增加预处理时间，仍然无法完全排除隐性泄漏。",
-    insight: "清洗训练数据并保留独立测试集，是有效实验的前提。",
-    citations: 243,
+      "转载新闻与相近查询可能同时进入训练和测试集合，使离线分数虚高。我们研究先去重、按新闻来源分组再划分数据的实验流程。",
+    method:
+      "近重复检测、按来源分组、留出不同时间段查询，对照原始语料与清洗语料。",
+    result: "原始集分数平均高估约 12 分，清洗后的测试结论更接近真实未知查询。",
+    limitation: "严格分组减少训练样本，仍可能遗漏改写转载和隐性重复。",
+    insight:
+      "数据清洗与测试隔离是选题的前提，不能把重复样本带来的高分当作方法创新。",
+    citations: 43,
     related: ["p1", "p7"],
-    tag: "数据质量",
+    tag: "语料质量",
   },
   {
     id: "p3",
-    title: "从单次成功到稳定可靠：智能体实验的复现准则",
+    title: "一次划分不够：检索实验中的重复抽样验证",
     authors: "J. He, L. Qiu",
-    year: 2026,
+    year: 2012,
     field: "agent",
     abstract:
-      "单次随机种子的最优结果容易误导研究。本文提出多种子重复、失败类型报告与置信区间，衡量智能体的真实可靠性。",
-    method: "在相同方案下改变随机种子，报告均值、最差表现和分布外成功率。",
-    result: "不同种子的成绩波动可达到 5 个百分点，验证策略可减少方差。",
-    limitation: "重复实验会增加计算开销，小团队需要权衡样本量。",
-    insight: "保留基线、独立测试和不同随机种子的复现实验，可以增强论文证据。",
-    citations: 76,
+      "小语料上的单次最好结果容易误导研究。本文使用多次随机划分、固定查询分组和配对比较来检查排序策略的可靠性。",
+    method:
+      "固定实验参数，仅改变随机种子重复测试，报告均值、最差表现和跨栏目测试。",
+    result: "同一方案的评分可波动 5 分，严格验证可减少对偶然结果的依赖。",
+    limitation: "重复计算增加实验成本，少量查询下置信区间仍较宽。",
+    insight: "相同配置换 seed 的复现，与跨栏目评测，是两种不同的证据。",
+    citations: 6,
     related: ["p1", "p2"],
-    tag: "可复现性",
+    tag: "实验复现",
   },
   {
     id: "p4",
-    title: "小模型，大边界：资源受限下的参数高效适配",
+    title: "小样本图像分类中的特征归一化与正则化",
     authors: "Q. Zhao, H. Sun",
-    year: 2025,
+    year: 2011,
     field: "ml",
     abstract:
-      "大模型微调昂贵，参数高效适配能否在小规模数据上取得稳定改善？本文比较全量训练与低秩更新。",
-    method: "小模型低秩适配，对照全量微调；系统扫描学习率与训练轮数。",
-    result: "合理的学习率与 8 轮训练接近大模型效果，算力消耗下降 56%。",
-    limitation: "长训练在小数据上明显过拟合，跨领域泛化未得到保证。",
-    insight: "合适的学习率与数据质量比盲目训练更多轮更重要。",
-    citations: 316,
+      "有限标注下，复杂分类器不一定优于简单基线。本文以 MNIST 和 CIFAR-10 的小规模子集研究特征归一化、样本重加权与正则化。",
+    method:
+      "对比线性分类基线和小型卷积网络，控制数据划分，扫描学习率、迭代轮数与正则强度。",
+    result:
+      "适度训练与合理特征处理在有限计算预算下获得稳定改善，而非依赖不断增大网络。",
+    limitation: "只使用少量类别，不能将结果直接推广到所有自然图像任务。",
+    insight:
+      "先排查数据、学习率与正则化，再考虑扩大网络；2012 年实验机的显存尤其有限。",
+    citations: 56,
     related: ["p5", "p2"],
-    tag: "高效微调",
+    tag: "模式识别",
   },
   {
     id: "p5",
-    title: "高分之后：小数据微调中的泛化落差",
+    title: "训练更久不等于识别更准：小型卷积网络实验",
     authors: "M. Tang, Z. Liu",
-    year: 2026,
+    year: 2012,
     field: "ml",
     abstract:
-      "训练准确率不断提高，验证表现却可能下降。我们分析小样本微调中训练强度、噪声比例与泛化的因果联系。",
-    method: "独立验证集、早停、不同种子重复与分布外评测。",
-    result: "16 轮训练的训练损失更低，泛化成绩反而比 8 轮低 9 个百分点。",
-    limitation: "未覆盖多模态模型；验证策略本身也有成本。",
-    insight: "训练损失持续下降但验证损失上升，是过拟合信号。",
-    citations: 95,
+      "卷积网络在手写数字和小图像上的训练误差可以持续下降，但验证误差会在样本不足时回升。本文检查训练强度与泛化之间的关系。",
+    method:
+      "独立验证集、早停、不同随机初始化，以及旋转和噪声变化下的留出评测。",
+    result: "本实验中 16 轮训练的训练损失更低，测试评分反而比 8 轮低 9 分。",
+    limitation: "小型网络和有限类别尚不足以代表大规模图像识别。",
+    insight:
+      "不要只汇报训练损失；验证损失回升意味着过拟合，需要收窄结论或改变方案。",
+    citations: 9,
     related: ["p4", "p7"],
-    tag: "泛化评测",
+    tag: "图像分类",
   },
   {
     id: "p6",
-    title: "少一点计算，多一点吞吐：推理中的自适应缓存",
+    title: "数据倾斜下的 MapReduce 自适应分区",
     authors: "X. Fang, R. Wu",
-    year: 2025,
+    year: 2011,
     field: "systems",
     abstract:
-      "静态缓存难以适应变化的请求。本文研究在固定显存预算下动态调整缓存，减少重复计算。",
-    method: "比较无缓存、固定缓存与自适应缓存，测试不同批大小。",
-    result: "清洗后的请求负载上，吞吐评分提升 10%，高批大小会增加显存需求。",
-    limitation: "在请求分布变化时缓存失效率上升，需要失效校验。",
-    insight: "缓存需要配合一致性验证，batch 并非越大越好。",
-    citations: 189,
+      "固定分区遇到热点键时，少数慢任务会拖延整个数据处理作业。本文在小型共享 CPU 节点上研究按采样结果调整分区。",
+    method: "对照固定分区、自适应分区和带结果校验的重复执行，测试不同批大小。",
+    result:
+      "在清洗后的实验日志负载上，综合吞吐评分提高约 10 分；工作集过大时出现内存压力。",
+    limitation: "新负载的键分布可能变化，采样与校验本身也有开销。",
+    insight: "控制数据规模和节点配置，才能把方法收益与硬件差异分开。",
+    citations: 31,
     related: ["p7", "p8"],
-    tag: "推理优化",
+    tag: "MapReduce",
   },
   {
     id: "p7",
-    title: "测量之前：可复现 AI 系统基准的实践",
+    title: "测量之前：共享集群中的可重复性能实验",
     authors: "R. Wu, S. Luo",
-    year: 2026,
+    year: 2010,
     field: "systems",
     abstract:
-      "硬件、预热、随机种子与数据顺序会改变系统基准。我们给出公平比较的最小实验条件。",
-    method: "固定硬件与负载、独立验证、报告成本和重复测量。",
-    result: "不控制随机种子时，测量差异足以反转方法排名。",
-    limitation: "严格测量流程增加实验耗时。",
-    insight: "同一设置、不同种子可验证稳定性；不能把硬件差异当方法提升。",
-    citations: 66,
+      "机器型号、缓存预热、输入顺序与同门的后台任务都会影响系统性能测量。本文给出小实验室可执行的公平对照流程。",
+    method: "固定节点和输入，隔离训练与测试负载，重复测量并记录资源成本。",
+    result: "没有控制硬件和数据顺序时，测量噪声足以反转两个方案的排名。",
+    limitation: "严格测量需要预留服务器时段，无法完全消除共享节点的干扰。",
+    insight: "同设置对照与多种子复现都需要真实计算预算。",
+    citations: 24,
     related: ["p6", "p3"],
-    tag: "实验设计",
+    tag: "系统评测",
   },
   {
     id: "p8",
-    title: "显存不是无限的：模型部署中的预算与权衡",
+    title: "几 GB 也要精打细算：实验工作集与资源预算",
     authors: "L. Qiu, X. Fang",
-    year: 2025,
+    year: 2011,
     field: "systems",
     abstract:
-      "模型规模与批大小共同决定显存占用，吞吐、延迟和资源成本之间存在边界。",
-    method: "跨模型规模分析静态权重、激活与批处理开销。",
-    result: "中等模型在 24GB 显存上可能溢出；高配服务器虽快却更昂贵。",
-    limitation: "未模拟复杂的多租户调度。",
-    insight: "先计算显存需求再选择服务器；资源最贵不代表方案最优。",
-    citations: 201,
+      "分类器参数、矩阵统计和批处理工作集共同占用内存。GPU 实验需考虑显存，MapReduce 则应检查 CPU 节点的主存。",
+    method:
+      "分别测量模型参数、激活或中间数据与批大小的资源占用，再选择实验机。",
+    result:
+      "大规模方案可能超过 GTX 580 3GB 版的显存，Tesla M2090 6GB 版可提供更大空间；系统实验使用对应 CPU 节点。",
+    limitation: "容量模型是教学近似，不代表真实软件栈的精确硬件测量。",
+    insight:
+      "先算资源需求，再选择服务器；更多显存或主存并不能修复错误的实验设计。",
+    citations: 37,
     related: ["p6", "p4"],
-    tag: "算力管理",
+    tag: "资源预算",
   },
 ];
 export const TOPICS: Topic[] = [
   {
     id: "agent-safe",
     direction: "agent",
-    title: "有限预算下的可靠工具调用",
-    question: "智能体能否用更少的调用，做出更可靠的决定？",
+    title: "点击偏差下的新闻检索排序",
+    question: "点击样本重加权能否提升未知查询的检索质量？",
     hypothesis:
-      "自适应验证能够在增加少量开销的情况下，提高工具调用的分布外成功率。",
+      "自适应样本权重可降低位置曝光偏差，但必须在独立查询与语料上验证。",
     method: "adaptive",
     risk: 25,
     novelty: 75,
@@ -310,9 +322,10 @@ export const TOPICS: Topic[] = [
   {
     id: "agent-frontier",
     direction: "agent",
-    title: "跨领域智能体自我校验",
-    question: "自我校验能否迁移到未见过的任务？",
-    hypothesis: "独立验证器有助于控制错误传播，但分布外数据决定结论是否成立。",
+    title: "跨栏目检索的相关性验证",
+    question: "一种排序策略能否迁移到词汇不同的新闻栏目？",
+    hypothesis:
+      "重复抽样和独立语料校验有助于识别过拟合，但严格测试会增加开销。",
     method: "verified",
     risk: 52,
     novelty: 94,
@@ -326,9 +339,10 @@ export const TOPICS: Topic[] = [
   {
     id: "ml-efficient",
     direction: "ml",
-    title: "小样本模型的高效适配",
-    question: "小模型能否在有限算力下获得稳定泛化？",
-    hypothesis: "适度训练结合低秩适配，可获得优于单纯扩大模型的成本收益。",
+    title: "有限样本下的图像特征学习",
+    question: "有限标注与显存下，怎样训练稳定的图像分类器？",
+    hypothesis:
+      "特征归一化与自适应样本权重能够改善小样本分类，训练强度仍需验证。",
     method: "adaptive",
     risk: 22,
     novelty: 69,
@@ -342,9 +356,10 @@ export const TOPICS: Topic[] = [
   {
     id: "ml-frontier",
     direction: "ml",
-    title: "跨领域泛化的置信度校准",
-    question: "独立校验能否让小模型感知自己的边界？",
-    hypothesis: "带校准的验证器提升分布外泛化，但计算预算与数据质量不可忽视。",
+    title: "小型卷积网络的跨条件泛化",
+    question: "数字或小图像分类器遇到旋转和噪声还能保持效果吗？",
+    hypothesis:
+      "独立验证选择正则强度，有望改善不同图像条件下的表现，但增加计算成本。",
     method: "verified",
     risk: 49,
     novelty: 91,
@@ -358,9 +373,10 @@ export const TOPICS: Topic[] = [
   {
     id: "sys-cache",
     direction: "systems",
-    title: "受限显存下的自适应推理缓存",
-    question: "同样的显存，能否更快地完成推理？",
-    hypothesis: "自适应缓存可以节省重复计算，但必须控制错误失效与批大小。",
+    title: "数据倾斜下的自适应 MapReduce 分区",
+    question: "同样的 CPU 节点，能否减少热点键造成的慢任务？",
+    hypothesis:
+      "按采样统计调整分区可减少尾部等待，但必须保持输入负载和节点配置一致。",
     method: "adaptive",
     risk: 24,
     novelty: 72,
@@ -374,9 +390,10 @@ export const TOPICS: Topic[] = [
   {
     id: "sys-frontier",
     direction: "systems",
-    title: "分布变化下的缓存一致性验证",
-    question: "低开销的校验能否解决动态负载下的缓存失效？",
-    hypothesis: "显式验证能降低错误缓存代价，但验证开销可能抵消加速收益。",
+    title: "变化负载下的结果一致性校验",
+    question: "重复执行与结果校验能否同时保证作业可靠性和处理效率？",
+    hypothesis:
+      "显式校验能避免重复执行造成的错误结果，但额外开销可能抵消吞吐收益。",
     method: "verified",
     risk: 45,
     novelty: 89,
@@ -391,7 +408,7 @@ export const TOPICS: Topic[] = [
 export const VENUES = [
   {
     id: "workshop",
-    name: "新锐计算研究工作坊",
+    name: "青年计算研究工作坊 2012",
     short: "NCR Workshop",
     threshold: 57,
     hours: 30,
@@ -400,7 +417,7 @@ export const VENUES = [
   },
   {
     id: "journal",
-    name: "智能系统研究学报",
+    name: "计算机应用研究学报",
     short: "JISR",
     threshold: 72,
     hours: 54,
@@ -409,12 +426,13 @@ export const VENUES = [
   },
   {
     id: "topconf",
-    name: "前沿智能国际会议",
-    short: "FAIC 2026",
+    name: "计算研究前沿论坛",
+    short: "CFR 2012",
     threshold: 87,
     hours: 72,
     direction: "agent",
-    description: "竞争激烈，偏好智能体创新，需要强证据与跨分布测试。",
+    description:
+      "竞争激烈，偏好信息检索与学习方法创新，需要对照、复现和跨语料测试。",
   },
 ];
 export const SECTIONS: { id: Section; name: string }[] = [
@@ -426,10 +444,84 @@ export const SECTIONS: { id: Section; name: string }[] = [
   { id: "experiments", name: "实验与分析" },
   { id: "conclusion", name: "结论" },
 ];
+// 服务器 ID 沿用旧存档，显示名称与容量统一按 2012 年硬件解释。
+export const SERVERS = {
+  rtx: {
+    name: "EVGA GeForce GTX 580（3GB 版）",
+    short: "GTX 580",
+    capacity: 3,
+    memory: 3,
+    rate: 1,
+  },
+  a100: {
+    name: "NVIDIA Tesla M2090",
+    short: "Tesla M2090",
+    capacity: 6,
+    memory: 6,
+    rate: 3,
+  },
+} as const;
+export const RESEARCH_CONTEXT = {
+  agent: {
+    modelNames: {
+      compact: "TF-IDF + 线性排序",
+      balanced: "Ranking SVM 实验",
+      large: "扩展特征排序实验",
+    },
+    datasetNames: {
+      raw: "原始新闻与点击语料",
+      clean: "去重新闻与独立查询",
+      shift: "跨栏目留出语料",
+    },
+    metric: "检索综合评分",
+    resourceLabel: "节点内存",
+    unit: "节点小时",
+    serverNames: {
+      rtx: "双核实验节点（3GB 主存）",
+      a100: "四核共享节点（6GB 主存）",
+    },
+  },
+  ml: {
+    modelNames: {
+      compact: "线性分类与图像特征",
+      balanced: "小型卷积网络",
+      large: "扩展卷积特征实验",
+    },
+    datasetNames: {
+      raw: "原始 MNIST / CIFAR-10 子集",
+      clean: "清洗图像与独立验证集",
+      shift: "旋转与噪声留出集",
+    },
+    metric: "分类综合评分",
+    resourceLabel: "显存",
+    unit: "GPUh",
+    serverNames: { rtx: SERVERS.rtx.name, a100: SERVERS.a100.name },
+  },
+  systems: {
+    modelNames: {
+      compact: "小规模 MapReduce 作业",
+      balanced: "标准分区与归并作业",
+      large: "大工作集 MapReduce 作业",
+    },
+    datasetNames: {
+      raw: "原始键值日志",
+      clean: "清洗与去重日志",
+      shift: "变化键分布留出负载",
+    },
+    metric: "处理效率综合评分",
+    resourceLabel: "节点内存",
+    unit: "节点小时",
+    serverNames: {
+      rtx: "双核实验节点（3GB 主存）",
+      a100: "四核共享节点（6GB 主存）",
+    },
+  },
+} as const;
+
 export const MODELS = [
-  { id: "compact", name: "轻量模型 · 1.5B", memory: 8, duration: 3 },
-  { id: "balanced", name: "标准模型 · 7B", memory: 22, duration: 5 },
-  { id: "large", name: "大型模型 · 14B", memory: 39, duration: 8 },
+  { id: "compact", name: "小规模基线方案", memory: 0.8, duration: 3 },
+  { id: "balanced", name: "标准实验方案", memory: 2.2, duration: 5 },
+  { id: "large", name: "大工作集方案", memory: 4.4, duration: 8 },
 ] as const;
 export const DATASETS = [
   { id: "raw", name: "原始数据集", note: "已有噪声与重复，分数可能虚高" },
@@ -439,7 +531,11 @@ export const DATASETS = [
 export const METHODS = [
   { id: "baseline", name: "基线方案", note: "保留对照，确认增益来自方法" },
   { id: "adaptive", name: "自适应策略", note: "按置信度分配有限预算" },
-  { id: "verified", name: "独立校验策略", note: "更高可靠性，更高计算开销" },
+  {
+    id: "verified",
+    name: "重复抽样与校验",
+    note: "严格验证结论，额外计算开销",
+  },
 ] as const;
 export const LIFE = [
   {
@@ -460,21 +556,21 @@ export const LIFE = [
     id: "meal",
     name: "食堂认真吃饭",
     time: 1,
-    description: "精力 +14，健康 +3，花费 ¥18",
+    description: "精力 +14，健康 +3，花费 ¥8",
     emoji: "🍜",
   },
   {
     id: "social",
     name: "和同门聚餐",
     time: 2,
-    description: "人际 +8，心情 +20，花费 ¥45",
+    description: "人际 +8，心情 +20，花费 ¥25",
     emoji: "🍲",
   },
   {
     id: "intern",
     name: "完成实习项目",
     time: 4,
-    description: "工程 +10，收入 ¥180，消耗精力",
+    description: "工程 +10，收入 ¥100，消耗精力",
     emoji: "💻",
   },
   {
@@ -515,9 +611,10 @@ export const WEEKDAYS = [
 ];
 export function gameDate(hour: number) {
   const day = hour === END_HOUR ? 27 : Math.floor(hour / 24);
-  const date = new Date(Date.UTC(2026, 8, 7 + day));
+  const date = new Date(Date.UTC(2012, 8, 3 + day));
   const month = date.getUTCMonth() + 1;
   return {
+    year: 2012,
     day: day + 1,
     week: Math.floor(day / 7) + 1,
     weekday: WEEKDAYS[day % 7],

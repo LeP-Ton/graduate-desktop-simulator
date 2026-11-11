@@ -1,0 +1,784 @@
+/* 2012 年 Windows 7 安装向导外壳；仅改变新建档案界面，不参与游戏规则。 */
+.setup2012-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 22px 18px 58px;
+  background: #07345d4d;
+  backdrop-filter: blur(2px);
+  font-family: Tahoma, "Microsoft YaHei", "宋体", sans-serif;
+  color: #263e52;
+  font-size: 12px;
+}
+.setup2012-window {
+  width: 820px;
+  max-width: 100%;
+  max-height: calc(100dvh - 80px);
+  overflow: hidden;
+  padding: 0 6px 6px;
+  background: linear-gradient(118deg, #deefffcc, #8db7dbe6 55%, #6f9bc5dd);
+  border: 1px solid #e4f4ff;
+  border-radius: 7px;
+  box-shadow:
+    0 0 0 1px #244f7f,
+    0 14px 54px #00234b99,
+    inset 0 1px #ffffffb3;
+}
+.setup2012-caption {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  height: 30px;
+  padding-left: 3px;
+  color: #173957;
+  font-size: 12px;
+  text-shadow:
+    0 0 5px #fff,
+    0 1px 2px #fff;
+}
+.setup2012-caption > img {
+  width: 16px;
+  height: 16px;
+  object-fit: contain;
+}
+.setup2012-caption > span {
+  flex: 1;
+  min-width: 0;
+}
+.setup2012-caption > button {
+  align-self: flex-start;
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 20px;
+  padding: 0;
+  margin-right: -1px;
+  border: 1px solid #9c6757;
+  border-top: 0;
+  border-radius: 0 0 3px 3px;
+  background: linear-gradient(#edbaaa, #d58b73 47%, #b64c2f 48%, #cf7858);
+  color: #fff;
+  text-shadow: 0 1px #75432f;
+}
+.setup2012-caption > button:hover {
+  background: linear-gradient(#f3b9a9, #df7859 47%, #c94324 48%, #e67550);
+}
+.setup2012-shell {
+  display: flex;
+  min-height: 552px;
+  max-height: calc(100dvh - 118px);
+  border: 1px solid #6186a9;
+  background: #fff;
+  box-shadow: 0 0 0 1px #e8f6ff;
+  overflow: hidden;
+}
+.setup2012-sidebar {
+  position: relative;
+  flex: 0 0 218px;
+  width: 218px;
+  padding: 32px 24px 100px;
+  background: linear-gradient(152deg, #224b80, #4b83b4 66%, #96bdd7);
+  color: #e8f6ff;
+}
+.setup2012-computer {
+  display: block;
+  width: 64px;
+  height: 64px;
+  object-fit: contain;
+  margin-bottom: 22px;
+}
+.setup2012-sidebar h1 {
+  font:
+    300 25px/1.5 "Segoe UI",
+    "Microsoft YaHei",
+    sans-serif;
+  letter-spacing: 0.2px;
+  color: #fff;
+  margin: 0 0 20px;
+}
+.setup2012-sidebar > p {
+  color: #d6eafd;
+  font-size: 12px;
+  line-height: 1.9;
+  margin-bottom: 26px;
+}
+.setup2012-sidebar ol {
+  list-style: none;
+  margin: 0;
+  padding: 17px 0 0;
+  border-top: 1px solid #b4d0e76e;
+}
+.setup2012-sidebar li {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 17px 0;
+  color: #c8ddf0;
+  font-size: 11px;
+  line-height: 1.7;
+}
+.setup2012-sidebar li > span {
+  width: 17px;
+  height: 17px;
+  flex-shrink: 0;
+  border: 1px solid #c5ddf2a8;
+  display: grid;
+  place-items: center;
+  font: 10px Tahoma;
+  border-radius: 50%;
+}
+.setup2012-sidebar li.current {
+  color: white;
+}
+.setup2012-sidebar li.current > span {
+  background: #ecf8ff;
+  border-color: white;
+  color: #37648e;
+}
+.setup2012-sidebar li.complete > span {
+  background: #97c7e233;
+  color: #e8f7ff;
+}
+.setup2012-version {
+  position: absolute;
+  left: 24px;
+  bottom: 25px;
+}
+.setup2012-version b {
+  display: block;
+  font:
+    300 23px/1.4 "Segoe UI",
+    sans-serif;
+  color: #fff;
+}
+.setup2012-version > span {
+  display: block;
+  margin-top: 7px;
+  font-size: 10px;
+  color: #d6e9fa;
+}
+.setup2012-main {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-width: 0;
+  min-height: 0;
+  background: white;
+}
+.setup2012-stage {
+  padding: 24px 30px 26px;
+  flex: 1;
+  min-height: 0;
+  overflow: auto;
+}
+.setup2012-stage-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  color: #7d8b95;
+  margin-bottom: 20px;
+  font-size: 11px;
+}
+.setup2012-stage-heading > small {
+  font-size: 10px;
+  color: #8494a2;
+  white-space: nowrap;
+}
+.setup2012-stage h2 {
+  font:
+    400 19px/1.6 "Microsoft YaHei",
+    sans-serif;
+  color: #18547f;
+  letter-spacing: 0;
+  margin: 0 0 10px;
+}
+.setup2012-description {
+  font-size: 11px;
+  line-height: 1.9;
+  color: #60798c;
+  margin: 0 0 23px;
+}
+.setup2012-form-row {
+  display: flex;
+  gap: 20px;
+  margin: 26px 0 25px;
+}
+.setup2012-field {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+  flex: 1;
+  min-width: 0;
+}
+.setup2012-field > span {
+  font-size: 12px;
+  color: #355167;
+}
+.setup2012-field.setup2012-gender {
+  flex: 0 0 130px;
+}
+.setup2012-window input,
+.setup2012-window select {
+  background: #fff;
+  border: 1px solid #839fb5;
+  border-radius: 0;
+  box-shadow: inset 1px 1px 2px #6a869c1c;
+  padding: 7px 8px;
+  height: 31px;
+  font:
+    12px Tahoma,
+    "Microsoft YaHei",
+    sans-serif;
+  color: #263e52;
+}
+.setup2012-window input:focus,
+.setup2012-window select:focus {
+  border-color: #3c8cc7 !important;
+  box-shadow: 0 0 0 1px #c1e1f8 !important;
+}
+.setup2012-window fieldset {
+  min-width: 0;
+  margin: 0;
+  padding: 15px 15px 13px;
+  border: 1px solid #cbd7df;
+  border-radius: 2px;
+}
+.setup2012-window legend {
+  color: #466379;
+  font-size: 11px;
+  padding: 0 5px;
+}
+.setup2012-avatars {
+  display: flex;
+  gap: 11px;
+  flex-wrap: wrap;
+}
+.setup2012-avatars > button {
+  display: grid;
+  place-items: center;
+  width: 43px;
+  height: 43px;
+  padding: 0;
+  border: 1px solid #bbcbd5;
+  background: #f6f9fb;
+  border-radius: 2px;
+  font-size: 25px;
+}
+.setup2012-avatars > button.selected {
+  background: #e0f0ff;
+  border-color: #5c9bc8;
+  box-shadow: inset 0 0 0 2px #edf8ff;
+}
+.setup2012-avatars > button:hover {
+  border-color: #6da4ca;
+  background: #edf7ff;
+}
+.setup2012-avatar-field > p {
+  font-size: 10px;
+  color: #7e8e99;
+  margin: 13px 0 0;
+  line-height: 1.7;
+}
+.setup2012-info {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 16px 0 0;
+  margin-top: 20px;
+  border-top: 1px solid #e1e8ee;
+}
+.setup2012-info > img {
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+.setup2012-info b {
+  display: block;
+  color: #416b88;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 1.6;
+  margin-bottom: 6px;
+}
+.setup2012-info p {
+  color: #7b8d9b;
+  font-size: 11px;
+  line-height: 1.9;
+  margin: 0;
+}
+.setup2012-directions,
+.setup2012-mentors {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 18px;
+}
+.setup2012-choice {
+  display: flex;
+  align-items: flex-start;
+  width: 100%;
+  gap: 10px;
+  border: 1px solid #d0dce5;
+  border-radius: 2px;
+  padding: 12px 13px;
+  text-align: left;
+  background: #fff;
+}
+.setup2012-choice.selected {
+  border-color: #7caacc;
+  background: linear-gradient(#f5faff, #e2f0fb);
+}
+.setup2012-choice:hover {
+  border-color: #8bb2cf;
+  background: #f1f8ff;
+}
+.setup2012-choice > span:last-child {
+  flex: 1;
+  min-width: 0;
+}
+.setup2012-radio {
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+  width: 13px;
+  height: 13px;
+  border: 1px solid #7e9bb0;
+  background: linear-gradient(#f2f7fa, #fff);
+  border-radius: 50%;
+  margin-top: 2px;
+  box-shadow: inset 0 0 0 2px #fff;
+}
+.setup2012-radio i {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #4488b9;
+  box-shadow: 0 0 2px #7fbedb;
+}
+.setup2012-choice b {
+  display: block;
+  font-size: 12px;
+  font-weight: 400;
+  color: #285572;
+  line-height: 1.6;
+}
+.setup2012-choice small {
+  display: block;
+  color: #708699;
+  font-size: 10px;
+  line-height: 1.8;
+  margin-top: 4px;
+}
+.setup2012-window .setup2012-abilities {
+  margin-top: 12px;
+  padding: 10px 15px 12px;
+}
+.setup2012-abilities > p {
+  margin: 0 0 10px;
+  font-size: 10px;
+  line-height: 1.7;
+  color: #7b8d99;
+}
+.setup2012-abilities > p > b {
+  color: #306c95;
+  font-weight: 600;
+}
+.setup2012-ability-row {
+  display: flex;
+  gap: 14px;
+  align-items: center;
+  margin: 9px 0;
+  font-size: 11px;
+  color: #476276;
+}
+.setup2012-ability-row > span {
+  width: 55px;
+  flex-shrink: 0;
+}
+.setup2012-ability-meter {
+  display: flex;
+  gap: 3px;
+  flex: 1;
+  max-width: 150px;
+  height: 7px;
+}
+.setup2012-ability-meter > i {
+  flex: 1;
+  height: 7px;
+  background: #e9eff4;
+  border: 1px solid #dce5ec;
+}
+.setup2012-ability-meter > i.filled {
+  background: linear-gradient(#c5e6fa, #76b2d5);
+  border-color: #8cbbd5;
+}
+.setup2012-stepper {
+  display: flex;
+  gap: 11px;
+  align-items: center;
+  margin-left: auto;
+}
+.setup2012-stepper button {
+  width: 23px;
+  height: 22px;
+  border: 1px solid #b3c4d0;
+  background: linear-gradient(#fff, #e8eef2);
+  border-radius: 2px;
+  color: #456b86;
+  padding: 0;
+  font: 14px Arial;
+  box-shadow: inset 0 1px white;
+}
+.setup2012-stepper > b {
+  width: 10px;
+  text-align: center;
+  font: 12px Tahoma;
+  color: #40667e;
+}
+.setup2012-mentor {
+  padding-top: 13px;
+  padding-bottom: 13px;
+}
+.setup2012-mentor em {
+  display: inline-block;
+  margin-left: 10px;
+  color: #8295a3;
+  font:
+    10px Tahoma,
+    "宋体",
+    sans-serif;
+}
+.setup2012-mentor > span > i {
+  display: block;
+  margin-top: 7px;
+  font-size: 10px;
+  font-style: normal;
+  color: #71889b;
+  line-height: 1.8;
+}
+.setup2012-ready {
+  margin-top: 9px;
+  padding-top: 17px;
+}
+.setup2012-footer {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  justify-content: space-between;
+  flex-shrink: 0;
+  padding: 15px 20px;
+  border-top: 1px solid #d0dce5;
+  background: #f5f7f9;
+}
+.setup2012-footer > span {
+  font-size: 10px;
+  color: #83929e;
+  line-height: 1.7;
+}
+.setup2012-footer > div {
+  display: flex;
+  gap: 9px;
+  margin-left: auto;
+}
+.setup2012-return {
+  font-size: 11px;
+  color: #426d8b;
+  padding: 0;
+  text-decoration: underline;
+}
+.setup2012-window .setup2012-footer .button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  min-height: 30px;
+  padding: 6px 12px;
+  font:
+    12px Tahoma,
+    "Microsoft YaHei",
+    sans-serif;
+  border-radius: 3px;
+  border: 1px solid #4d86b0;
+  background: linear-gradient(#f8fcff, #cfe5f5);
+  color: #254d68;
+  box-shadow: inset 0 0 0 1px #ffffffb3;
+  transform: none;
+}
+.setup2012-window .setup2012-footer .button.secondary {
+  border-color: #a8bbc8;
+  background: linear-gradient(#fff, #e7edf1);
+  color: #4c6578;
+}
+.setup2012-window .setup2012-footer .button:hover:not(:disabled) {
+  background: linear-gradient(#eff9ff, #bcdff5);
+  border-color: #4f9bd0;
+}
+.setup2012-window button:disabled {
+  opacity: 0.45;
+}
+
+@media (max-width: 720px) {
+  .setup2012-overlay {
+    padding: 12px 8px 52px;
+  }
+  .setup2012-window {
+    max-height: calc(100dvh - 68px);
+    width: 620px;
+  }
+  .setup2012-shell {
+    max-height: calc(100dvh - 106px);
+    min-height: 0;
+  }
+  .setup2012-sidebar {
+    flex-basis: 155px;
+    width: 155px;
+    padding: 25px 17px 85px;
+  }
+  .setup2012-computer {
+    width: 48px;
+    height: 48px;
+    margin-bottom: 16px;
+  }
+  .setup2012-sidebar h1 {
+    font-size: 21px;
+  }
+  .setup2012-sidebar > p {
+    font-size: 10px;
+  }
+  .setup2012-sidebar li {
+    font-size: 10px;
+    gap: 6px;
+  }
+  .setup2012-sidebar li > span {
+    width: 15px;
+    height: 15px;
+    font-size: 9px;
+  }
+  .setup2012-version {
+    left: 17px;
+    bottom: 20px;
+  }
+  .setup2012-version b {
+    font-size: 19px;
+  }
+  .setup2012-version > span {
+    font-size: 9px;
+  }
+  .setup2012-stage {
+    padding: 22px 21px;
+  }
+  .setup2012-stage h2 {
+    font-size: 17px;
+  }
+  .setup2012-description {
+    font-size: 10px;
+    margin-bottom: 20px;
+  }
+  .setup2012-form-row {
+    gap: 12px;
+  }
+  .setup2012-field.setup2012-gender {
+    flex-basis: 105px;
+  }
+  .setup2012-avatars {
+    gap: 8px;
+  }
+  .setup2012-avatars > button {
+    width: 37px;
+    height: 37px;
+    font-size: 23px;
+  }
+  .setup2012-choice {
+    padding: 11px;
+  }
+  .setup2012-choice small {
+    font-size: 10px;
+  }
+  .setup2012-footer {
+    padding: 13px 16px;
+  }
+  .setup2012-footer > span {
+    max-width: 90px;
+    font-size: 9px;
+  }
+  .setup2012-window .setup2012-footer .button {
+    font-size: 11px;
+    padding: 6px 9px;
+    gap: 4px;
+  }
+}
+@media (max-width: 480px) {
+  .setup2012-overlay {
+    padding: 9px 7px 50px;
+  }
+  .setup2012-window {
+    max-height: calc(100dvh - 64px);
+  }
+  .setup2012-caption {
+    font-size: 11px;
+  }
+  .setup2012-shell {
+    display: block;
+    max-height: calc(100dvh - 102px);
+    overflow: auto;
+  }
+  .setup2012-sidebar {
+    width: 100%;
+    min-height: 82px;
+    padding: 15px 17px;
+    display: grid;
+    grid-template-columns: 41px 1fr;
+    grid-template-rows: auto auto;
+    gap: 0 13px;
+  }
+  .setup2012-computer {
+    width: 40px;
+    height: 40px;
+    margin: 0;
+    grid-row: 1/3;
+    align-self: center;
+  }
+  .setup2012-sidebar h1 {
+    font-size: 17px;
+    line-height: 1.5;
+    margin: 0;
+  }
+  .setup2012-sidebar h1 br {
+    display: none;
+  }
+  .setup2012-sidebar > p {
+    font-size: 10px;
+    line-height: 1.7;
+    margin: 4px 0 0;
+  }
+  .setup2012-sidebar > p br {
+    display: none;
+  }
+  .setup2012-sidebar ol,
+  .setup2012-version {
+    display: none;
+  }
+  .setup2012-main {
+    min-height: 470px;
+  }
+  .setup2012-stage {
+    padding: 19px 18px 21px;
+    overflow: visible;
+  }
+  .setup2012-stage-heading {
+    font-size: 10px;
+    margin-bottom: 15px;
+  }
+  .setup2012-stage h2 {
+    font-size: 17px;
+    line-height: 1.7;
+  }
+  .setup2012-description {
+    font-size: 11px;
+    line-height: 1.9;
+  }
+  .setup2012-form-row {
+    gap: 12px;
+    margin: 21px 0;
+  }
+  .setup2012-field.setup2012-gender {
+    flex-basis: 100px;
+  }
+  .setup2012-window input,
+  .setup2012-window select {
+    padding: 7px;
+    font-size: 12px;
+  }
+  .setup2012-avatars {
+    gap: 7px;
+  }
+  .setup2012-avatars > button {
+    width: 37px;
+    height: 37px;
+    font-size: 24px;
+  }
+  .setup2012-info {
+    margin-top: 18px;
+    gap: 10px;
+  }
+  .setup2012-info b {
+    font-size: 11px;
+  }
+  .setup2012-info p {
+    font-size: 10px;
+  }
+  .setup2012-ability-row {
+    gap: 10px;
+  }
+  .setup2012-ability-meter {
+    gap: 2px;
+  }
+  .setup2012-stepper {
+    gap: 9px;
+  }
+  .setup2012-mentor em {
+    font-size: 9px;
+    margin-left: 7px;
+  }
+  .setup2012-footer {
+    position: sticky;
+    bottom: 0;
+    padding: 12px 14px;
+    z-index: 1;
+    gap: 8px;
+  }
+  .setup2012-footer > span {
+    display: none;
+  }
+  .setup2012-footer > div {
+    margin-left: auto;
+    gap: 7px;
+  }
+  .setup2012-window .setup2012-footer .button {
+    font-size: 11px;
+    padding: 7px 9px;
+  }
+  .setup2012-return {
+    font-size: 10px;
+  }
+}
+@media (max-height: 680px) and (min-width: 481px) {
+  .setup2012-overlay {
+    padding-top: 10px;
+    padding-bottom: 50px;
+  }
+  .setup2012-shell {
+    min-height: 0;
+    max-height: calc(100dvh - 96px);
+  }
+  .setup2012-sidebar {
+    padding-top: 21px;
+  }
+  .setup2012-computer {
+    width: 48px;
+    height: 48px;
+    margin-bottom: 14px;
+  }
+  .setup2012-sidebar h1 {
+    font-size: 22px;
+    margin-bottom: 14px;
+  }
+  .setup2012-sidebar > p {
+    margin-bottom: 18px;
+  }
+  .setup2012-sidebar ol {
+    padding-top: 10px;
+  }
+  .setup2012-sidebar li {
+    margin: 12px 0;
+  }
+  .setup2012-stage {
+    padding-top: 18px;
+    padding-bottom: 18px;
+  }
+}

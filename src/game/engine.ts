@@ -1,5 +1,6 @@
 import {
   DEFAULT_CONFIG,
+  RESEARCH_CONTEXT,
   END_HOUR,
   LIFE,
   MENTORS,
@@ -162,15 +163,18 @@ export function reduceGame(state: GameState, action: Action): GameState {
         s.aiIssues.push({
           id: uid(s, "ai"),
           kind: "code",
-          text: "AI 代码把验证集参与了参数选择，存在隐性数据泄漏。运行测试并核验后才能安全用于实验。",
+          text: "下载的第三方代码把验证集参与了参数选择，存在隐性数据泄漏。运行测试并核验后才能安全用于实验。",
           resolved: false,
         });
-        log(s, "AI 生成了实验框架，代码进度提升；仍需核验数据隔离。");
+        log(s, "导入了师兄分享的代码框架，代码进度提升；仍需核验数据隔离。");
       } else if (action.mode === "test") {
         s.aiIssues
           .filter((i) => i.kind === "code")
           .forEach((i) => (i.resolved = true));
-        log(s, "通过数据隔离、维度和随机种子测试；修复 AI 生成代码中的泄漏。");
+        log(
+          s,
+          "通过数据隔离、维度和随机种子测试；修复第三方代码中的数据泄漏。",
+        );
       } else
         log(s, `完成科研代码迭代，代码质量 ${Math.round(s.codeQuality)}%。`);
       break;
@@ -219,7 +223,7 @@ export function reduceGame(state: GameState, action: Action): GameState {
         logs: [
           `[提交] ${config.name} · seed=${config.seed}`,
           `[配置] ${config.model} / ${config.dataset} / ${config.method}`,
-          `[计划] 预计 ${experimentDuration(config)}h，需要 ${requiredMemory(config).toFixed(1)}GB 显存。`,
+          `[计划] 预计 ${experimentDuration(config)}h，需要 ${requiredMemory(config).toFixed(2)}GB ${RESEARCH_CONTEXT[s.profile.direction].resourceLabel}。`,
         ],
       };
       s.tasks.push(task);
@@ -546,7 +550,7 @@ export function reduceGame(state: GameState, action: Action): GameState {
       if (["intern", "ta"].includes(action.kind) && !canWork(s, item.time))
         break;
       const cost =
-        action.kind === "meal" ? 18 : action.kind === "social" ? 45 : 0;
+        action.kind === "meal" ? 8 : action.kind === "social" ? 25 : 0;
       if (s.stats.money < cost) {
         s.lastNotice = "余额不足，可以考虑助教或实习工作。";
         break;
@@ -578,7 +582,7 @@ export function reduceGame(state: GameState, action: Action): GameState {
       }
       if (action.kind === "intern") {
         s.stats.engineering += 10;
-        s.stats.money += 180;
+        s.stats.money += 100;
         s.stats.energy -= 15;
         s.stats.stress += 5;
         s.flags.push(`intern-${s.hour}`);
@@ -602,7 +606,7 @@ export function reduceGame(state: GameState, action: Action): GameState {
         (action.kind === "analysis" || action.kind === "polish") &&
         !s.topicId
       ) {
-        s.lastNotice = "请先明确研究问题，让 AI 在上下文内提供帮助。";
+        s.lastNotice = "请先明确研究问题，再用统计脚本整理已有记录。";
         break;
       }
       work(s, 0.5, 0);
@@ -611,29 +615,32 @@ export function reduceGame(state: GameState, action: Action): GameState {
         s.aiIssues.push({
           id: uid(s, "ai"),
           kind: "citation",
-          text: "AI 声称存在 “Universal Agent Theorem, 2026”，但学术库中没有这篇文献。核查原文前请勿引用。",
+          text: "BibTeX 批量整理得到一条缺少出版来源的引用；学术库中无法核实，核查原文前请勿引用。",
           resolved: false,
         });
         log(
           s,
-          "AI 提炼了：数据清洗、匹配对照、独立验证。但它还给出了一条可能虚构的引用，请核查。",
+          "关键词脚本整理出数据清洗、匹配对照、独立验证等线索；批量导入中有一条来源不明的引用，需要核对原文。",
         );
       }
       if (action.kind === "idea") {
         s.stats.skill += 2;
         log(
           s,
-          "AI 建议：先做匹配基线，仅改变策略；然后更换种子复现，最后以分布外数据检验边界。这只是候选思路，仍需阅读与实验。",
+          "实验设计清单：先做匹配基线，仅改变策略；再更换种子复现，最后用独立留出集检验边界。清单不能代替你阅读和思考。",
         );
       }
       if (action.kind === "analysis") {
         s.aiIssues.push({
           id: uid(s, "ai"),
           kind: "claim",
-          text: "AI 将单次实验的提升描述为“普遍显著提升”，超出了已有证据。请核对统计与分布外结果。",
+          text: "统计模板把单次实验的提升填成“普遍显著提升”，超出了已有证据。请核对重复实验和独立留出结果。",
           resolved: false,
         });
-        log(s, "AI 加快了实验摘要，但夸大了单次实验结论。核验后才能用于论文。");
+        log(
+          s,
+          "统计脚本加快了结果整理，但默认报告模板夸大了单次实验结论，核验后才能用于论文。",
+        );
       }
       if (action.kind === "polish") {
         s.manuscript.effort.abstract = clamp(s.manuscript.effort.abstract + 20);
@@ -642,10 +649,13 @@ export function reduceGame(state: GameState, action: Action): GameState {
         s.aiIssues.push({
           id: uid(s, "ai"),
           kind: "claim",
-          text: "润色稿中“已证明普遍最优”的表述不被当前实验支持，需要改为有限条件下的观测。",
+          text: "导入的摘要模板包含“已证明普遍最优”，不被当前实验支持，需要手动改为有限条件下的观测。",
           resolved: false,
         });
-        log(s, "AI 改善了摘要表达，但存在夸大措辞，请核实后采用。");
+        log(
+          s,
+          "论文模板整理了摘要结构，但不能判断结论强弱；请人工核实表述后采用。",
+        );
       }
       break;
     }
@@ -659,10 +669,10 @@ export function reduceGame(state: GameState, action: Action): GameState {
       log(
         s,
         issue.kind === "citation"
-          ? "检索核实：AI 给出的参考文献不存在，已排除，不计入参考文献。"
+          ? "检索核实：批量导入的参考文献无法找到可靠来源，已排除，不计入参考文献。"
           : issue.kind === "code"
-            ? "逐项核对并修复了 AI 代码的数据隔离问题。"
-            : "对照实验记录，收窄 AI 结论为当前设置下的观测，保留研究局限。",
+            ? "逐项核对并修复了第三方代码的数据隔离问题。"
+            : "对照实验记录，收窄模板结论为当前设置下的观测，保留研究局限。",
       );
       break;
     }

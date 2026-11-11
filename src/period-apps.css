@@ -1,0 +1,3227 @@
+/* 2012 软件内页：经典工具栏、浅蓝窗格和文档表格，业务动作仍由原组件提供。 */
+.window-content {
+  font-family: Tahoma, "Microsoft YaHei", "宋体", sans-serif;
+  font-size: 12px;
+  color: #222;
+  background: #fff;
+}
+.window-content .page {
+  padding: 18px 22px 24px;
+  max-width: none;
+}
+.window-content .page-head {
+  gap: 14px;
+  align-items: flex-start;
+  margin-bottom: 18px;
+  border-bottom: 1px solid #bacbdb;
+  padding-bottom: 13px;
+}
+.window-content .page-head h2 {
+  font-size: 20px;
+  line-height: 1.5;
+  letter-spacing: 0;
+  color: #154575;
+  font-weight: 500;
+}
+.window-content .page-head .eyebrow {
+  font-size: 11px;
+  color: #526775;
+  letter-spacing: 0;
+  margin-bottom: 5px;
+}
+.window-content .page-head p {
+  font-size: 12px;
+  line-height: 1.8;
+  color: #52616b;
+  margin-top: 6px;
+}
+.window-content h3 {
+  font-weight: 600;
+  letter-spacing: 0;
+}
+.window-content input,
+.window-content select,
+.window-content textarea {
+  border: 1px solid #9eacbb;
+  border-radius: 1px;
+  background: #fff;
+  color: #222;
+  padding: 6px 8px;
+  box-shadow: inset 1px 1px 2px #00000010;
+  font-size: 12px;
+}
+.window-content input:focus,
+.window-content select:focus,
+.window-content textarea:focus {
+  border-color: #377fb1 !important;
+  box-shadow:
+    inset 1px 1px 2px #0000000c,
+    0 0 0 1px #85b9e033;
+}
+.window-content .button {
+  color: #16344e;
+  border: 1px solid #7d9db7;
+  border-radius: 3px;
+  background: linear-gradient(#fff 0%, #ecf5fd 48%, #dbeaf7 49%, #eaf4fc 100%);
+  box-shadow: inset 0 1px #fff;
+  padding: 6px 12px;
+  font-size: 12px;
+  min-height: 28px;
+  font-weight: 400;
+  transform: none;
+}
+.window-content .button:hover:not(:disabled) {
+  color: #143751;
+  border-color: #448ac0;
+  background: linear-gradient(#fff, #d7ecfc);
+  transform: none;
+}
+.window-content .button.secondary {
+  border-color: #a6afb7;
+  background: linear-gradient(#fff, #e7e9eb);
+  color: #293c4b;
+}
+.window-content .button.small {
+  font-size: 11px;
+  padding: 4px 9px;
+  min-height: 24px;
+}
+.window-content .text-button,
+.window-content .back-link {
+  color: #2263a0;
+  font-size: 11px;
+}
+.window-content .text-button:hover,
+.window-content .back-link:hover {
+  text-decoration: underline;
+  color: #154a7f;
+}
+.window-content .pill {
+  border: 1px solid #bdd2e5;
+  border-radius: 2px;
+  background: #edf5fc;
+  color: #315b7e;
+  padding: 3px 6px;
+  font-size: 10px;
+  font-weight: 400;
+  letter-spacing: 0;
+}
+.window-content .pill.slate {
+  background: #f2f2f2;
+  border-color: #d5d9dc;
+  color: #69737b;
+}
+.window-content .pill.orange {
+  background: #fff6df;
+  border-color: #e3c98b;
+  color: #835f14;
+}
+.window-content .pill.purple {
+  background: #eff1fb;
+  border-color: #bac5dc;
+  color: #4b5f86;
+}
+.window-content .meter {
+  height: 8px;
+  border: 1px solid #b6bdc5;
+  border-radius: 2px;
+  background: #f3f3f3;
+  box-shadow: inset 0 1px 2px #0001;
+}
+.window-content .meter > i {
+  background: linear-gradient(#a6e978, #68b845 48%, #3ca327 49%, #8ed963);
+  border-radius: 0;
+  box-shadow: inset 0 1px #d7ffc1;
+}
+.window-content .meter-label {
+  font-size: 11px;
+  color: #444;
+}
+.window-content .meter-label b {
+  font-size: 11px;
+  color: #284867;
+}
+.window-content .meter-label small {
+  color: #7d8994;
+  font-size: 10px;
+}
+.window-content .section-title {
+  margin-bottom: 12px;
+  padding-bottom: 5px;
+  border-bottom: 1px solid #dde5ed;
+}
+.window-content .section-title h3 {
+  font-size: 13px;
+  color: #244967;
+}
+.window-content .section-title .muted,
+.window-content .section-note {
+  font-size: 11px;
+  line-height: 1.9;
+  color: #697580;
+}
+.window-content .eyebrow {
+  letter-spacing: 0;
+  color: #5f7484;
+  font-size: 11px;
+}
+.window-content .hint {
+  background: #ffffe8;
+  border: 1px solid #e4d79a;
+  border-radius: 1px;
+  padding: 10px 12px;
+  color: #6f663c;
+  font-size: 11px;
+  line-height: 1.9;
+}
+.window-content .hint svg {
+  color: #9d8842;
+  width: 14px;
+  height: 14px;
+}
+.window-content .field {
+  font-size: 12px;
+  margin-bottom: 15px;
+  gap: 7px;
+}
+.window-content .field > span {
+  color: #3c4a57;
+  font-size: 12px;
+  font-weight: 400;
+}
+.window-content .field small {
+  color: #6d7c89;
+  font-size: 11px;
+}
+.window-content .tabs {
+  gap: 1px;
+}
+.window-content .tabs button {
+  padding: 6px 13px;
+  border: 1px solid #bacbd9;
+  border-bottom: 0;
+  border-radius: 3px 3px 0 0;
+  background: linear-gradient(#fff, #e4edf5);
+  color: #4d6071;
+  font-size: 12px;
+}
+.window-content .tabs button.active {
+  background: #fff;
+  color: #184976;
+  font-weight: 600;
+  box-shadow: inset 0 2px #78a7d1;
+}
+.window-content .tabs.underlined {
+  border-bottom: 1px solid #a9bfd0;
+  gap: 3px;
+  padding-left: 4px;
+}
+.window-content .tabs.underlined button {
+  padding: 7px 13px;
+  margin-bottom: 0;
+  border-radius: 3px 3px 0 0;
+}
+.window-content .tabs.underlined button.active:after {
+  height: 1px;
+  background: #fff;
+  bottom: -1px;
+}
+.window-content .tabs button b {
+  border-radius: 2px;
+  background: #dae6f3;
+  color: #466984;
+  font-size: 10px;
+}
+.window-content .empty {
+  padding: 42px 20px;
+  color: #73808a;
+}
+.window-content .empty-symbol {
+  width: 54px;
+  height: 54px;
+  background: #edf3f8;
+  border: 1px solid #c9d8e6;
+  border-radius: 4px;
+  color: #62809a;
+  margin-bottom: 17px;
+}
+.window-content .empty h3 {
+  font-size: 15px;
+  color: #32516c;
+}
+.window-content .empty p {
+  font-size: 12px;
+  color: #75808b;
+}
+.window-content .period-program-bar,
+.window-content .period-browser-bar {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  min-height: 31px;
+  border: 1px solid #aebfd0;
+  background: linear-gradient(#f8fbfd, #e4edf5);
+  color: #466079;
+  padding: 5px 9px;
+  margin: -1px -1px 16px;
+  font-size: 11px;
+}
+.window-content .period-browser-bar > b,
+.window-content .period-program-bar > b {
+  font-size: 11px;
+  color: #47627b;
+  font-weight: 400;
+  white-space: nowrap;
+}
+.window-content .period-browser-bar > span {
+  flex: 1;
+  background: #fff;
+  border: 1px solid #acbdce;
+  color: #536576;
+  padding: 4px 7px;
+  min-width: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.window-content .period-browser-bar > button {
+  font-size: 11px;
+  color: #285f8e;
+  white-space: nowrap;
+}
+.window-content .period-program-bar > span {
+  color: #6c7d8c;
+  font-size: 11px;
+}
+
+/* Internet Explorer 个人主页与文献检索 */
+.window-content .home-layout {
+  background: #fff;
+}
+.window-content .app-sidebar {
+  background: linear-gradient(90deg, #edf4fa, #e3edf8);
+  border-color: #c0cedc;
+  width: 172px;
+  padding: 16px 10px;
+}
+.window-content .sidebar-profile {
+  border-bottom: 1px solid #c4d1df;
+  margin: 0 0 16px;
+  padding: 0 4px 15px;
+  gap: 8px;
+}
+.window-content .sidebar-profile > div {
+  border-radius: 2px;
+  border: 1px solid #9bb3c9;
+  background: #fff;
+}
+.window-content .sidebar-profile > b {
+  font-size: 12px;
+  color: #284c6d;
+}
+.window-content .sidebar-profile small {
+  font-size: 10px;
+  color: #60798e;
+}
+.window-content .nav-label {
+  font-size: 11px;
+  color: #4d6b84;
+  letter-spacing: 0;
+  margin: 4px 10px 8px;
+}
+.window-content .nav-item {
+  font-size: 12px;
+  color: #2b5274;
+  border-radius: 1px;
+  padding: 8px 10px;
+  gap: 8px;
+}
+.window-content .nav-item.active,
+.window-content .nav-item:hover {
+  background: linear-gradient(#f6fbff, #d8eaf8);
+  box-shadow: inset 0 0 0 1px #b2cde1;
+  color: #174f7f;
+}
+.window-content .nav-item svg {
+  color: #6386a4;
+}
+.window-content .nav-count {
+  border-radius: 1px;
+  font-size: 10px;
+  background: #d8e6f3;
+  color: #547590;
+}
+.window-content .sidebar-line {
+  background: #c6d6e4;
+  margin: 13px 8px;
+}
+.window-content .sidebar-bottom {
+  font-size: 10px;
+  color: #738598;
+  line-height: 1.8;
+  padding-top: 40px;
+}
+.window-content .sidebar-bottom small {
+  font-size: 10px;
+  color: #7c8fa1;
+}
+.window-content .home-content {
+  padding: 13px 19px 22px;
+}
+.window-content .home-content > .period-browser-bar {
+  margin-bottom: 14px;
+}
+.window-content .home-greeting {
+  margin-bottom: 15px;
+}
+.window-content .home-greeting h1 {
+  font-size: 20px;
+  font-weight: 500;
+  letter-spacing: 0;
+  color: #205083;
+}
+.window-content .home-greeting .eyebrow {
+  font-size: 11px;
+  color: #7b8996;
+  margin-bottom: 6px;
+}
+.window-content .home-greeting > .pill {
+  font-size: 10px;
+  background: #f7fafc;
+  color: #527798;
+  border-color: #c4d6e4;
+}
+.window-content .home-hero {
+  height: auto;
+  min-height: 128px;
+  border: 1px solid #b5ccdf;
+  border-radius: 0;
+  background: linear-gradient(#f7fbff, #e7f1f9);
+}
+.window-content .home-hero:after,
+.window-content .hero-art,
+.window-content .hero-number {
+  display: none;
+}
+.window-content .hero-copy {
+  padding: 16px 20px;
+}
+.window-content .hero-copy > span {
+  font-size: 11px;
+  color: #607f9c;
+  letter-spacing: 0;
+}
+.window-content .hero-copy h2 {
+  font-size: 21px;
+  line-height: 1.5;
+  color: #285a84;
+  font-weight: 500;
+  letter-spacing: 0;
+  margin: 6px 0;
+}
+.window-content .hero-copy h2 br {
+  display: none;
+}
+.window-content .hero-copy p {
+  font-size: 12px;
+  color: #63788b;
+  max-width: none;
+  white-space: normal;
+}
+.window-content .hero-copy > button {
+  font-size: 12px;
+  color: #246ba0;
+  margin-top: 9px;
+  gap: 7px;
+}
+.window-content .overview-cards {
+  margin: 14px 0 20px;
+  gap: 10px;
+}
+.window-content .overview-cards > div {
+  border-radius: 0;
+  border: 1px solid #c3d4e3;
+  background: linear-gradient(#fbfdff, #f0f5f9);
+  padding: 13px 14px;
+}
+.window-content .overview-cards > div > span {
+  font-size: 11px;
+  color: #426a8b;
+}
+.window-content .overview-cards b {
+  font-family: Tahoma, sans-serif;
+  font-size: 25px;
+  color: #315b7d;
+  margin: 10px 0;
+}
+.window-content .overview-cards b small {
+  font-size: 10px;
+  color: #738a9d;
+}
+.window-content .overview-cards p {
+  font-size: 10px;
+  color: #718697;
+  line-height: 1.7;
+}
+.window-content .tiny-bars i {
+  background: #78a7cf;
+  border-radius: 0;
+}
+.window-content .knowledge-dots i {
+  background: #d8e3ed;
+  border-radius: 0;
+  height: 5px;
+}
+.window-content .knowledge-dots i.filled {
+  background: #729bc0;
+}
+.window-content .home-columns {
+  gap: 22px;
+  margin-bottom: 22px;
+}
+.window-content .journey button {
+  border-bottom: 1px dotted #d6e1eb;
+  padding: 10px 0;
+  gap: 9px;
+}
+.window-content .journey button + button:before {
+  display: none;
+}
+.window-content .journey b {
+  font-size: 12px;
+  color: #335d7d;
+  font-weight: 400;
+}
+.window-content .journey small {
+  font-size: 11px;
+  color: #8293a0;
+}
+.window-content .step-mark {
+  font-size: 10px;
+  border-radius: 2px;
+  border: 1px solid #bdd1e3;
+  color: #6c8ea7;
+  background: #eff5fa;
+  width: 23px;
+  height: 23px;
+}
+.window-content .step-mark.current,
+.window-content .step-mark.done {
+  background: linear-gradient(#edf7ff, #bfd8ed);
+  color: #245987;
+  border-color: #93b6d0;
+}
+.window-content .agenda-mini > button {
+  border-bottom: 1px dotted #dbe4ec;
+  padding: 10px 0;
+  gap: 10px;
+}
+.window-content .agenda-mini > button > span b {
+  font-size: 12px;
+  color: #4a7090;
+}
+.window-content .agenda-mini > button > span small {
+  font-size: 10px;
+  color: #94a2af;
+}
+.window-content .agenda-mini > button > i {
+  background: #81a8c9;
+}
+.window-content .agenda-mini > button > div b {
+  font-size: 12px;
+  color: #3d6281;
+  font-weight: 400;
+}
+.window-content .agenda-mini > button > div small {
+  font-size: 11px;
+  color: #8c9aa7;
+}
+.window-content .gentle-card {
+  border: 1px solid #e4d29c;
+  border-radius: 0;
+  background: #fffde8;
+  padding: 10px;
+  margin-top: 12px;
+}
+.window-content .gentle-card > span {
+  font-size: 22px;
+}
+.window-content .gentle-card b {
+  font-size: 11px;
+  color: #837440;
+}
+.window-content .gentle-card small {
+  font-size: 10px;
+  color: #a29465;
+}
+.window-content .active-topic {
+  background: #f0f6fb;
+  border: 1px solid #b9d0e1;
+  border-radius: 0;
+  padding: 14px;
+  gap: 12px;
+}
+.window-content .topic-light {
+  border-radius: 2px;
+  background: #dceaf5;
+  color: #668fb1;
+}
+.window-content .active-topic b {
+  font-size: 13px;
+  color: #2c5d83;
+}
+.window-content .active-topic p {
+  font-size: 11px;
+  color: #657f94;
+}
+.window-content .active-topic > div > span {
+  font-size: 10px;
+  color: #8399aa;
+}
+.window-content .topic-grid {
+  gap: 12px;
+}
+.window-content .topic-card {
+  border-radius: 0;
+  border: 1px solid #c0d2e0;
+  padding: 15px;
+  background: #fcfdff;
+}
+.window-content .topic-card.selected {
+  border-color: #7fa6c5;
+  background: #eff7fc;
+}
+.window-content .topic-card h3 {
+  font-size: 13px;
+  color: #315b7c;
+}
+.window-content .topic-card p {
+  font-size: 11px;
+  color: #6b8090;
+}
+.window-content .topic-metrics {
+  font-size: 10px;
+  color: #8c9caa;
+  gap: 11px;
+}
+.window-content .topic-metrics b {
+  color: #557a96;
+  font-weight: 400;
+}
+.window-content .topic-bottom {
+  border-color: #dce7ee;
+  gap: 9px;
+}
+.window-content .topic-bottom > span {
+  color: #869aaa;
+  font-size: 10px;
+}
+.window-content .topic-card .topic-bottom .button {
+  font-size: 11px;
+}
+.window-content .home-footer {
+  color: #8a9bab;
+  font-size: 10px;
+  border-top: 1px solid #d4e0e9;
+  margin-top: 19px;
+  padding-top: 12px;
+}
+.window-content .search-box {
+  border-radius: 1px;
+  border: 1px solid #9eafbf;
+  background: #fff;
+  gap: 10px;
+  padding: 3px 10px;
+  box-shadow: inset 0 1px 2px #0001;
+}
+.window-content .search-box input {
+  border: 0;
+  box-shadow: none;
+  font-size: 13px;
+  padding: 7px 0;
+}
+.window-content .search-box kbd {
+  font-size: 11px;
+  border-radius: 1px;
+  color: #6b8297;
+  border-color: #c6d3df;
+}
+.window-content .filter-row {
+  border-bottom: 1px solid #b4c9dc;
+  padding-bottom: 0;
+  align-items: flex-end;
+}
+.window-content .filter-row select {
+  font-size: 11px;
+  color: #405b72;
+  border: 1px solid #bdcbd8;
+  margin-bottom: 5px;
+}
+.window-content .results-count {
+  font-size: 11px;
+  color: #778a9a;
+}
+.window-content .results-count span {
+  color: #9caab7;
+}
+.window-content .paper-list article {
+  padding: 17px 0;
+  border-color: #d4e0e9;
+}
+.window-content .paper-list h3 {
+  font-size: 15px;
+  color: #154c90;
+  font-weight: 400;
+  text-decoration: underline;
+  line-height: 1.7;
+}
+.window-content .paper-list p {
+  font-size: 12px;
+  color: #5f6c76;
+  line-height: 1.85;
+  max-width: none;
+}
+.window-content .authors {
+  font-size: 11px;
+  color: #478143;
+}
+.window-content .paper-list-meta > span,
+.window-content .paper-list-meta .pill {
+  font-size: 10px;
+}
+.window-content .paper-list-meta > span {
+  color: #7f91a0;
+}
+.window-content .paper-list .paper-open {
+  font-size: 11px;
+  color: #2e679a;
+}
+.window-content .bookmark-button {
+  color: #a2afb9;
+}
+.window-content .bookmark-button.saved {
+  color: #c29437;
+}
+.window-content .paper-detail h1 {
+  font-size: 22px;
+  color: #234c72;
+  font-weight: 500;
+  line-height: 1.6;
+  margin: 16px 0 9px;
+}
+.window-content .paper-authors {
+  font-size: 11px;
+  color: #647989;
+}
+.window-content .paper-actions {
+  margin: 18px 0 23px;
+  gap: 8px;
+}
+.window-content .paper-section,
+.window-content .paper-two section {
+  border-radius: 0;
+  background: #f7f9fb;
+  border: 1px solid #cddbe6;
+  padding: 17px 20px;
+}
+.window-content .paper-two {
+  gap: 15px;
+  margin: 18px 0;
+}
+.window-content .paper-section > span,
+.window-content .paper-two section > span {
+  font-size: 10px;
+  letter-spacing: 0;
+  color: #899cad;
+}
+.window-content .paper-section h3,
+.window-content .paper-two h3 {
+  font-size: 13px;
+  color: #335d7e;
+}
+.window-content .paper-section p,
+.window-content .paper-two p {
+  font-size: 12px;
+  color: #617482;
+  line-height: 2;
+}
+.window-content .insight-box {
+  border-radius: 0;
+  background: #fffce7;
+  border-color: #dfd19b;
+  padding: 18px;
+  color: #aa8b32;
+}
+.window-content .insight-box h3 {
+  font-size: 13px;
+  color: #8b702d;
+}
+.window-content .insight-box p {
+  font-size: 12px;
+  color: #8d805a;
+}
+.window-content .insight-box strong {
+  font-size: 11px;
+  color: #9b803e;
+}
+.window-content .related-paper {
+  font-size: 12px;
+  color: #2d6c9e;
+  border-color: #dce5ec;
+}
+
+/* Vim 与 PuTTY，实验配置按经典 Windows 对话框组织。 */
+.window-content .ide-layout {
+  background: #fff;
+  color: #222;
+}
+.window-content .ide-explorer {
+  background: #f3f5f7;
+  border-right: 1px solid #b9c7d1;
+  color: #475969;
+  padding: 15px 10px;
+  width: 190px;
+}
+.window-content .ide-explorer > span {
+  font-size: 11px;
+  color: #4d6c83;
+  letter-spacing: 0;
+}
+.window-content .ide-explorer > b {
+  font-size: 11px;
+  color: #52697d;
+}
+.window-content .ide-explorer > button {
+  font-family: Consolas, "Courier New", monospace;
+  font-size: 11px;
+  color: #4a6275;
+  padding: 8px 6px;
+  border-radius: 0;
+}
+.window-content .ide-explorer > button.active {
+  background: #d9e8f7;
+  color: #244f7b;
+  box-shadow: inset 0 0 0 1px #b3cce1;
+}
+.window-content .ide-readme {
+  padding: 30px 5px 0;
+}
+.window-content .ide-readme > span {
+  font-size: 10px;
+  color: #657b8d;
+}
+.window-content .ide-readme p {
+  font-size: 11px;
+  color: #798b99;
+}
+.window-content .ide-readme button {
+  font-size: 11px;
+  color: #336a9c;
+}
+.window-content .ide-menu {
+  height: 27px;
+  flex-shrink: 0;
+  line-height: 27px;
+  padding: 0 12px;
+  background: linear-gradient(#f7f8f9, #e8ebee);
+  color: #3d4c5a;
+  border-bottom: 1px solid #b9c6d1;
+  font-size: 11px;
+  white-space: nowrap;
+}
+.window-content .ide-tabs {
+  background: #dce6ef;
+  border-color: #b3c6d5;
+  height: 30px;
+}
+.window-content .ide-tabs > button {
+  background: #fff;
+  border: 1px solid #aabecf;
+  border-bottom: 0;
+  margin-left: 5px;
+  color: #315b7c;
+  padding: 7px 12px;
+  font-size: 11px;
+}
+.window-content .ide-tabs > button span {
+  color: #8ba4b8;
+}
+.window-content .ide-tabs > span {
+  font-size: 10px;
+  color: #60778b;
+}
+.window-content .code-area {
+  padding: 19px 15px 24px;
+  background: #fff;
+}
+.window-content .code-area > div {
+  font-size: 12px;
+  line-height: 1.95;
+}
+.window-content .code-area > div > span {
+  font-size: 11px;
+  color: #a0aab1;
+  border-right: 1px solid #e3e7eb;
+  padding-right: 10px;
+  margin-right: 14px;
+}
+.window-content .code-area code {
+  font-family: "Courier New", monospace;
+  font-size: 12px;
+  color: #222;
+}
+.window-content .code-area code.comment {
+  color: #338143;
+}
+.window-content .code-area code.keyword {
+  color: #123eae;
+}
+.window-content .ide-bottom {
+  background: #edf2f6;
+  border-color: #b8cbdc;
+  padding: 17px 20px;
+}
+.window-content .ide-bottom > div:first-child {
+  color: #53799a;
+}
+.window-content .ide-bottom b {
+  font-size: 11px;
+  color: #3c5d77;
+}
+.window-content .ide-bottom .pill {
+  color: #65798b;
+  background: #e7eef6;
+}
+.window-content .ide-bottom .pill.orange {
+  color: #a47e30;
+  background: #fff4dd;
+}
+.window-content .ide-bottom p {
+  font-size: 11px;
+  color: #728696;
+}
+.window-content .ide-bottom .button {
+  font-size: 11px;
+  border-color: #94acc0;
+  color: #264e70;
+  background: linear-gradient(#fff, #dce9f4);
+}
+.window-content .ide-bottom .button.secondary {
+  background: linear-gradient(#fff, #e5e9ed);
+  color: #516e84;
+  border-color: #a8b6c1;
+}
+.window-content .experiment-form {
+  border: 1px solid #c4d2df;
+  border-radius: 0;
+  padding: 17px 18px 2px;
+  background: #f8fafc;
+  gap: 0 19px;
+}
+.window-content .method-options {
+  gap: 9px;
+}
+.window-content .method-options > button {
+  border: 1px solid #bacbd9;
+  border-radius: 2px;
+  background: #fff;
+  padding: 13px;
+}
+.window-content .method-options > button.selected {
+  border-color: #6f9cbe;
+  background: linear-gradient(#f3faff, #dfedf8);
+}
+.window-content .method-options b {
+  font-size: 12px;
+  color: #335f82;
+  font-weight: 400;
+}
+.window-content .method-options small {
+  font-size: 10px;
+  color: #8297a8;
+}
+.window-content .server-options > button {
+  border-color: #bacbd9;
+  border-radius: 2px;
+  padding: 14px;
+  background: #fff;
+  color: #7396b2;
+}
+.window-content .server-options > button.selected {
+  border-color: #6996ba;
+  background: #edf6fd;
+}
+.window-content .server-options b {
+  font-size: 12px;
+  color: #2f597a;
+  font-weight: 400;
+}
+.window-content .server-options small {
+  font-size: 11px;
+  color: #8a9dab;
+}
+.window-content .experiment-estimate {
+  border: 1px solid #bcd0e1;
+  border-radius: 1px;
+  background: #f1f7fc;
+  color: #728ca1;
+  margin-top: 15px;
+  padding: 13px 15px;
+}
+.window-content .experiment-estimate > span {
+  font-size: 11px;
+}
+.window-content .experiment-estimate b {
+  color: #3c6586;
+  font-weight: 600;
+}
+.window-content .experiment-estimate small {
+  font-size: 10px;
+  color: #8298aa;
+}
+.window-content .experiment-estimate.warning {
+  background: #fff9e8;
+  border-color: #deca92;
+  color: #b49242;
+}
+.window-content .experiment-estimate.warning b {
+  color: #9b792e;
+}
+.window-content .experiment-estimate.warning small {
+  color: #a6905e;
+}
+.window-content .task-log-layout {
+  border-radius: 0;
+  border-color: #acbfce;
+}
+.window-content .task-log-layout > aside {
+  background: #eaf0f6;
+  border-color: #b7cad9;
+}
+.window-content .task-log-layout > aside > button {
+  border-color: #d5e0ea;
+  color: #6b87a0;
+}
+.window-content .task-log-layout > aside > button.active {
+  background: #cfe0f1;
+}
+.window-content .task-log-layout > aside b {
+  font-size: 11px;
+  color: #3c6586;
+}
+.window-content .task-log-layout > aside small {
+  font-size: 10px;
+  color: #8296a7;
+}
+.window-content .task-heading h3 {
+  color: #3f617b;
+  font-size: 13px;
+}
+.window-content .log-console {
+  border-radius: 0;
+  background: #080808;
+  border: 1px solid #333;
+  color: #ddd;
+  padding: 16px;
+  font-family: "Courier New", monospace;
+  font-size: 11px;
+  line-height: 1.9;
+  min-height: 245px;
+}
+.window-content .log-console > span {
+  color: #ccc;
+  font-size: 11px;
+}
+.window-content .log-console .error {
+  color: #fa7979;
+}
+.window-content .log-console .success {
+  color: #93d273;
+}
+.window-content .gpu-grid {
+  gap: 15px;
+}
+.window-content .gpu-card {
+  border: 1px solid #bdcddd;
+  border-radius: 0;
+  background: #fafcfe;
+  padding: 18px;
+}
+.window-content .gpu-chip {
+  border: 1px solid #b1c5d5;
+  border-radius: 2px;
+  background: linear-gradient(#edf7ff, #cddfed);
+  color: #6590ad;
+}
+.window-content .gpu-card h3 {
+  font-size: 15px;
+  color: #2c5678;
+  font-weight: 400;
+}
+.window-content .gpu-card > p {
+  font-size: 11px;
+  color: #7c91a2;
+}
+.window-content .gpu-util > b {
+  font-size: 28px;
+  color: #4b7c9e;
+}
+.window-content .gpu-util > span {
+  font-size: 10px;
+  color: #899dac;
+}
+.window-content .gpu-spark i {
+  background: #80a9c7;
+  border-radius: 0;
+}
+.window-content .gpu-current {
+  font-size: 11px;
+  color: #6e8ca3;
+  border-color: #d8e3eb;
+}
+.window-content .gpu-card > small {
+  font-size: 10px;
+  color: #91a1af;
+}
+.window-content .table-wrap {
+  border: 1px solid #b9cad8;
+  border-radius: 0;
+}
+.window-content table {
+  font-size: 12px;
+}
+.window-content thead {
+  background: linear-gradient(#f7fbff, #dce9f5);
+  color: #45667f;
+  font-size: 11px;
+}
+.window-content th {
+  font-size: 11px;
+  font-weight: 400;
+  border-right: 1px solid #c8d9e7;
+  padding: 10px 12px;
+}
+.window-content td {
+  font-size: 11px;
+  color: #526c80;
+  border-color: #d9e3ec;
+  padding: 12px;
+}
+.window-content td > b {
+  font-size: 11px;
+  font-weight: 400;
+}
+.window-content td small {
+  font-size: 10px;
+  color: #9aabb9;
+}
+.window-content tbody tr:nth-child(even) {
+  background: #f8fbfd;
+}
+.window-content tbody tr:hover {
+  background: #e9f3fc;
+}
+.window-content .result-metrics {
+  gap: 10px;
+  margin: 17px 0 22px;
+}
+.window-content .result-metrics > div {
+  border-radius: 0;
+  border-color: #bfd1df;
+  background: #f7fafd;
+  padding: 14px;
+}
+.window-content .result-metrics span {
+  font-size: 11px;
+  color: #6b8499;
+}
+.window-content .result-metrics b {
+  font-size: 26px;
+  color: #355f7f;
+  font-weight: 400;
+}
+.window-content .result-metrics small {
+  font-size: 10px;
+  color: #7a95ab;
+}
+.window-content .result-metrics em {
+  font-size: 10px;
+  color: #899dad;
+}
+.window-content .loss-chart {
+  border: 1px solid #bacbd8;
+  border-radius: 0;
+  background: #f3f3f3;
+  padding: 14px 10px;
+}
+.window-content .loss-chart svg {
+  background: #fff;
+  border: 1px solid #bdc7d0;
+}
+.window-content .loss-chart text {
+  font:
+    10px Tahoma,
+    sans-serif;
+  fill: #52616e;
+}
+.window-content .loss-chart polyline:first-of-type {
+  stroke: #235da5;
+}
+.window-content .loss-chart polyline:last-of-type {
+  stroke: #c23737;
+}
+.window-content .chart-legend {
+  font-size: 11px;
+  color: #587084;
+  gap: 17px;
+}
+.window-content .chart-legend small {
+  font-size: 10px;
+  color: #8699aa;
+}
+.window-content .chart-legend > span:first-child i {
+  background: #235da5;
+}
+.window-content .chart-legend > span:nth-child(2) i {
+  background: #c23737;
+}
+.window-content .diagnosis {
+  border: 1px solid #d9cb9a;
+  border-radius: 0;
+  background: #fffcea;
+  padding: 17px 20px;
+  color: #b09b52;
+  gap: 13px;
+}
+.window-content .diagnosis h3 {
+  font-size: 13px;
+  color: #8d783d;
+}
+.window-content .diagnosis p {
+  font-size: 11px;
+  color: #968961;
+  line-height: 1.95;
+}
+.window-content .diagnosis .evidence-text {
+  color: #71845a;
+}
+.window-content .evidence-checks > span:not(.pill) {
+  font-size: 11px;
+  border-radius: 1px;
+  background: #f0f2f4;
+  color: #89959f;
+  border: 1px solid #d7dfe5;
+  padding: 7px 10px;
+}
+.window-content .evidence-checks > span.done {
+  background: #edf6e8;
+  border-color: #c3d8b8;
+  color: #6b8e54;
+}
+.window-content .import-banner {
+  border-color: #c7d8e4;
+  border-radius: 0;
+  background: #eff6fb;
+  color: #6b8aa3;
+  font-size: 11px;
+}
+
+/* Word 2010 与 Outlook 2010 的功能区、导航窗格、文稿纸张。 */
+.window-content .writer-layout {
+  background: #b8c5d6;
+}
+.window-content .writer-sidebar {
+  background: #f0f4f8;
+  border-color: #aabdd0;
+  width: 175px;
+  padding: 17px 10px;
+}
+.window-content .writer-doc {
+  padding: 1px 10px 20px;
+}
+.window-content .writer-doc > b {
+  color: #3c6180;
+  font-size: 12px;
+}
+.window-content .writer-doc > small {
+  font-size: 10px;
+  color: #8398aa;
+}
+.window-content .writer-sidebar .nav-item {
+  font-size: 11px;
+  color: #4c6a82;
+  padding: 9px;
+}
+.window-content .outline-index {
+  font-size: 10px;
+  color: #9ab0c2;
+}
+.window-content .writer-score > span {
+  font-size: 11px;
+  color: #6e8ca4;
+}
+.window-content .writer-score > b {
+  font-size: 30px;
+  color: #3f698b;
+}
+.window-content .writer-score > b small {
+  font-size: 11px;
+  color: #7e96a9;
+}
+.window-content .writer-score p {
+  font-size: 10px;
+  color: #8298aa;
+}
+.window-content .word-ribbon {
+  display: flex;
+  align-items: center;
+  gap: 19px;
+  background: linear-gradient(#f7faff, #dce6f4);
+  border-bottom: 1px solid #a6b8cd;
+  height: 34px;
+  flex-shrink: 0;
+  padding: 0 15px;
+  font-size: 11px;
+  color: #4f6883;
+  white-space: nowrap;
+}
+.window-content .word-ribbon > strong {
+  height: 26px;
+  line-height: 26px;
+  color: white;
+  background: linear-gradient(#5088be, #28619e);
+  padding: 0 17px;
+  align-self: flex-end;
+  border: 1px solid #28609b;
+  border-radius: 4px 4px 0 0;
+  font-weight: 400;
+}
+.window-content .word-ribbon > b {
+  margin-left: auto;
+  color: #8da0b9;
+  font-size: 10px;
+  font-weight: 400;
+}
+.window-content .editor-toolbar {
+  background: linear-gradient(#f9fbff, #e3ebf6);
+  border-color: #a6b9cf;
+  padding: 0 21px;
+  height: 44px;
+  gap: 14px;
+}
+.window-content .editor-toolbar > span {
+  font-size: 10px;
+  color: #7b91a8;
+  white-space: nowrap;
+}
+.window-content .editor-toolbar > div {
+  gap: 17px;
+}
+.window-content .editor-toolbar button {
+  font-size: 11px;
+  color: #527598;
+  padding: 4px 5px;
+}
+.window-content .editor-toolbar button:hover {
+  background: #fff7d2;
+  box-shadow: inset 0 0 0 1px #dfc984;
+}
+.window-content .editor-paper {
+  border: 1px solid #8f9faf;
+  border-radius: 0;
+  margin: 24px auto;
+  padding: 33px 40px;
+  max-width: 820px;
+  min-height: 550px;
+  background: #fff;
+  box-shadow: 0 2px 5px #263d5444;
+}
+.window-content .editor-paper .eyebrow {
+  font-size: 10px;
+  letter-spacing: 0;
+  color: #8795a2;
+}
+.window-content .editor-paper h2 {
+  font-family: "宋体", SimSun, serif;
+  font-size: 24px;
+  font-weight: 600;
+  color: #111;
+  letter-spacing: 1px;
+}
+.window-content .editor-meta {
+  font-size: 10px;
+  color: #87939e;
+  border-color: #dae1e8;
+}
+.window-content .manuscript-text {
+  font-family: "宋体", SimSun, serif;
+  font-size: 14px;
+  color: #222;
+  line-height: 2.15;
+  min-height: 270px;
+  box-shadow: none;
+}
+.window-content .manuscript-text::placeholder {
+  color: #9ea7ad;
+  font-size: 13px;
+}
+.window-content .manuscript-text.title-text {
+  font-size: 24px;
+}
+.window-content .editor-effort {
+  font-size: 10px;
+  color: #8196aa;
+}
+.window-content .editor-effort b {
+  font-size: 10px;
+  color: #6684a0;
+}
+.window-content .editor-paper .hint {
+  font-size: 10px;
+  line-height: 1.85;
+}
+.window-content .editor-paper > .button {
+  font-size: 11px;
+  padding: 7px 11px;
+}
+.window-content .writer-main > .page {
+  background: #f8fafc;
+  min-height: 100%;
+}
+.window-content .quality-grid {
+  border-radius: 0;
+  border: 1px solid #bccede;
+  background: #eef4f9;
+  padding: 17px 19px;
+}
+.window-content .review-box {
+  border-radius: 0;
+  border-color: #bacfdf;
+  padding: 18px;
+  background: #fff;
+}
+.window-content .review-box h3 {
+  font-size: 14px;
+  color: #355f80;
+}
+.window-content .review-box p {
+  font-size: 12px;
+  line-height: 1.95;
+  color: #708596;
+}
+.window-content .review-box > div:first-child small {
+  font-size: 10px;
+  color: #8c9faf;
+}
+.window-content .review-box .field > span {
+  font-size: 11px;
+  color: #5d7c94;
+}
+.window-content .review-box .field small {
+  font-size: 10px;
+}
+.window-content .review-box textarea {
+  font-size: 12px;
+  color: #42627a;
+}
+.window-content .venue-options {
+  gap: 10px;
+}
+.window-content .venue-options > button {
+  border: 1px solid #bbcede;
+  border-radius: 1px;
+  padding: 14px 16px;
+  background: #fff;
+}
+.window-content .venue-options > button.selected {
+  border-color: #729dbd;
+  background: #ecf6fd;
+}
+.window-content .venue-options b {
+  font-size: 12px;
+  color: #315e7f;
+  font-weight: 500;
+}
+.window-content .venue-options em {
+  font-size: 10px;
+  color: #8ba3b6;
+}
+.window-content .venue-options p {
+  font-size: 11px;
+  color: #7890a3;
+}
+.window-content .venue-options small {
+  font-size: 10px;
+  color: #96aabb;
+}
+.window-content .venue-select {
+  border-color: #b5c9d9;
+  background: #fff;
+}
+.window-content .venue-options > button.selected .venue-select {
+  background: #5a91bd;
+  border-color: #417daa;
+}
+.window-content .reference-list {
+  border-color: #d6e1ea;
+}
+.window-content .reference-list p {
+  font-size: 11px;
+  color: #657e91;
+}
+.window-content .embedded-figure {
+  border-radius: 0;
+  border-color: #c6d6e3;
+  background: #fafcff;
+}
+.window-content .embedded-figure > span {
+  font-size: 10px;
+  color: #8299ab;
+}
+.window-content .embedded-figure > b {
+  font-size: 12px;
+  color: #547a96;
+}
+.window-content .submission-history {
+  font-size: 11px;
+  color: #62829b;
+  border-color: #d6e3ec;
+}
+.window-content .submission-history > small {
+  font-size: 10px;
+  color: #93a8b9;
+}
+.window-content .mail-layout > aside {
+  background: linear-gradient(90deg, #ecf3fa, #dce8f5);
+  border-color: #b5c8da;
+  padding: 18px 10px;
+  width: 150px;
+}
+.window-content .mail-layout > aside h3 {
+  font-size: 13px;
+  color: #3e6890;
+  font-weight: 400;
+  margin-bottom: 22px;
+}
+.window-content .mail-layout > aside > button {
+  font-size: 11px;
+  border-radius: 0;
+  color: #5f7f9b;
+  padding: 10px 9px;
+}
+.window-content .mail-layout > aside > button.active {
+  background: linear-gradient(#e3f2ff, #b7d6f2);
+  color: #255982;
+  box-shadow: inset 0 0 0 1px #94b9da;
+}
+.window-content .mail-layout > aside > p {
+  font-size: 9px;
+  color: #8ca2b6;
+}
+.window-content .mail-list {
+  background: #fff;
+  border-color: #b9cbdc;
+  width: 230px;
+}
+.window-content .mail-list > button {
+  border-color: #dbe5ee;
+  padding: 19px 15px;
+  gap: 9px;
+}
+.window-content .mail-list > button.active {
+  background: #e3effb;
+  box-shadow: inset 3px 0 #72a4d0;
+}
+.window-content .mail-list > button > span {
+  font-size: 10px;
+  color: #8ca2b6;
+}
+.window-content .mail-list small {
+  font-size: 9px;
+}
+.window-content .mail-list b {
+  font-size: 12px;
+  color: #416c90;
+  font-weight: 400;
+}
+.window-content .mail-list p {
+  font-size: 10px;
+  color: #98acbc;
+}
+.window-content .mail-body {
+  padding: 23px 26px;
+  background: #fff;
+}
+.window-content .mail-body h2 {
+  font-size: 20px;
+  color: #244e73;
+  font-weight: 500;
+  line-height: 1.7;
+}
+.window-content .mail-sender {
+  border-color: #d6e2eb;
+}
+.window-content .mail-sender > span {
+  border-radius: 2px;
+  border: 1px solid #abc7dd;
+  background: #e2edf6;
+  color: #78a1bf;
+}
+.window-content .mail-sender b {
+  font-size: 11px;
+  color: #527b9b;
+}
+.window-content .mail-sender small {
+  font-size: 10px;
+  color: #8ca4b7;
+}
+.window-content .mail-text p {
+  font-family: "宋体", SimSun, serif;
+  font-size: 13px;
+  color: #48667d;
+  line-height: 2.2;
+}
+.window-content .mail-body > .button {
+  font-size: 11px;
+  padding: 7px 10px;
+}
+
+/* QQ2012 蓝色面板与纯文本聊天记录。 */
+.window-content .chat-layout {
+  background: #fff;
+}
+.window-content .chat-contacts {
+  width: 232px;
+  background: linear-gradient(110deg, #d6f0fe, #eaf8ff 75%);
+  border-right: 1px solid #91bbd6;
+}
+.window-content .chat-contacts > div:first-child {
+  padding: 16px 15px 15px;
+  border-bottom: 1px solid #b5d3e6;
+  background: linear-gradient(120deg, #abe0fa, #d8effb);
+}
+.window-content .chat-contacts h3 {
+  font-size: 17px;
+  color: #285d84;
+  font-weight: 400;
+  margin-bottom: 9px;
+}
+.window-content .chat-contacts > div:first-child > span {
+  font-size: 10px;
+  color: #6694b1;
+}
+.window-content .chat-contacts > button {
+  padding: 13px 12px;
+  border-bottom: 1px solid #d3e9f5;
+  gap: 10px;
+}
+.window-content .chat-contacts > button:hover {
+  background: #f0f9ff;
+}
+.window-content .chat-contacts > button.active {
+  background: linear-gradient(#e9f7ff, #c5e4f8);
+  box-shadow: inset 0 0 0 1px #9bc6e1;
+}
+.window-content .contact-avatar {
+  width: 36px;
+  height: 36px;
+  border: 1px solid #fff;
+  border-radius: 2px;
+  box-shadow: 0 0 0 1px #9abdd3;
+  background: #e6f1f8;
+  color: #5c7d92;
+  font-size: 13px;
+}
+.window-content .chat-contacts > button b {
+  font-size: 12px;
+  color: #3b6481;
+  font-weight: 400;
+}
+.window-content .chat-contacts > button small {
+  font-size: 9px;
+  color: #83a6bb;
+}
+.window-content .chat-contacts > button p {
+  font-size: 10px;
+  color: #8eacbd;
+  margin-top: 6px;
+}
+.window-content .chat-contacts > button > em {
+  background: #e9983b;
+  color: #fff;
+  border: 1px solid #d8882b;
+  min-width: 15px;
+  font-size: 9px;
+  line-height: 12px;
+  bottom: 8px;
+  right: 10px;
+  border-radius: 7px;
+}
+.window-content .chat-group-note {
+  font-size: 10px;
+  color: #85a9be;
+  line-height: 1.9;
+  padding: 25px 15px 16px;
+}
+.window-content .chat-main {
+  background: #fff;
+}
+.window-content .chat-main > header {
+  background: linear-gradient(115deg, #b8e6fb, #e9f8ff);
+  height: 66px;
+  border-bottom: 1px solid #a7c9df;
+  padding: 12px 20px;
+}
+.window-content .chat-main header h3 {
+  font-size: 15px;
+  color: #2c6086;
+  font-weight: 400;
+  gap: 9px;
+}
+.window-content .chat-main header .pill {
+  background: #d9eefb;
+  border-color: #b4d3e8;
+  color: #5b90b0;
+  font-size: 10px;
+}
+.window-content .chat-main header p {
+  font-size: 10px;
+  color: #7d9fb5;
+  line-height: 1.8;
+}
+.window-content .chat-messages {
+  padding: 18px 23px;
+  background: #fff;
+}
+.window-content .chat-date {
+  font-size: 10px;
+  color: #a3b7c4;
+  margin-bottom: 22px;
+}
+.window-content .message {
+  margin-bottom: 18px;
+  gap: 9px;
+}
+.window-content .bubble-avatar {
+  width: 24px;
+  height: 24px;
+  border-radius: 1px;
+  border: 1px solid #c4d7e4;
+  font-size: 10px;
+  color: #7795a9;
+}
+.window-content .message small {
+  font-size: 10px;
+  color: #3582b2;
+  margin-bottom: 6px;
+}
+.window-content .message p {
+  border: 0;
+  border-radius: 0;
+  background: none;
+  color: #222;
+  font-size: 12px;
+  padding: 0 2px;
+  line-height: 1.95;
+}
+.window-content .message.own {
+  flex-direction: row;
+}
+.window-content .message.own small {
+  text-align: left;
+  color: #33904c;
+}
+.window-content .message.own p {
+  border: 0;
+  border-radius: 0;
+  background: none;
+}
+.window-content .chat-composer {
+  padding: 12px 18px 10px;
+  border-top: 1px solid #bad2e3;
+  background: linear-gradient(#edf6fc, #fff);
+}
+.window-content .quick-replies {
+  gap: 6px;
+  margin-bottom: 10px;
+}
+.window-content .quick-replies button {
+  border: 1px solid #b8cbdc;
+  border-radius: 2px;
+  background: linear-gradient(#fff, #e5eff7);
+  font-size: 10px;
+  color: #507997;
+  padding: 5px 8px;
+}
+.window-content .quick-replies button:hover {
+  background: linear-gradient(#fff, #d3e9f8);
+  border-color: #7faac9;
+}
+.window-content .chat-input {
+  border: 1px solid #aac4d8;
+  background: #fff;
+  padding: 2px 3px 2px 8px;
+  gap: 8px;
+}
+.window-content .chat-input input {
+  font-size: 12px;
+  border: 0;
+  box-shadow: none;
+  background: none;
+  min-height: 33px;
+}
+.window-content .chat-input input::placeholder {
+  color: #a7bac8;
+}
+.window-content .chat-input button {
+  height: 27px;
+  width: 45px;
+  display: grid;
+  place-items: center;
+  background: linear-gradient(#f3fbff, #b9dbf2);
+  border: 1px solid #7faccc;
+  border-radius: 2px;
+  color: #396b8e;
+  padding: 4px;
+}
+.window-content .chat-composer > small {
+  font-size: 10px;
+  color: #8ba7b9;
+  line-height: 1.8;
+  margin-top: 9px;
+}
+.window-content .npc-profile {
+  border-color: #b7cfdf;
+  background: #edf6fc;
+  padding: 14px 20px;
+  gap: 12px 20px;
+}
+.window-content .npc-profile b {
+  font-size: 11px;
+  color: #4a7392;
+}
+.window-content .npc-profile p,
+.window-content .npc-profile span {
+  font-size: 10px;
+  color: #839caf;
+}
+
+/* 日历、资源管理器、控制面板及培养系统沿用 Win7 的列表与分组面板。 */
+.window-content .week-tabs {
+  border: 1px solid #b8ccdd;
+  border-radius: 2px;
+  margin: 15px 0;
+}
+.window-content .week-tabs button {
+  background: linear-gradient(#fafcfe, #e8eff7);
+  color: #6b8aa4;
+  border-color: #c0d3e2;
+  padding: 12px;
+  font-size: 12px;
+}
+.window-content .week-tabs button.active {
+  background: linear-gradient(#e2f3ff, #bddbf2);
+  color: #315f83;
+  box-shadow: inset 0 2px #82acd0;
+}
+.window-content .week-tabs small {
+  font-size: 10px;
+  color: #8ba3b7;
+}
+.window-content .calendar-days {
+  gap: 5px;
+  margin: 18px 0 12px;
+}
+.window-content .calendar-days button {
+  border-radius: 1px;
+  background: #fafcfe;
+  border: 1px solid #d1dee9;
+  color: #8197a9;
+  padding: 10px 0;
+  gap: 9px;
+}
+.window-content .calendar-days button.selected {
+  background: #dfeffc;
+  border-color: #8ab1cf;
+  color: #39698b;
+}
+.window-content .calendar-days button.today b {
+  color: #2b5d83;
+}
+.window-content .calendar-days span {
+  font-size: 11px;
+}
+.window-content .calendar-days b {
+  font-size: 20px;
+  font-weight: 400;
+}
+.window-content .calendar-events {
+  border-color: #c1d2e0;
+}
+.window-content .calendar-event {
+  border-color: #d9e3eb;
+  gap: 14px;
+  padding: 18px 5px;
+}
+.window-content .calendar-event > i {
+  background: #7ca7c8;
+}
+.window-content .calendar-event h3 {
+  font-size: 13px;
+  color: #426c8d;
+  font-weight: 400;
+}
+.window-content .calendar-event p {
+  font-size: 11px;
+  color: #8a9eaf;
+  line-height: 1.8;
+}
+.window-content .event-time b {
+  font-size: 12px;
+  color: #547c9c;
+}
+.window-content .event-time small {
+  font-size: 10px;
+  color: #9aaebb;
+}
+.window-content .event-actions {
+  gap: 8px;
+}
+.window-content .event-actions .button {
+  font-size: 11px;
+}
+.window-content .event-actions .text-button {
+  font-size: 10px;
+}
+.window-content .add-event {
+  gap: 10px;
+  color: #90abc0;
+  padding: 18px 0;
+}
+.window-content .add-event b {
+  font-size: 12px;
+  color: #567f9e;
+}
+.window-content .add-event span {
+  font-size: 10px;
+  color: #9db2c2;
+}
+.window-content .add-event input,
+.window-content .add-event select {
+  font-size: 11px;
+  padding: 6px 8px;
+}
+.window-content .calendar-free h3 {
+  font-size: 14px;
+  color: #7391a8;
+}
+.window-content .calendar-free p {
+  font-size: 11px;
+  color: #9aafbe;
+}
+.window-content .files-layout > aside {
+  width: 168px;
+  background: linear-gradient(90deg, #eff5fa, #e1ecf5);
+  border-color: #b7cbda;
+  padding: 18px 11px;
+}
+.window-content .files-layout > aside h3 {
+  font-size: 13px;
+  color: #557e9e;
+  font-weight: 400;
+  margin-bottom: 21px;
+}
+.window-content .files-layout > aside button {
+  font-size: 11px;
+  color: #6b8fa9;
+  padding: 9px 8px;
+  border-radius: 0;
+}
+.window-content .files-layout > aside button.active {
+  background: linear-gradient(#f8fcff, #d2e7f7);
+  box-shadow: inset 0 0 0 1px #a6c4db;
+  color: #2e6087;
+}
+.window-content .file-list > div {
+  border-bottom: 1px solid #d9e4ec;
+  padding: 14px 0;
+  gap: 12px;
+  color: #8caac0;
+}
+.window-content .file-list b {
+  font-size: 12px;
+  color: #4a7293;
+  font-weight: 400;
+}
+.window-content .file-list small {
+  font-size: 10px;
+  color: #9ab0c1;
+}
+.window-content .file-list .button {
+  font-size: 10px;
+  border-color: #bdcfdd;
+  color: #668ba7;
+}
+.window-content .file-preview {
+  font:
+    11px/1.9 "Courier New",
+    monospace;
+  background: #fff;
+  border: 1px solid #b6cbdc;
+  border-radius: 0;
+  padding: 16px;
+  color: #516f87;
+}
+.window-content .life-status {
+  gap: 11px;
+  margin-bottom: 18px;
+}
+.window-content .life-status > div {
+  border: 1px solid #c5d5e3;
+  border-radius: 0;
+  background: #f5f9fc;
+  padding: 13px 14px;
+  color: #7292ab;
+}
+.window-content .life-status > div > span {
+  font-size: 11px;
+}
+.window-content .life-status b {
+  font-size: 24px;
+  color: #4c7696;
+  font-weight: 400;
+}
+.window-content .life-hero {
+  background: #f4f8fc;
+  border: 1px solid #c4d6e5;
+  border-radius: 0;
+  padding: 17px 20px;
+  gap: 17px;
+}
+.window-content .life-hero h2 {
+  font-size: 16px;
+  color: #517b9a;
+  font-weight: 400;
+}
+.window-content .life-hero p {
+  font-size: 11px;
+  color: #8da5b7;
+}
+.window-content .life-hero > span {
+  font-family: "Segoe UI Symbol", sans-serif;
+  font-size: 31px;
+  color: #d2b570;
+}
+.window-content .life-grid {
+  gap: 11px;
+}
+.window-content .life-grid > button {
+  padding: 16px;
+  border: 1px solid #c4d6e3;
+  border-radius: 2px;
+  background: linear-gradient(#fcfdff, #edf4fa);
+  gap: 13px;
+}
+.window-content .life-grid > button:hover {
+  background: #e8f4ff;
+  border-color: #8eb2ce;
+}
+.window-content .life-grid > button > span {
+  font-family: "Segoe UI Symbol", sans-serif;
+  font-size: 26px;
+  color: #8babc2;
+}
+.window-content .life-grid h3 {
+  font-size: 13px;
+  color: #4e7898;
+  font-weight: 400;
+}
+.window-content .life-grid p {
+  font-size: 11px;
+  color: #8ca4b7;
+}
+.window-content .life-grid em {
+  font-size: 11px;
+  color: #8babc1;
+}
+.window-content .student-card {
+  border: 1px solid #bacfdf;
+  border-radius: 0;
+  background: linear-gradient(#f7fbfe, #e2eef7);
+  padding: 20px 24px;
+  gap: 16px;
+}
+.window-content .student-avatar {
+  border: 1px solid #9cbad0;
+  border-radius: 2px;
+  background: #fff;
+  font-size: 36px;
+  width: 60px;
+  height: 60px;
+}
+.window-content .student-card h2 {
+  font-size: 20px;
+  color: #315f82;
+  font-weight: 400;
+}
+.window-content .student-card p {
+  font-size: 12px;
+  color: #6e8da4;
+}
+.window-content .student-card > div > span {
+  font-size: 10px;
+  color: #93aabb;
+}
+.window-content .student-card > svg {
+  color: #aac2d4;
+}
+.window-content .academic-summary {
+  gap: 10px;
+  margin-bottom: 22px;
+}
+.window-content .academic-summary > div {
+  border: 1px solid #c1d3e1;
+  border-radius: 0;
+  padding: 15px;
+  background: #f5f9fc;
+}
+.window-content .academic-summary b {
+  font-size: 26px;
+  color: #507f9f;
+  font-weight: 400;
+}
+.window-content .academic-summary span {
+  font-size: 11px;
+  color: #91a9ba;
+}
+.window-content .year-track {
+  border: 1px solid #c4d5e3;
+  border-radius: 0;
+  margin-bottom: 24px;
+}
+.window-content .year-track > div {
+  padding: 16px;
+  background: #f6f9fc;
+  color: #9aafbe;
+  border-color: #cfdeea;
+}
+.window-content .year-track > div.active {
+  background: #e7f2fb;
+  color: #577f9d;
+}
+.window-content .year-track b {
+  font-size: 13px;
+  font-weight: 400;
+}
+.window-content .year-track span {
+  font-size: 11px;
+}
+.window-content .year-track small {
+  font-size: 10px;
+}
+.window-content .growth-grid {
+  gap: 25px;
+  margin-bottom: 23px;
+}
+.window-content .growth-grid .meter-label {
+  font-size: 11px;
+}
+.window-content .growth-grid .section-note {
+  font-size: 10px;
+  color: #8ca5b7;
+}
+.window-content .requirement-item {
+  font-size: 11px;
+  color: #839db0;
+  border-color: #d9e5ed;
+  padding: 11px 0;
+}
+.window-content .requirement-item b {
+  font-size: 11px;
+  color: #5e88a7;
+  font-weight: 400;
+}
+.window-content .career-grid {
+  gap: 10px;
+}
+.window-content .career-grid > div {
+  border-radius: 0;
+  border: 1px solid #c4d6e3;
+  background: #f8fbfd;
+  padding: 15px;
+  gap: 11px;
+}
+.window-content .career-symbol {
+  border-radius: 2px;
+  border: 1px solid #c0d5e4;
+  background: #e7f1f9;
+  font-family: "Segoe UI Symbol", sans-serif;
+  font-size: 23px;
+  color: #8caec5;
+}
+.window-content .career-grid b {
+  font-size: 12px;
+  font-weight: 400;
+  color: #517e9d;
+}
+.window-content .career-grid p {
+  font-size: 10px;
+  color: #91aabc;
+}
+.window-content .career-grid em {
+  font-size: 21px;
+  color: #729dbb;
+}
+.window-content .career-grid small {
+  font-size: 9px;
+  color: #a6bbca;
+}
+.window-content .month-reflection {
+  border: 1px solid #dacc9f;
+  border-radius: 0;
+  background: #fffcee;
+  padding: 23px;
+  color: #b5a369;
+}
+.window-content .month-reflection h3 {
+  font-size: 15px;
+  color: #98864f;
+  font-weight: 400;
+}
+.window-content .month-reflection p {
+  font-size: 12px;
+  color: #a1946d;
+}
+.window-content .save-current {
+  border: 1px solid #bbcfde;
+  border-radius: 0;
+  background: linear-gradient(#fafcfe, #e6f0f8);
+  padding: 20px;
+  gap: 15px;
+}
+.window-content .save-current > span {
+  border: 1px solid #aec9dd;
+  border-radius: 2px;
+  background: #e3eff8;
+  color: #7dabc7;
+  width: 48px;
+  height: 48px;
+}
+.window-content .save-current b {
+  font-size: 14px;
+  color: #487597;
+  font-weight: 400;
+}
+.window-content .save-current p {
+  font-size: 11px;
+  color: #7e9db3;
+}
+.window-content .save-current small {
+  font-size: 10px;
+  color: #9bb1c1;
+}
+.window-content .save-current .pill {
+  background: #e5f1fa;
+  border-color: #c4dbe9;
+  color: #80a5be;
+}
+.window-content .save-options {
+  gap: 18px;
+  margin-bottom: 25px;
+}
+.window-content .save-options section {
+  padding: 18px;
+  border: 1px solid #c3d5e2;
+  border-radius: 0;
+  background: #fbfdff;
+}
+.window-content .save-options h3 {
+  font-size: 13px;
+  color: #527e9c;
+  font-weight: 400;
+}
+.window-content .save-options p {
+  font-size: 11px;
+  color: #8ca7ba;
+  line-height: 1.9;
+  min-height: 57px;
+}
+.window-content .save-options .button {
+  font-size: 11px;
+  padding: 6px 10px;
+}
+.window-content .about-grados {
+  border-color: #d0dfea;
+  color: #85a8c0;
+  gap: 13px;
+  margin-top: 28px;
+  padding-top: 19px;
+}
+.window-content .about-grados b {
+  font-size: 13px;
+  color: #587e9b;
+  font-weight: 400;
+}
+.window-content .about-grados p {
+  font-size: 10px;
+  color: #9ab3c5;
+}
+.window-content .about-grados > span {
+  font-size: 10px;
+  color: #a2bacb;
+}
+.window-content .legacy-save {
+  border: 1px solid #dcc989;
+  background: #fffcec;
+  padding: 15px 17px;
+  margin-bottom: 23px;
+  color: #93814b;
+}
+.window-content .legacy-save p {
+  font-size: 11px;
+  line-height: 1.9;
+  margin-bottom: 12px;
+}
+
+/* 本地脚本工具，不模拟2012年尚不存在的生成式研究助手。 */
+.window-content .ai-hero {
+  text-align: left;
+  background: none;
+  border-bottom: 1px solid #bdcfe0;
+  padding: 0 0 16px;
+  position: relative;
+  padding-left: 58px;
+  min-height: 96px;
+}
+.window-content .ai-logo {
+  position: absolute;
+  left: 0;
+  top: 3px;
+  width: 44px;
+  height: 44px;
+  border-radius: 2px;
+  border: 1px solid #a8c2d8;
+  background: linear-gradient(#f5fbff, #c9e1f4);
+  color: #6393b5;
+  box-shadow: none;
+  transform: none;
+  margin: 0;
+}
+.window-content .ai-logo svg {
+  width: 23px;
+  height: 23px;
+}
+.window-content .ai-hero > .pill {
+  font-size: 10px;
+  letter-spacing: 0;
+  background: #edf4fa;
+  color: #7899b1;
+}
+.window-content .ai-hero h1 {
+  font-size: 20px;
+  color: #315e80;
+  font-weight: 400;
+  letter-spacing: 0;
+  line-height: 1.5;
+  margin: 9px 0 5px;
+}
+.window-content .ai-hero h1 br {
+  display: none;
+}
+.window-content .ai-hero p {
+  font-size: 11px;
+  color: #8aa2b6;
+  line-height: 1.9;
+}
+.window-content .ai-tools {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  border: 1px solid #b9cddd;
+  margin: 19px 0 22px;
+}
+.window-content .ai-tools > button {
+  display: grid;
+  grid-template-columns: 29px 175px 1fr 90px;
+  align-items: center;
+  gap: 12px;
+  border: 0;
+  border-bottom: 1px solid #d4e2ec;
+  border-radius: 0;
+  background: #fff;
+  padding: 15px;
+  color: #7fa3bf;
+}
+.window-content .ai-tools > button:nth-child(even) {
+  background: #f5f9fc;
+}
+.window-content .ai-tools > button:last-child {
+  border-bottom: 0;
+}
+.window-content .ai-tools > button:hover {
+  background: #e6f2fb;
+}
+.window-content .ai-tools h3 {
+  font-size: 12px;
+  font-weight: 400;
+  color: #456f90;
+  margin: 0;
+}
+.window-content .ai-tools p {
+  font-size: 11px;
+  color: #88a0b3;
+  line-height: 1.9;
+}
+.window-content .ai-tools > button > span {
+  font-size: 10px;
+  color: #7396b1;
+  margin: 0;
+}
+.window-content .ai-issues > div {
+  border: 1px solid #d9c898;
+  border-radius: 0;
+  background: #fffbed;
+  padding: 15px;
+  gap: 11px;
+}
+.window-content .ai-issues > div.resolved {
+  border-color: #bdd1b3;
+  background: #f4f9ef;
+}
+.window-content .ai-issues b {
+  font-size: 12px;
+  font-weight: 400;
+  color: #9a8343;
+}
+.window-content .ai-issues p {
+  font-size: 11px;
+  color: #a39367;
+  line-height: 1.9;
+}
+.window-content .ai-issues .button {
+  font-size: 10px;
+  color: #8f7a3d;
+  border-color: #d9c89a;
+}
+.window-content .ai-issues .resolved b {
+  color: #7e985e;
+}
+.window-content .ai-issues .resolved p {
+  color: #a1b18d;
+}
+
+@media (max-width: 1000px) {
+  .window-content .page {
+    padding: 17px 19px 22px;
+  }
+  .window-content .home-content {
+    padding: 13px 17px 20px;
+  }
+  .window-content .app-sidebar {
+    width: 150px;
+  }
+  .window-content .sidebar-profile small {
+    font-size: 8px;
+  }
+  .window-content .nav-item {
+    font-size: 11px;
+    padding: 8px;
+  }
+  .window-content .hero-copy p {
+    font-size: 11px;
+    max-width: none;
+  }
+  .window-content .hero-copy h2 {
+    font-size: 19px;
+  }
+  .window-content .overview-cards > div {
+    padding: 12px;
+  }
+  .window-content .overview-cards > div > span {
+    font-size: 10px;
+  }
+  .window-content .overview-cards b small {
+    font-size: 10px;
+  }
+  .window-content .overview-cards p {
+    font-size: 10px;
+  }
+  .window-content .writer-sidebar {
+    width: 150px;
+  }
+  .window-content .word-ribbon {
+    gap: 13px;
+    font-size: 10px;
+    padding: 0 11px;
+  }
+  .window-content .word-ribbon > b {
+    font-size: 9px;
+  }
+  .window-content .editor-paper {
+    margin: 20px;
+    padding: 27px 30px;
+    min-height: 500px;
+  }
+  .window-content .chat-contacts {
+    width: 210px;
+  }
+  .window-content .chat-contacts > button {
+    padding: 12px 10px;
+  }
+  .window-content .chat-contacts > button small {
+    font-size: 8px;
+  }
+  .window-content .mail-layout > aside {
+    width: 132px;
+  }
+  .window-content .mail-list {
+    width: 195px;
+  }
+  .window-content .mail-body {
+    padding: 21px;
+  }
+  .window-content .ai-tools > button {
+    grid-template-columns: 25px 150px 1fr 75px;
+    gap: 9px;
+    padding: 13px;
+  }
+  .window-content .ai-tools h3 {
+    font-size: 11px;
+  }
+  .window-content .ai-tools p {
+    font-size: 10px;
+  }
+  .window-content .ai-tools > button > span {
+    font-size: 9px;
+  }
+}
+@media (max-width: 760px) {
+  .window-content .page {
+    padding: 17px 15px 23px;
+  }
+  .window-content .page-head h2 {
+    font-size: 18px;
+  }
+  .window-content .page-head p {
+    font-size: 11px;
+  }
+  .window-content .page-head .eyebrow {
+    font-size: 10px;
+  }
+  .window-content .page-head {
+    gap: 10px;
+  }
+  .window-content .page-head select {
+    max-width: 130px;
+    padding: 6px;
+    font-size: 10px;
+  }
+  .window-content .page-head .button {
+    font-size: 10px;
+  }
+  .window-content .period-browser-bar {
+    padding: 5px 7px;
+    gap: 7px;
+    font-size: 10px;
+  }
+  .window-content .period-browser-bar > b {
+    font-size: 9px;
+  }
+  .window-content .period-browser-bar > span {
+    font-size: 10px;
+    padding: 4px;
+  }
+  .window-content .period-browser-bar > button {
+    font-size: 9px;
+    max-width: 65px;
+    white-space: normal;
+    line-height: 1.6;
+  }
+  .window-content .home-layout .app-sidebar {
+    display: none;
+  }
+  .window-content .home-content {
+    padding: 12px 15px 21px;
+  }
+  .window-content .home-greeting h1 {
+    font-size: 19px;
+  }
+  .window-content .home-greeting .eyebrow {
+    font-size: 11px;
+  }
+  .window-content .home-hero {
+    min-height: 125px;
+    height: auto;
+  }
+  .window-content .hero-copy {
+    padding: 14px 15px;
+  }
+  .window-content .hero-copy > span {
+    font-size: 10px;
+  }
+  .window-content .hero-copy h2 {
+    font-size: 20px;
+  }
+  .window-content .hero-copy p {
+    font-size: 11px;
+    max-width: none;
+  }
+  .window-content .hero-copy > button {
+    font-size: 11px;
+  }
+  .window-content .overview-cards {
+    gap: 7px;
+  }
+  .window-content .overview-cards > div {
+    padding: 11px 8px;
+  }
+  .window-content .overview-cards > div > span {
+    font-size: 10px;
+    gap: 4px;
+  }
+  .window-content .overview-cards b {
+    font-size: 23px;
+  }
+  .window-content .overview-cards b small {
+    font-size: 9px;
+  }
+  .window-content .overview-cards p {
+    font-size: 9px;
+    line-height: 1.7;
+  }
+  .window-content .home-columns {
+    display: block;
+  }
+  .window-content .journey b {
+    font-size: 12px;
+  }
+  .window-content .journey small {
+    font-size: 10px;
+  }
+  .window-content .topic-grid {
+    grid-template-columns: 1fr;
+  }
+  .window-content .topic-card h3 {
+    font-size: 14px;
+  }
+  .window-content .topic-card p {
+    font-size: 11px;
+  }
+  .window-content .topic-metrics {
+    font-size: 10px;
+    gap: 12px;
+  }
+  .window-content .home-footer {
+    font-size: 10px;
+  }
+  .window-content .filter-row {
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  .window-content .filter-row .tabs {
+    width: 100%;
+    overflow: auto;
+  }
+  .window-content .tabs button {
+    font-size: 10px;
+    padding: 6px 9px;
+  }
+  .window-content .paper-list h3 {
+    font-size: 14px;
+  }
+  .window-content .paper-list p {
+    font-size: 11px;
+  }
+  .window-content .paper-list-meta {
+    gap: 7px;
+    flex-wrap: wrap;
+  }
+  .window-content .paper-detail h1 {
+    font-size: 21px;
+  }
+  .window-content .paper-two {
+    grid-template-columns: 1fr;
+  }
+  .window-content .paper-section p,
+  .window-content .paper-two p {
+    font-size: 12px;
+  }
+  .window-content .ide-explorer {
+    display: none;
+  }
+  .window-content .ide-menu {
+    font-size: 10px;
+    height: 27px;
+    line-height: 27px;
+    padding: 0 9px;
+    overflow: hidden;
+  }
+  .window-content .ide-tabs > span {
+    font-size: 9px;
+  }
+  .window-content .code-area {
+    padding: 18px 9px;
+  }
+  .window-content .code-area code {
+    font-size: 11px;
+  }
+  .window-content .code-area > div > span {
+    width: 19px;
+    margin-right: 10px;
+    padding-right: 7px;
+  }
+  .window-content .ide-bottom {
+    padding: 17px 14px;
+  }
+  .window-content .ide-bottom p {
+    font-size: 10px;
+  }
+  .window-content .ide-bottom .button {
+    font-size: 10px;
+  }
+  .window-content .experiment-form {
+    padding: 14px 12px 0;
+    gap: 0 12px;
+  }
+  .window-content .method-options {
+    grid-template-columns: 1fr;
+  }
+  .window-content .method-options > button {
+    padding: 12px;
+    display: block;
+  }
+  .window-content .method-options small {
+    font-size: 10px;
+    margin-top: 7px;
+  }
+  .window-content .server-options > button {
+    padding: 13px;
+  }
+  .window-content .server-options b {
+    font-size: 11px;
+  }
+  .window-content .server-options small {
+    font-size: 10px;
+  }
+  .window-content .experiment-estimate > span {
+    font-size: 10px;
+  }
+  .window-content .experiment-estimate small {
+    font-size: 10px;
+    line-height: 1.9;
+  }
+  .window-content .task-log-layout {
+    display: block;
+  }
+  .window-content .task-log-layout > aside {
+    width: auto;
+  }
+  .window-content .task-log-layout > aside > button {
+    min-width: 150px;
+  }
+  .window-content .log-console {
+    font-size: 10px;
+    padding: 14px;
+  }
+  .window-content .log-console > span {
+    font-size: 9px;
+  }
+  .window-content .gpu-grid {
+    grid-template-columns: 1fr;
+  }
+  .window-content .gpu-card {
+    padding: 17px;
+  }
+  .window-content .result-metrics {
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+  .window-content .result-metrics > div {
+    padding: 13px;
+  }
+  .window-content .result-metrics b {
+    font-size: 24px;
+  }
+  .window-content .result-metrics em {
+    font-size: 9px;
+    line-height: 1.8;
+  }
+  .window-content .loss-chart {
+    padding: 10px 5px;
+  }
+  .window-content .chart-legend {
+    font-size: 10px;
+    gap: 12px;
+  }
+  .window-content .chart-legend small {
+    font-size: 9px;
+  }
+  .window-content .writer-layout {
+    display: block;
+  }
+  .window-content .writer-sidebar {
+    width: auto;
+    padding: 9px 11px;
+    background: #eef3f8;
+    border-bottom: 1px solid #aebfd0;
+    flex-direction: row;
+  }
+  .window-content .writer-sidebar .nav-item {
+    font-size: 10px;
+    padding: 7px 9px;
+  }
+  .window-content .writer-sidebar .nav-item > .outline-index {
+    font-size: 9px;
+  }
+  .window-content .word-ribbon {
+    gap: 13px;
+    font-size: 10px;
+    padding: 0 10px;
+    height: 32px;
+    overflow: hidden;
+  }
+  .window-content .word-ribbon > b {
+    display: none;
+  }
+  .window-content .word-ribbon > strong {
+    padding: 0 13px;
+  }
+  .window-content .word-ribbon > span:nth-last-of-type(-n + 2) {
+    display: none;
+  }
+  .window-content .editor-toolbar {
+    padding: 0 13px;
+    gap: 6px;
+    height: 41px;
+  }
+  .window-content .editor-toolbar > span {
+    font-size: 8px;
+  }
+  .window-content .editor-toolbar > div {
+    gap: 7px;
+  }
+  .window-content .editor-toolbar button {
+    font-size: 10px;
+    padding: 3px;
+  }
+  .window-content .editor-paper {
+    margin: 14px;
+    padding: 24px 19px;
+    min-height: 470px;
+  }
+  .window-content .editor-paper h2 {
+    font-size: 23px;
+  }
+  .window-content .manuscript-text {
+    font-size: 13px;
+    min-height: 250px;
+  }
+  .window-content .editor-paper .hint {
+    font-size: 10px;
+  }
+  .window-content .writer-main > .page {
+    padding: 18px 15px;
+  }
+  .window-content .review-box p {
+    font-size: 11px;
+  }
+  .window-content .venue-options b {
+    font-size: 12px;
+  }
+  .window-content .venue-options p {
+    font-size: 11px;
+  }
+  .window-content .venue-options small {
+    font-size: 10px;
+  }
+  .window-content .chat-contacts {
+    width: 70px;
+  }
+  .window-content .chat-contacts > div:first-child {
+    padding: 15px 7px;
+  }
+  .window-content .chat-contacts h3 {
+    font-size: 10px;
+    line-height: 1.8;
+    margin: 0;
+  }
+  .window-content .chat-contacts > div:first-child > span {
+    display: none;
+  }
+  .window-content .chat-contacts > button {
+    padding: 13px 12px;
+  }
+  .window-content .chat-contacts > button > div {
+    display: none;
+  }
+  .window-content .contact-avatar {
+    height: 34px;
+    width: 34px;
+    font-size: 13px;
+  }
+  .window-content .chat-contacts > button > em {
+    font-size: 8px;
+    right: 4px;
+    bottom: 6px;
+    min-width: 13px;
+  }
+  .window-content .chat-main > header {
+    padding: 11px 13px;
+    height: 64px;
+  }
+  .window-content .chat-main header h3 {
+    font-size: 14px;
+    gap: 7px;
+  }
+  .window-content .chat-main header .pill {
+    font-size: 8px;
+  }
+  .window-content .chat-main header p {
+    font-size: 9px;
+    line-height: 1.6;
+  }
+  .window-content .chat-main > header > .text-button {
+    font-size: 10px;
+  }
+  .window-content .chat-messages {
+    padding: 17px 13px;
+  }
+  .window-content .chat-date {
+    font-size: 9px;
+    line-height: 1.8;
+  }
+  .window-content .message > div {
+    max-width: 85%;
+  }
+  .window-content .message small {
+    font-size: 9px;
+  }
+  .window-content .message p {
+    font-size: 11px;
+    line-height: 1.9;
+  }
+  .window-content .bubble-avatar {
+    height: 23px;
+    width: 23px;
+    font-size: 9px;
+  }
+  .window-content .chat-composer {
+    padding: 11px 12px 9px;
+  }
+  .window-content .quick-replies {
+    gap: 5px;
+  }
+  .window-content .quick-replies button {
+    font-size: 9px;
+    padding: 5px 6px;
+  }
+  .window-content .chat-input input {
+    font-size: 11px;
+  }
+  .window-content .chat-composer > small {
+    font-size: 9px;
+  }
+  .window-content .npc-profile {
+    padding: 13px 14px;
+    gap: 10px 14px;
+  }
+  .window-content .mail-layout {
+    display: block;
+  }
+  .window-content .mail-layout > aside {
+    width: auto;
+    padding: 9px 10px;
+    flex-direction: row;
+    gap: 4px;
+    border-bottom: 1px solid #b6cbdc;
+  }
+  .window-content .mail-layout > aside > button {
+    font-size: 10px;
+    padding: 7px 10px;
+  }
+  .window-content .mail-list {
+    width: auto;
+    border-bottom: 1px solid #b8ccdd;
+    max-height: 155px;
+  }
+  .window-content .mail-list > button {
+    min-width: 205px;
+    padding: 14px;
+    gap: 7px;
+  }
+  .window-content .mail-list > button > span {
+    font-size: 9px;
+  }
+  .window-content .mail-list b {
+    font-size: 11px;
+  }
+  .window-content .mail-list p {
+    font-size: 9px;
+  }
+  .window-content .mail-body {
+    padding: 20px 17px;
+  }
+  .window-content .mail-body h2 {
+    font-size: 20px;
+  }
+  .window-content .mail-sender b {
+    font-size: 10px;
+  }
+  .window-content .mail-sender small {
+    font-size: 9px;
+  }
+  .window-content .mail-text p {
+    font-size: 12px;
+  }
+  .window-content .week-tabs button {
+    padding: 11px 5px;
+    font-size: 11px;
+  }
+  .window-content .week-tabs small {
+    font-size: 9px;
+  }
+  .window-content .calendar-days {
+    gap: 3px;
+  }
+  .window-content .calendar-days button {
+    gap: 7px;
+    padding: 10px 0;
+  }
+  .window-content .calendar-days span {
+    font-size: 10px;
+  }
+  .window-content .calendar-days b {
+    font-size: 20px;
+  }
+  .window-content .calendar-event h3 {
+    font-size: 12px;
+  }
+  .window-content .calendar-event p {
+    font-size: 10px;
+  }
+  .window-content .add-event {
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  .window-content .add-event input {
+    font-size: 11px;
+  }
+  .window-content .add-event b {
+    font-size: 11px;
+  }
+  .window-content .add-event .button {
+    font-size: 10px;
+  }
+  .window-content .files-layout {
+    display: block;
+  }
+  .window-content .files-layout > aside {
+    width: auto;
+    flex-direction: row;
+    gap: 3px;
+    padding: 9px 10px;
+    border-bottom: 1px solid #b8cddb;
+  }
+  .window-content .files-layout > aside button {
+    font-size: 10px;
+    padding: 7px 9px;
+  }
+  .window-content .file-list b {
+    font-size: 11px;
+  }
+  .window-content .file-list > div {
+    padding: 14px 0;
+    gap: 10px;
+  }
+  .window-content .file-list .button {
+    font-size: 9px;
+    padding: 5px 7px;
+  }
+  .window-content .file-preview {
+    font-size: 10px;
+    line-height: 1.9;
+  }
+  .window-content .life-grid {
+    grid-template-columns: 1fr;
+  }
+  .window-content .life-status {
+    gap: 7px;
+  }
+  .window-content .life-status > div {
+    padding: 12px 9px;
+  }
+  .window-content .life-status > div > span {
+    font-size: 10px;
+  }
+  .window-content .life-status b {
+    font-size: 24px;
+  }
+  .window-content .life-hero {
+    padding: 17px 14px;
+    gap: 12px;
+  }
+  .window-content .life-hero h2 {
+    font-size: 14px;
+  }
+  .window-content .life-hero p {
+    font-size: 10px;
+  }
+  .window-content .life-grid h3 {
+    font-size: 13px;
+  }
+  .window-content .life-grid p {
+    font-size: 11px;
+  }
+  .window-content .student-card {
+    padding: 18px 15px;
+    gap: 13px;
+  }
+  .window-content .student-card h2 {
+    font-size: 20px;
+  }
+  .window-content .student-card p {
+    font-size: 11px;
+  }
+  .window-content .student-card > div > span {
+    font-size: 10px;
+  }
+  .window-content .student-avatar {
+    width: 51px;
+    height: 51px;
+    font-size: 32px;
+  }
+  .window-content .academic-summary {
+    gap: 7px;
+  }
+  .window-content .academic-summary > div {
+    padding: 14px 6px;
+  }
+  .window-content .academic-summary span {
+    font-size: 10px;
+  }
+  .window-content .academic-summary b {
+    font-size: 24px;
+  }
+  .window-content .year-track > div {
+    padding: 14px 10px;
+  }
+  .window-content .year-track span {
+    font-size: 10px;
+    line-height: 1.8;
+  }
+  .window-content .year-track small {
+    font-size: 9px;
+  }
+  .window-content .growth-grid {
+    grid-template-columns: 1fr;
+    gap: 22px;
+  }
+  .window-content .requirement-item,
+  .window-content .requirement-item b {
+    font-size: 11px;
+  }
+  .window-content .career-grid {
+    grid-template-columns: 1fr;
+  }
+  .window-content .career-grid b {
+    font-size: 12px;
+  }
+  .window-content .career-grid p {
+    font-size: 10px;
+  }
+  .window-content .month-reflection {
+    padding: 21px 16px;
+  }
+  .window-content .month-reflection h3 {
+    font-size: 14px;
+  }
+  .window-content .month-reflection p {
+    font-size: 11px;
+  }
+  .window-content .save-current {
+    padding: 17px 14px;
+    gap: 12px;
+  }
+  .window-content .save-current b {
+    font-size: 13px;
+  }
+  .window-content .save-current p {
+    font-size: 11px;
+  }
+  .window-content .save-current small {
+    font-size: 10px;
+  }
+  .window-content .save-options {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+  .window-content .save-options section {
+    padding: 17px;
+  }
+  .window-content .save-options h3 {
+    font-size: 13px;
+  }
+  .window-content .save-options p {
+    font-size: 11px;
+    min-height: 0;
+  }
+  .window-content .save-options .button {
+    font-size: 11px;
+  }
+  .window-content .about-grados b {
+    font-size: 12px;
+  }
+  .window-content .about-grados p,
+  .window-content .about-grados > span {
+    font-size: 10px;
+  }
+  .window-content .ai-hero {
+    padding-left: 51px;
+  }
+  .window-content .ai-logo {
+    width: 39px;
+    height: 39px;
+  }
+  .window-content .ai-hero > .pill {
+    font-size: 9px;
+  }
+  .window-content .ai-hero h1 {
+    font-size: 18px;
+    line-height: 1.6;
+  }
+  .window-content .ai-hero h1 br {
+    display: block;
+  }
+  .window-content .ai-hero p {
+    font-size: 10px;
+  }
+  .window-content .ai-tools > button {
+    grid-template-columns: 24px 1fr 70px;
+    gap: 10px;
+    padding: 14px 12px;
+  }
+  .window-content .ai-tools p {
+    grid-column: 2/4;
+    grid-row: 2;
+    font-size: 10px;
+  }
+  .window-content .ai-tools h3 {
+    font-size: 12px;
+  }
+  .window-content .ai-tools > button > span {
+    font-size: 10px;
+  }
+  .window-content .ai-issues > div {
+    padding: 14px 12px;
+    gap: 9px;
+  }
+  .window-content .ai-issues b {
+    font-size: 11px;
+  }
+  .window-content .ai-issues p {
+    font-size: 10px;
+  }
+  .window-content .ai-issues .button {
+    font-size: 10px;
+  }
+}

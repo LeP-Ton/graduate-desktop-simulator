@@ -2,6 +2,8 @@ import assert from "node:assert/strict";
 import test from "node:test";
 import {
   DEFAULT_CONFIG,
+  PAPERS,
+  SERVERS,
   END_HOUR,
   SECTIONS,
   TOPICS,
@@ -15,7 +17,7 @@ import {
   simulateExperiment,
   reviewManuscript,
 } from "../src/game/research";
-import { parseSave, validateSave } from "../src/game/storage";
+import { getLegacyBackup, parseSave, validateSave } from "../src/game/storage";
 import type { ExperimentConfig, GameState, Profile } from "../src/game/types";
 
 const profile: Profile = {
@@ -95,7 +97,7 @@ test("相同种子和配置完全复现，方法、污染和训练强度产生�
   assert.ok(unstable.diagnosis.some((x) => x.includes("学习率")));
 });
 
-test("GPU 两台服务器并行，同一服务器排队，显存与算力真实约束", () => {
+test("两台计算服务器并行，同一服务器排队，容量与机时真实约束", () => {
   let s = readyGame();
   for (const server of ["rtx", "a100", "rtx"] as const)
     s = reduceGame(s, {
@@ -114,7 +116,7 @@ test("GPU 两台服务器并行，同一服务器排队，显存与算力真实�
     config: { ...DEFAULT_CONFIG, model: "large", server: "rtx" },
   });
   advanceTime(oom, 0.25);
-  assert.ok(requiredMemory(oom.tasks[0].config) > 24);
+  assert.ok(requiredMemory(oom.tasks[0].config) > 3);
   assert.equal(oom.tasks[0].status, "failed");
   assert.ok(oom.tasks[0].logs.some((x) => x.includes("out of memory")));
   s.stats.compute = 0;
@@ -128,7 +130,7 @@ test("GPU 两台服务器并行，同一服务器排队，显存与算力真实�
   assert.ok(s.stats.compute <= computeAfter);
 });
 
-test("AI 生产力有收益，未经核验的代码降低可信度，测试后恢复", () => {
+test("第三方脚本有收益，未经核验的代码降低可信度，测试后恢复", () => {
   let s = readyGame();
   s = reduceGame(s, { type: "code", mode: "ai" });
   assert.ok(s.aiIssues.some((i) => !i.resolved && i.kind === "code"));
@@ -261,7 +263,7 @@ test("提前到组会需要等待到开始，结束时间与日程一致", () =>
   assert.equal(s.hour, meeting.start + meeting.duration);
   assert.equal(s.calendar.find((e) => e.id === meeting.id)!.done, true);
   assert.equal(gameDate(672).clock, "24:00");
-  assert.equal(gameDate(744).date, "10月8日");
+  assert.equal(gameDate(744).date, "10月4日");
 });
 
 test("所有方向与替代课题都能产生有限、有研究意义的结果", () => {
@@ -337,4 +339,138 @@ test("NPC 根据独立日程和能力行动，非工作时间不会同步增长"
   advanceTime(s, 7);
   assert.ok(junior().progress > juniorBefore);
   assert.notEqual(mentor().task, junior().task);
+});
+
+test("2012 世界的开局、论文年份和设备容量一致", () => {
+  const s = createGame(profile);
+  assert.equal(s.era, 2012);
+  assert.equal(gameDate(8).year, 2012);
+  assert.equal(gameDate(8).date, "9月3日");
+  assert.equal(gameDate(8).weekday, "星期一");
+  assert.equal(gameDate(672).date, "9月30日");
+  assert.ok(PAPERS.every((p) => p.year <= 2012));
+  assert.equal(SERVERS.rtx.capacity, 3);
+  assert.equal(SERVERS.a100.capacity, 6);
+  assert.ok(requiredMemory({ ...DEFAULT_CONFIG }) < 3);
+  assert.ok(
+    requiredMemory({
+      ...DEFAULT_CONFIG,
+      model: "large",
+      batch: 64,
+      method: "verified",
+    }) > 6,
+  );
+});
+
+test("同一工作集超出 3GB 设备，但可在 6GB 共享设备运行", () => {
+  let s = readyGame();
+  s = reduceGame(s, {
+    type: "experiment",
+    config: { ...DEFAULT_CONFIG, model: "large", server: "rtx" },
+  });
+  advanceTime(s, 0.25);
+  assert.equal(s.tasks.at(-1)!.status, "failed");
+  assert.ok(s.tasks.at(-1)!.logs.some((line) => line.includes("3GB")));
+  s = experiment(s, { model: "large", server: "a100" });
+  assert.equal(s.tasks.at(-1)!.status, "done");
+});
+
+test("系统研究使用 CPU 节点内存与节点小时，而非把 MapReduce 当成 GPU 训练", () => {
+  let s = createGame({ ...profile, direction: "systems" });
+  s = reduceGame(s, { type: "read", id: "p6" });
+  s = reduceGame(s, { type: "topic", id: "sys-cache" });
+  s = reduceGame(s, { type: "code", mode: "write" });
+  s = reduceGame(s, { type: "code", mode: "write" });
+  s = experiment(s);
+  assert.ok(s.tasks[0].logs.some((line) => line.includes("双核实验节点")));
+  assert.ok(s.tasks[0].logs.some((line) => line.includes("节点小时")));
+  const badStep = simulateExperiment({
+    ...s.tasks[0],
+    config: { ...s.tasks[0].config, learningRate: 0.01 },
+  });
+  assert.ok(badStep.diagnosis.some((line) => line.includes("分区调整步长")));
+  assert.ok(!badStep.diagnosis.some((line) => line.includes("梯度")));
+  const overTuned = simulateExperiment({
+    ...s.tasks[0],
+    config: { ...s.tasks[0].config, epochs: 16 },
+  });
+  assert.ok(overTuned.diagnosis.some((line) => line.includes("留出负载代价")));
+});
+
+test("旧版存档先完整备份，再迁移系统文本，保留玩家原文与科研数值", () => {
+  const current = experiment(readyGame(), { method: "adaptive" });
+  const legacy = structuredClone(current);
+  delete legacy.era;
+  legacy.manuscript.sections.intro =
+    "这是我在2026年写下的AI研究原稿，请原样保留。";
+  legacy.messages.push({
+    id: "player-legacy",
+    from: "mentor",
+    text: "我自己写的 Agent 研究问题",
+    hour: legacy.hour,
+    read: true,
+    player: true,
+  });
+  legacy.messages[0].text = "请检查 RTX 4090 和 AI 代码。";
+  legacy.tasks[0].logs.push("[旧调度] RTX 4090 / 24GB");
+  const raw = JSON.stringify(legacy);
+  const values = new Map<string, string>();
+  const oldDescriptor = Object.getOwnPropertyDescriptor(
+    globalThis,
+    "localStorage",
+  );
+  const memoryStorage = {
+    getItem: (key: string) => values.get(key) ?? null,
+    setItem: (key: string, value: string) => {
+      values.set(key, value);
+    },
+    removeItem: (key: string) => {
+      values.delete(key);
+    },
+    clear: () => values.clear(),
+    key: (index: number) => [...values.keys()][index] ?? null,
+    get length() {
+      return values.size;
+    },
+  };
+  Object.defineProperty(globalThis, "localStorage", {
+    value: memoryStorage,
+    configurable: true,
+  });
+  try {
+    const migrated = parseSave(raw);
+    assert.equal(getLegacyBackup(), raw);
+    assert.equal(migrated.era, 2012);
+    assert.ok(migrated.flags.includes("era-2012-migrated"));
+    assert.equal(
+      migrated.manuscript.sections.intro,
+      legacy.manuscript.sections.intro,
+    );
+    assert.equal(migrated.messages.at(-1)!.text, legacy.messages.at(-1)!.text);
+    assert.ok(!migrated.messages[0].text.includes("RTX 4090"));
+    assert.equal(migrated.hour, legacy.hour);
+    assert.equal(migrated.rng, legacy.rng);
+    assert.deepEqual(migrated.stats, legacy.stats);
+    assert.deepEqual(migrated.tasks[0].config, legacy.tasks[0].config);
+    assert.equal(
+      migrated.tasks[0].result!.score,
+      legacy.tasks[0].result!.score,
+    );
+    assert.deepEqual(parseSave(JSON.stringify(migrated)), migrated);
+    assert.equal(JSON.stringify(legacy), raw);
+    const another = structuredClone(legacy);
+    another.profile.name = "另一个旧档";
+    parseSave(JSON.stringify(another));
+    assert.equal(getLegacyBackup(), JSON.stringify(another));
+    assert.ok(
+      [...values.entries()].some(
+        ([key, value]) =>
+          key.startsWith("grados-v1-before-2012-") && value === raw,
+      ),
+    );
+  } finally {
+    if (oldDescriptor)
+      Object.defineProperty(globalThis, "localStorage", oldDescriptor);
+    else Reflect.deleteProperty(globalThis, "localStorage");
+  }
 });

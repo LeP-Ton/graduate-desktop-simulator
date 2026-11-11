@@ -24,12 +24,28 @@ import {
   MENTORS,
   PAPERS,
   TOPICS,
+  RESEARCH_CONTEXT,
   gameDate,
 } from "../game/data";
 import { careerOptions, paperQuality } from "../game/research";
-import { exportGame, loadGame, parseSave, saveGame } from "../game/storage";
+import {
+  exportGame,
+  loadGame,
+  parseSave,
+  saveGame,
+  getLegacyBackup,
+  exportLegacyBackup,
+} from "../game/storage";
 import type { GameState } from "../game/types";
-import { Button, Hint, Meter, PageHead, Pill, SectionTitle } from "./shared";
+import {
+  Button,
+  Hint,
+  Meter,
+  PageHead,
+  Pill,
+  SectionTitle,
+  PeriodAvatar,
+} from "./shared";
 import type { AppProps } from "./shared";
 export function AI({ state: s, dispatch, open }: AppProps) {
   return (
@@ -38,16 +54,16 @@ export function AI({ state: s, dispatch, open }: AppProps) {
         <span className="ai-logo">
           <Sparkles size={30} strokeWidth={1.3} />
         </span>
-        <Pill tone="purple">本地规则模拟 · 无外部 API</Pill>
+        <Pill tone="purple">本地脚本与桌面工具 · 2012</Pill>
         <h1>
-          一起思考，
+          科研工具箱
           <br />
-          也保持独立判断。
+          文献、统计与格式检查
         </h1>
         <p>
-          我可以帮你走得快一些。
+          使用现成脚本整理书目、计算统计量、检查文稿。
           <br />
-          但每一个重要结论，都值得你亲自确认。
+          工具输出必须对照原文、数据和公式核查。
         </p>
       </div>
       <div className="ai-tools">
@@ -55,26 +71,26 @@ export function AI({ state: s, dispatch, open }: AppProps) {
           [
             {
               kind: "summary",
-              title: "提炼文献线索",
-              text: "梳理方法、数据与研究局限。摘要不是证据。",
+              title: "整理文献索引",
+              text: "从导入的题录整理关键词与目录，不代替阅读原文。",
               icon: BookOpen,
             },
             {
               kind: "idea",
-              title: "拓展研究思路",
-              text: "提供可以检验的假设与对照设计。",
+              title: "查阅实验设计清单",
+              text: "按教材清单检查对照、数据切分与变量设置。",
               icon: Sparkles,
             },
             {
               kind: "analysis",
-              title: "辅助实验分析",
-              text: "整理观察现象，注意因果与相关的区别。",
+              title: "运行统计汇总脚本",
+              text: "计算均值和差异，仍需人工判断统计假设是否满足。",
               icon: FileJson2,
             },
             {
               kind: "polish",
-              title: "润色论文摘要",
-              text: "改善表达，核对它是否夸大了你的发现。",
+              title: "检查文稿与引文格式",
+              text: "应用参考文献样式与术语表，逐项核对检查建议。",
               icon: FileText,
             },
           ] as const
@@ -112,7 +128,7 @@ export function AI({ state: s, dispatch, open }: AppProps) {
               <div>
                 <b>
                   {i.kind === "code"
-                    ? "生成代码"
+                    ? "第三方代码"
                     : i.kind === "citation"
                       ? "参考文献"
                       : "研究结论"}{" "}
@@ -133,13 +149,12 @@ export function AI({ state: s, dispatch, open }: AppProps) {
         </div>
       ) : (
         <Hint>
-          AI
-          会节省时间，也可能产生虚构引用、错误代码或过度推断。未验证的问题会降低论文可信度；核查有真实时间成本。
+          第三方脚本和网上题录可以节省时间，也可能包含导入错误、程序缺陷和不适用的统计假设。未验证的问题会降低论文可信度；核查有真实时间成本。
         </Hint>
       )}
       <div className="button-row">
         <Button secondary onClick={() => open("ide")}>
-          <FileCode2 size={14} />在 IDE 生成与测试代码
+          <FileCode2 size={14} />在 Vim 中导入与检查代码
         </Button>
         <Button secondary onClick={() => open("writer")}>
           回到论文编辑器
@@ -152,8 +167,8 @@ export function Life({ state: s, dispatch }: AppProps) {
   return (
     <div className="page">
       <PageHead
-        eyebrow="科研之外的生活"
-        title="先照顾好自己。"
+        eyebrow="研究生生活计划 · 2012"
+        title="校园生活与个人状态"
         text="你是研究生，也不只是研究生。生活的选择同样有意义。"
         action={
           <Pill tone="orange">
@@ -180,7 +195,7 @@ export function Life({ state: s, dispatch }: AppProps) {
         ))}
       </div>
       <div className="life-hero">
-        <span>🌳</span>
+        <span>☀</span>
         <div>
           <h2>实验可以在后台，生活要在场。</h2>
           <p>睡一觉不会让你落后。良好的状态，让研究走得更远。</p>
@@ -192,7 +207,19 @@ export function Life({ state: s, dispatch }: AppProps) {
             key={l.id}
             onClick={() => dispatch({ type: "life", kind: l.id })}
           >
-            <span>{l.emoji}</span>
+            <span>
+              {
+                {
+                  sleep: "☾",
+                  exercise: "◉",
+                  meal: "♨",
+                  social: "☕",
+                  intern: "▣",
+                  ta: "✎",
+                  leisure: "♫",
+                }[l.id]
+              }
+            </span>
             <div>
               <h3>{l.name}</h3>
               <p>{l.description}</p>
@@ -229,7 +256,9 @@ export function Academic({ state: s, open }: AppProps) {
         }
       />
       <div className="student-card">
-        <span className="student-avatar">{s.profile.avatar}</span>
+        <span className="student-avatar">
+          <PeriodAvatar value={s.profile.avatar} />
+        </span>
         <div>
           <h2>{s.profile.name}</h2>
           <p>{DIRECTIONS[s.profile.direction].name}</p>
@@ -408,7 +437,23 @@ export function Files({ state: s, open }: AppProps) {
       icon: FileJson2,
       size: t.status === "done" ? "结果已生成" : "任务记录",
       text: JSON.stringify(
-        { config: t.config, result: t.result || null, logs: t.logs },
+        {
+          config: {
+            ...t.config,
+            model:
+              RESEARCH_CONTEXT[s.profile.direction].modelNames[t.config.model],
+            dataset:
+              RESEARCH_CONTEXT[s.profile.direction].datasetNames[
+                t.config.dataset
+              ],
+            server:
+              RESEARCH_CONTEXT[s.profile.direction].serverNames[
+                t.config.server
+              ],
+          },
+          result: t.result || null,
+          logs: t.logs,
+        },
         null,
         2,
       ),
@@ -455,7 +500,7 @@ export function Files({ state: s, open }: AppProps) {
       </aside>
       <main className="page">
         <PageHead
-          title="你的探索，都在这里。"
+          title="科研工作目录"
           text={`${s.profile.name} / research-workspace / ${folder === "all" ? "全部文件" : folder}`}
           action={
             <Pill tone="slate">
@@ -519,7 +564,7 @@ export function Settings({
     <div className="page settings-page">
       <PageHead
         eyebrow="保存你的每一步"
-        title="把今天，留给明天。"
+        title="控制面板 · 存档与恢复"
         text="自动存档持续保存当前进度；手动存档保留一个独立快照。"
       />
       <div className="save-current">
@@ -622,6 +667,27 @@ export function Settings({
           </div>
         </section>
       </div>
+      {getLegacyBackup() && (
+        <section className="legacy-save">
+          <SectionTitle>旧版本迁移前的原始存档</SectionTitle>
+          <p>
+            升级为 2012
+            版前的原始进度已在本机单独保留，包含当时的文稿与实验记录。
+          </p>
+          <Button
+            secondary
+            onClick={() =>
+              toast(
+                exportLegacyBackup()
+                  ? "已导出迁移前原始存档。"
+                  : "原始备份不存在或浏览器存储不可用。",
+              )
+            }
+          >
+            导出迁移前原档
+          </Button>
+        </section>
+      )}
       <SectionTitle>重新出发</SectionTitle>
       <p className="section-note">
         新建角色会开始新的四周，并覆盖自动进度。手动快照仍会保留，建议先导出当前存档。
@@ -633,10 +699,10 @@ export function Settings({
       <div className="about-grados">
         <GraduationCap size={30} strokeWidth={1.1} />
         <div>
-          <b>GradOS · 研究生桌面模拟器</b>
+          <b>研究生桌面模拟器：2012</b>
           <p>四周科研周期 · v1.0 · 本地优先</p>
         </div>
-        <span>保持好奇，诚实求证。</span>
+        <span>2012 年秋季学期 · 本地科研模拟</span>
       </div>
     </div>
   );

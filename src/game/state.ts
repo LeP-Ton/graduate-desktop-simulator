@@ -2,7 +2,7 @@ import { END_HOUR, MENTORS, NPCS, SECTIONS } from "./data";
 import { message } from "./mutations";
 import type { GameState, Profile, Section } from "./types";
 
-export function createGame(profile: Profile, seed = 20260907): GameState {
+export function createGame(profile: Profile, seed = 20120903): GameState {
   const sections = Object.fromEntries(
     SECTIONS.map((x) => [x.id, ""]),
   ) as Record<Section, string>;
@@ -12,6 +12,7 @@ export function createGame(profile: Profile, seed = 20260907): GameState {
   >;
   const s: GameState = {
     version: 1,
+    era: 2012,
     profile,
     hour: 8,
     rng: seed,
@@ -20,7 +21,7 @@ export function createGame(profile: Profile, seed = 20260907): GameState {
       stress: 16,
       mood: 82,
       health: 88,
-      money: 1600,
+      money: 1200,
       compute: MENTORS[profile.mentor].quota,
       skill: 22 + profile.abilities.insight * 2,
       engineering: 15 + profile.abilities.coding * 2,
@@ -87,7 +88,7 @@ export function createGame(profile: Profile, seed = 20260907): GameState {
         id: "welcome",
         from: "研究生院",
         subject: "欢迎开启你的研究生生活",
-        text: "欢迎来到计算机与人工智能学院。未来四周，你可以认真做科研，也可以探索工程、合作与生活。周四 14:00 为课题组组会，请提前准备。毕业是一段三年的旅程，本次体验仅记录你的第一个科研月。",
+        text: "欢迎来到计算机学院。未来四周，你可以认真做科研，也可以探索工程、合作与生活。周四 14:00 为课题组组会，请提前准备。毕业是一段三年的旅程，本次体验仅记录你的第一个科研月。",
         hour: 8,
         read: false,
         kind: "school",
@@ -96,7 +97,7 @@ export function createGame(profile: Profile, seed = 20260907): GameState {
         id: "workshop-call",
         from: "NCR 工作坊组委会",
         subject: "征稿启事：一个小问题，也值得好好研究",
-        text: "新锐计算研究工作坊欢迎有明确研究问题、可靠实验与诚实局限性讨论的短论文。本游戏中审稿约需 30 个模拟小时。可从论文编辑器投稿。所有会议均为虚构。",
+        text: "青年计算研究工作坊 2012欢迎有明确研究问题、可靠实验与诚实局限性讨论的短论文。本游戏中审稿约需 30 个模拟小时。可从论文编辑器投稿。所有会议均为虚构。",
         hour: 8,
         read: false,
         kind: "conference",
@@ -121,7 +122,7 @@ export function createGame(profile: Profile, seed = 20260907): GameState {
   message(
     s,
     "senior",
-    "同学，欢迎！我把工具验证、数据清洗和复现相关文献放进了学术搜索。建议先做基线，再一次只改一个变量。GPU 今天上午有人在用，先读文献正合适。",
+    "同学，欢迎！我把排序学习、数据清洗和复现相关文献放进了学术搜索。建议先做基线，再一次只改一个变量。实验服务器今天上午有人在用，先读文献正合适。",
   );
   return s;
 }

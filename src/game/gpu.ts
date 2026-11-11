@@ -1,3 +1,4 @@
+import { RESEARCH_CONTEXT, SERVERS } from "./data";
 import { requiredMemory, simulateExperiment } from "./research";
 import { notify, once } from "./mutations";
 import type { GameState } from "./types";
@@ -19,6 +20,7 @@ export function serverBusyUntil(
 export function tickQueue(s: GameState, dt: number, from: number) {
   for (const server of ["rtx", "a100"] as const) {
     if (serverBusyUntil(s, server, from) > from) continue;
+    const context = RESEARCH_CONTEXT[s.profile.direction];
     let task = s.tasks.find(
       (t) => t.config.server === server && t.status === "running",
     );
@@ -32,24 +34,24 @@ export function tickQueue(s: GameState, dt: number, from: number) {
       task.status = "running";
       task.startedAt = from;
       task.logs.push(
-        `[调度] 分配 ${server === "rtx" ? "RTX 4090 / 24GB" : "A100 / 48GB"}，启动训练。`,
+        `[调度] 分配 ${context.serverNames[server]} / ${SERVERS[server].capacity}GB ${context.resourceLabel}，启动实验。`,
       );
-      if (requiredMemory(task.config) > (server === "rtx" ? 24 : 48)) {
+      if (requiredMemory(task.config) > SERVERS[server].capacity) {
         task.status = "failed";
         task.finishedAt = s.hour;
         task.logs.push(
-          `[错误] CUDA out of memory：需要 ${requiredMemory(task.config).toFixed(1)}GB，超过服务器显存。缩小模型 / batch，或使用 A100。`,
+          `[错误] ${s.profile.direction === "ml" ? "CUDA out of memory" : "工作集 out of memory"}：需要 ${requiredMemory(task.config).toFixed(2)}GB，超过 ${SERVERS[server].capacity}GB ${context.resourceLabel}。缩小方案或批大小，或改用容量更大的共享服务器。`,
         );
         notify(
           s,
           "实验未能启动",
-          `${task.config.name} 显存不足。请在终端查看诊断并修改配置。`,
+          `${task.config.name} ${context.resourceLabel}不足。请在终端查看诊断并修改配置。`,
           "terminal",
         );
         continue;
       }
     }
-    const rate = server === "a100" ? 3 : 1;
+    const rate = SERVERS[server].rate;
     if (s.stats.compute < rate * dt) {
       once(s, `budget-${task.id}`, () => {
         task!.logs.push(
@@ -76,7 +78,7 @@ export function tickQueue(s: GameState, dt: number, from: number) {
     );
     if (after > before)
       task.logs.push(
-        `[训练] epoch ${after}/${task.config.epochs} · 已用算力 ${task.spent.toFixed(2)} GPUh`,
+        `[实验] 迭代 ${after}/${task.config.epochs} · 已用算力 ${task.spent.toFixed(2)} ${context.unit}`,
       );
     if (task.progress >= task.duration) {
       task.status = "done";

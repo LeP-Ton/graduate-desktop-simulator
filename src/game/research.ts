@@ -12,8 +12,8 @@ export const clamp = (value: number, min = 0, max = 100) =>
 export function requiredMemory(c: ExperimentConfig) {
   return (
     MODELS.find((m) => m.id === c.model)!.memory +
-    c.batch * 0.18 +
-    (c.method === "verified" ? 5 : 0)
+    c.batch * 0.018 +
+    (c.method === "verified" ? 0.5 : 0)
   );
 }
 export function experimentDuration(c: ExperimentConfig) {
@@ -36,6 +36,7 @@ export function simulateExperiment(task: TrainingTask): ExperimentResult {
   const methodGain =
     c.method === "baseline" ? 0 : c.method === topic.method ? 12 : 7;
   const modelGain = c.model === "large" ? 6 : c.model === "balanced" ? 3 : 0;
+  const systems = topic.direction === "systems";
   const badRate = c.learningRate >= 0.01,
     slowRate = c.learningRate <= 0.0001;
   const overfit = c.epochs > 10;
@@ -76,19 +77,27 @@ export function simulateExperiment(task: TrainingTask): ExperimentResult {
     evidence: string[] = [];
   if (badRate)
     diagnosis.push(
-      "学习率 0.01 过大，梯度震荡导致验证损失不稳定。下一轮尝试 0.001。",
+      systems
+        ? "分区调整步长 0.01 过大，分区边界反复变动，中间数据迁移引入性能抖动。下一轮尝试 0.001。"
+        : "学习率 0.01 过大，梯度震荡导致验证损失不稳定。下一轮尝试 0.001。",
     );
   if (slowRate)
     diagnosis.push(
-      "学习率较小，在当前训练轮数内收敛不足。适当调高学习率可节省算力。",
+      systems
+        ? "分区调整步长较小，当前迭代次数内尚未均衡热点任务。适当调高步长可减少调度开销。"
+        : "学习率较小，在当前训练轮数内收敛不足。适当调高学习率可节省算力。",
     );
   if (overfit)
     diagnosis.push(
-      "训练损失下降但验证损失上升：训练轮数过多，模型在小数据上过拟合。建议使用 8 轮。",
+      systems
+        ? "调度在同一负载上迭代过多，分区方案过度贴合已见日志，留出负载代价回升。建议使用 8 轮并在新负载复核。"
+        : "训练损失下降但验证损失上升：训练轮数过多，模型在小数据上过拟合。建议使用 8 轮。",
     );
   if (c.dataset === "raw")
     diagnosis.push(
-      "原始数据含重复和噪声，表面分数高于真实泛化能力。请使用清洗集或跨领域留出集复核。",
+      systems
+        ? "原始日志的重复键令缓存命中率偏高，当前负载得分虚高。请使用清洗日志与变化键分布负载复核。"
+        : "原始数据含重复和噪声，表面分数高于真实泛化能力。请使用清洗集或跨领域留出集复核。",
     );
   if (task.codeQuality < 65)
     diagnosis.push(
@@ -96,7 +105,7 @@ export function simulateExperiment(task: TrainingTask): ExperimentResult {
     );
   if (task.aiRisk)
     diagnosis.push(
-      "未验证的 AI 代码遗漏了验证集隔离，导致数据泄漏。修复代码后重新运行。",
+      "未核验的第三方代码遗漏了验证集隔离，导致数据泄漏。修复数据隔离后重新运行。",
     );
   if (c.method === "baseline")
     evidence.push(
@@ -265,7 +274,7 @@ export function reviewManuscript(s: GameState, venueId: string, round: number) {
     feedback.push("R1：相关工作引用不足，请补充已阅读且核实过的文献。");
   if (s.aiIssues.some((i) => !i.resolved))
     feedback.push(
-      "R3：文稿或代码含未核实的 AI 内容，可能影响学术可信度，请先核查。",
+      "R3：文稿或代码含未核实的脚本输出、模板结论，可能影响学术可信度，请先核查。",
     );
   if (!s.manuscript.figures.length)
     feedback.push("R2：请将已分析的实验图表加入论文，明确对应的实验设置。");
@@ -297,7 +306,7 @@ export function reviewManuscript(s: GameState, venueId: string, round: number) {
 export function careerOptions(s: GameState) {
   return [
     {
-      name: "AI 算法工程师",
+      name: "算法与模式识别工程师",
       score: Math.round(
         clamp(
           s.stats.skill * 0.5 +

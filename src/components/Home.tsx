@@ -13,10 +13,23 @@ import {
   Target,
   Zap,
 } from "lucide-react";
-import { DIRECTIONS, MENTORS, TOPICS, gameDate } from "../game/data";
+import {
+  DIRECTIONS,
+  MENTORS,
+  TOPICS,
+  RESEARCH_CONTEXT,
+  gameDate,
+} from "../game/data";
 import { paperQuality, researchEvidence } from "../game/research";
 import type { AppId } from "../game/types";
-import { AppIcon, Button, Meter, Pill, SectionTitle } from "./shared";
+import {
+  AppIcon,
+  Button,
+  Meter,
+  Pill,
+  SectionTitle,
+  PeriodAvatar,
+} from "./shared";
 import type { AppProps } from "./shared";
 export function Home({ state: s, dispatch, open }: AppProps) {
   const date = gameDate(s.hour),
@@ -57,10 +70,12 @@ export function Home({ state: s, dispatch, open }: AppProps) {
     <div className="home-layout">
       <aside className="app-sidebar">
         <div className="sidebar-profile">
-          <div>{s.profile.avatar}</div>
+          <div>
+            <PeriodAvatar value={s.profile.avatar} />
+          </div>
           <b>
             {s.profile.name}
-            <small>计算机与人工智能学院</small>
+            <small>计算机学院</small>
           </b>
         </div>
         <span className="nav-label">我的空间</span>
@@ -97,7 +112,7 @@ export function Home({ state: s, dispatch, open }: AppProps) {
                   search: "学术搜索",
                   terminal: "实验终端",
                   writer: "论文编辑器",
-                  ai: "AI 科研助手",
+                  ai: "科研工具箱",
                 } as Record<string, string>
               )[id]
             }
@@ -110,6 +125,11 @@ export function Home({ state: s, dispatch, open }: AppProps) {
         </div>
       </aside>
       <main className="home-content">
+        <div className="period-browser-bar">
+          <b>Internet Explorer 9</b>
+          <span>http://graduate.lab.edu.cn/home/</span>
+          <button onClick={() => open("mail")}>校园邮箱</button>
+        </div>
         <div className="home-greeting">
           <div>
             <span className="eyebrow">
@@ -120,7 +140,7 @@ export function Home({ state: s, dispatch, open }: AppProps) {
                   : "晚上好"}
               ，{s.profile.name}
             </span>
-            <h1>今天，也离答案近一点。</h1>
+            <h1>2012 级研究生工作台</h1>
           </div>
           <Pill>
             <span className="online-dot" /> 科研周期 · 第 {date.day} 天
@@ -129,20 +149,20 @@ export function Home({ state: s, dispatch, open }: AppProps) {
         <div className="home-hero">
           <div className="hero-copy">
             <span>
-              <i /> 你的研究，没有标准答案
+              <i /> 计算机学院 · 研究生信息服务
             </span>
             <h2>
-              把好奇心，
+              科研计划与
               <br />
-              变成新的发现。
+              实验进度记录
             </h2>
             <p>
               {topic
                 ? topic.question
-                : "从一篇论文、一个疑问开始。\n下一次突破，也许就在你的桌面上。"}
+                : "欢迎使用课题组科研管理系统。\n请先查阅参考文献，再制定本周实验计划。"}
             </p>
             <button onClick={() => open(topic ? "terminal" : "search")}>
-              {topic ? "继续我的研究" : "开始探索文献"}
+              {topic ? "继续我的研究" : "检索参考文献"}
               <ArrowRight size={16} />
             </button>
           </div>
@@ -367,7 +387,10 @@ export function Home({ state: s, dispatch, open }: AppProps) {
                     </span>
                   </div>
                   <div className="topic-bottom">
-                    <span>预计 {t.cost} GPUh 起</span>
+                    <span>
+                      预计 {t.cost} {RESEARCH_CONTEXT[s.profile.direction].unit}{" "}
+                      起
+                    </span>
                     <Button
                       small
                       secondary={t.id !== s.topicId}
