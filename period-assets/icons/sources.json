@@ -1,0 +1,298 @@
+{
+  "computer": {
+    "source_url": "https://raw.githubusercontent.com/Visnalize/resources/main/icons/win7/Shell32.dll/imageres_109.ico",
+    "source_file": "imageres_109.ico",
+    "source_sha256": "1c874c904585f1febe54278ec4120797dc74926086de75211b9c0502e8878d11",
+    "native_sizes": [
+      16,
+      24,
+      32,
+      48,
+      64,
+      256
+    ],
+    "variants": {
+      "16": "computer-16.png",
+      "24": "computer-24.png",
+      "32": "computer-32.png",
+      "48": "computer-48.png",
+      "64": "computer-64.png",
+      "256": "computer-256.png"
+    },
+    "processing": "无损解码原始 ICO，显式选择同尺寸最高色深帧；不修改图形、不放大",
+    "color_depths": {
+      "16": 32,
+      "24": 32,
+      "32": 32,
+      "48": 32,
+      "64": 32,
+      "256": 32
+    }
+  },
+  "folder": {
+    "source_url": "https://raw.githubusercontent.com/Visnalize/resources/main/icons/win7/Standard%20Folders/imageres_3.ico",
+    "source_file": "imageres_3.ico",
+    "source_sha256": "bef53904908769ceeb60f8e0976c3194e73534f00f4afb65497c2091121b98b2",
+    "native_sizes": [
+      16,
+      32,
+      48,
+      256
+    ],
+    "variants": {
+      "16": "folder-16.png",
+      "32": "folder-32.png",
+      "48": "folder-48.png",
+      "256": "folder-256.png"
+    },
+    "processing": "无损解码原始 ICO，显式选择同尺寸最高色深帧；不修改图形、不放大",
+    "color_depths": {
+      "16": 32,
+      "32": 32,
+      "48": 32,
+      "256": 32
+    }
+  },
+  "schedule": {
+    "source_url": "https://raw.githubusercontent.com/Visnalize/resources/main/icons/win7/Control%20Panel/imageres_80.ico",
+    "source_file": "imageres_80.ico",
+    "source_sha256": "789d160c6789a396e62c2d025187a0de793cc7bcdbe1f22485d079c184dae023",
+    "native_sizes": [
+      16,
+      32,
+      48
+    ],
+    "variants": {
+      "16": "schedule-16.png",
+      "32": "schedule-32.png",
+      "48": "schedule-48.png"
+    },
+    "processing": "无损解码原始 ICO，显式选择同尺寸最高色深帧；不修改图形、不放大",
+    "color_depths": {
+      "16": 32,
+      "32": 32,
+      "48": 32
+    }
+  },
+  "study": {
+    "source_url": "https://raw.githubusercontent.com/Visnalize/resources/main/icons/win7/Special%20Folders/imageres_162.ico",
+    "source_file": "imageres_162.ico",
+    "source_sha256": "9658fe1598581f8b9410f74f2ec6dc861a6827d4adf41f8494d8629ab9818367",
+    "native_sizes": [
+      16,
+      32,
+      48,
+      256
+    ],
+    "variants": {
+      "16": "study-16.png",
+      "32": "study-32.png",
+      "48": "study-48.png",
+      "256": "study-256.png"
+    },
+    "processing": "无损解码原始 ICO，显式选择同尺寸最高色深帧；不修改图形、不放大",
+    "color_depths": {
+      "16": 32,
+      "32": 32,
+      "48": 32,
+      "256": 32
+    }
+  },
+  "diary": {
+    "source_url": "https://raw.githubusercontent.com/Visnalize/resources/main/icons/win7/Windows%20Journal/Journal_104.ico",
+    "source_file": "Journal_104.ico",
+    "source_sha256": "b6c59e0d4262edebc95261f15ba82f907745f4f87221689c89e8063ccd1e314a",
+    "native_sizes": [
+      16,
+      32,
+      48,
+      256
+    ],
+    "variants": {
+      "16": "diary-16.png",
+      "32": "diary-32.png",
+      "48": "diary-48.png",
+      "256": "diary-256.png"
+    },
+    "processing": "无损解码原始 ICO，显式选择同尺寸最高色深帧；不修改图形、不放大",
+    "color_depths": {
+      "16": 32,
+      "32": 32,
+      "48": 32,
+      "256": 32
+    }
+  },
+  "documents": {
+    "source_url": "https://raw.githubusercontent.com/Visnalize/resources/main/icons/win7/Special%20Folders/imageres_112.ico",
+    "source_file": "imageres_112.ico",
+    "source_sha256": "bd6632d3fe8d72dce265f93a54a9a75a4baf7d27ab81202a977b811856d0bc6e",
+    "native_sizes": [
+      16,
+      24,
+      32,
+      48,
+      256
+    ],
+    "variants": {
+      "16": "documents-16.png",
+      "24": "documents-24.png",
+      "32": "documents-32.png",
+      "48": "documents-48.png",
+      "256": "documents-256.png"
+    },
+    "processing": "无损解码原始 ICO，显式选择同尺寸最高色深帧；不修改图形、不放大",
+    "color_depths": {
+      "16": 32,
+      "24": 32,
+      "32": 32,
+      "48": 32,
+      "256": 32
+    }
+  },
+  "favorites": {
+    "source_url": "https://raw.githubusercontent.com/Visnalize/resources/main/icons/win7/Filetypes%2C%20Devices%2C%20Miscellaneous/imageres_1024.ico",
+    "source_file": "imageres_1024.ico",
+    "source_sha256": "d08c3cd05e0c12a19556f6004a24393547597b9795b1cb264d20da73abbc45ff",
+    "native_sizes": [
+      16,
+      24,
+      32,
+      48,
+      256
+    ],
+    "variants": {
+      "16": "favorites-16.png",
+      "24": "favorites-24.png",
+      "32": "favorites-32.png",
+      "48": "favorites-48.png",
+      "256": "favorites-256.png"
+    },
+    "processing": "无损解码原始 ICO，显式选择同尺寸最高色深帧；不修改图形、不放大",
+    "color_depths": {
+      "16": 32,
+      "24": 32,
+      "32": 32,
+      "48": 32,
+      "256": 32
+    }
+  },
+  "control-panel": {
+    "source_url": "https://raw.githubusercontent.com/Visnalize/resources/main/icons/win7/Control%20Panel/imageres_27.ico",
+    "source_file": "imageres_27.ico",
+    "source_sha256": "911b1dee433aa7171c9fb8834ed652fcde4fdbe517ab9272c78f0ea1af2ec200",
+    "native_sizes": [
+      16,
+      24,
+      32,
+      48,
+      64,
+      256
+    ],
+    "variants": {
+      "16": "control-panel-16.png",
+      "24": "control-panel-24.png",
+      "32": "control-panel-32.png",
+      "48": "control-panel-48.png",
+      "64": "control-panel-64.png",
+      "256": "control-panel-256.png"
+    },
+    "processing": "无损解码原始 ICO，显式选择同尺寸最高色深帧；不修改图形、不放大",
+    "color_depths": {
+      "16": 32,
+      "24": 32,
+      "32": 32,
+      "48": 32,
+      "64": 32,
+      "256": 32
+    }
+  },
+  "ie": {
+    "source_url": "https://raw.githubusercontent.com/Visnalize/resources/main/icons/win7/Internet%20Explorer/iexplore_7.ico",
+    "source_file": "iexplore_7.ico",
+    "source_sha256": "2aff48721e6ee82fa140d70b4c7862ad779513eab1bffa63dcae34488312aae8",
+    "native_sizes": [
+      16,
+      24,
+      32,
+      48,
+      256
+    ],
+    "variants": {
+      "16": "ie-16.png",
+      "24": "ie-24.png",
+      "32": "ie-32.png",
+      "48": "ie-48.png",
+      "256": "ie-256.png"
+    },
+    "processing": "无损解码原始 ICO，显式选择同尺寸最高色深帧；不修改图形、不放大",
+    "color_depths": {
+      "16": 32,
+      "24": 32,
+      "32": 32,
+      "48": 32,
+      "256": 32
+    }
+  },
+  "shortcut": {
+    "source_url": "https://raw.githubusercontent.com/Visnalize/resources/main/icons/win7/Shell32.dll/shell32_16769.ico",
+    "source_file": "shell32_16769.ico",
+    "source_sha256": "5c6347c3cc704f37565c841920f262e2ea95bf77009126e041b2fda4b590bbd4",
+    "native_sizes": [
+      16,
+      24,
+      32,
+      48
+    ],
+    "variants": {
+      "16": "shortcut-16.png",
+      "24": "shortcut-24.png",
+      "32": "shortcut-32.png",
+      "48": "shortcut-48.png"
+    },
+    "processing": "无损解码原始 ICO，显式选择同尺寸最高色深帧；不修改图形、不放大",
+    "color_depths": {
+      "16": 32,
+      "24": 32,
+      "32": 32,
+      "48": 32
+    }
+  },
+  "qq": {
+    "source_url": "https://zjc.wtu.edu.cn/images/qq-1.png",
+    "reference_url": "https://qzonestyle.gtimg.cn/qzone/qzact/act/external/tiqq/logo.png",
+    "source_sha256": "79cc3f67866c1a3193d11e6f2134e2ba282978e4932847631445eadab42bd827",
+    "original_size": [
+      584,
+      584
+    ],
+    "native_sizes": [
+      375
+    ],
+    "variants": {
+      "375": "qq.png"
+    },
+    "processing": "保留真实企鹅原图与原有透明通道；仅去除透明边距 [105, 81, 480, 500]，不重绘、不放大。"
+  },
+  "start-orb": {
+    "source_url": "https://github.com/EJSnow/Windows-7-skin",
+    "source_files": [
+      "Windows 7 start button 100%.png",
+      "Windows 7 start button 150%.png"
+    ],
+    "original_sizes": [
+      [
+        54,
+        162
+      ],
+      [
+        81,
+        243
+      ]
+    ],
+    "processing": "保留原版普通、悬停和按下三态；Windows 图形取普通态，不重绘",
+    "source_sha256": {
+      "start-orb.png": "008d4c2e60a352887d99fd18defc4f1f6279e78628511d761340ad935ef9b190",
+      "start-orb-150.png": "4cabea431c29a946b71505cccdaeb1b33787a2b9c630bc5a586a68c7ad99d235"
+    }
+  }
+}
