@@ -14,6 +14,8 @@
 ## 开发与验证
 - `npm install` 安装依赖，`npm run dev` 启动本地开发。
 - `npm run build` 执行 TypeScript 检查并构建，`npm test` 验证引擎。
+- `npm run package:pages` 生成 `artifacts/pages/`；源码位于 main，构建产物发布到同仓库 gh-pages 分支根目录，使用 GitHub Pages 托管。
+- 在线试玩地址：`https://lep-ton.github.io/graduate-desktop-simulator/`。Vite 使用相对 base，保持项目子目录下的资源可用。
 - 模拟时间以小时表示，最小推进步长 0.25 小时；四周上限 672 小时。动作推进和自动推进使用同一时间函数。
 - 所有随机行为使用存档中的种子；禁止在核心规则中使用 `Math.random()`。
 - 时间推进时处理后台队列、NPC 日程、组会和审稿，不依赖界面打开状态。
