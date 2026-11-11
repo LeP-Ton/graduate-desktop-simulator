@@ -3,7 +3,7 @@
 ## 基本信息
 - 需求 ID：REQ-20261111135543
 - 来源：用户提供《研究生桌面模拟器》完整设计与第一版验收标准。
-- 状态：原首版已交付；2012版构建、18项引擎、11组浏览器及离线验证通过，正在更新线上版本。
+- 状态：2012版已上线；构建、18项引擎、11组本地及真实线上浏览器检查、离线验证通过，待用户人工试玩。
 - 创建时间：2026-11-11 13:55:43（Asia/Shanghai）。
 - 项目：当前仓库；初始分支 main，无提交。
 - 关联聊天：2026-11-11《研究生桌面模拟器》开发，会话-1 起；聊天 ID `01a1c92c-79a6-7512-b309-e74002de9243`（由桌面工具返回）。
@@ -37,6 +37,7 @@
 - 本地试玩：`artifacts/GradOS-即点即玩.html` 可用 Chrome 离线打开；`npm run package:local` 可重新生成。源码与构建压缩包同放于 `artifacts/`。
 - GitHub：[LeP-Ton/graduate-desktop-simulator](https://github.com/LeP-Ton/graduate-desktop-simulator)，现为公开仓库，默认分支 main。
 - 在线试玩：[研究生桌面模拟器](https://lep-ton.github.io/graduate-desktop-simulator/)。Pages 构建成功、HTTPS 返回 200，11 组真实线上交互检查通过。
+- 2012版：[直接试玩](https://lep-ton.github.io/graduate-desktop-simulator/?v=2012)。源码提交 `cdf7543`，部署提交 `fb5b22a`，新版本11组真实线上验收通过。
 - 待办：用户实际试玩与体验反馈。公开仓库设置已获用户明确授权并执行。
 - 未验证：Safari、Firefox、手机实机与人工体验验收。已知范围边界见根目录 [TODO](../../../TODO.md)。
 - Git：首版代码提交为 `d2aac18acbc6f4f1510c3e1f3933f496b5340e21`，当前分支 main 跟踪 origin/main。后续发布文档补记单独提交，不修改游戏代码。此前 Sites 同步被拒绝时未创建提交，历史记录保留。

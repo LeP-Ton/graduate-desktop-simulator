@@ -12,7 +12,7 @@
 
 现有公开仓库的 `main` 分支保存源码，`gh-pages` 分支保存网页构建产物。执行 `npm run package:pages` 生成 `artifacts/pages/`，将其发布到同一仓库的 `gh-pages` 分支，Pages 来源选择该分支根目录。Vite 使用相对资源路径，适配项目子目录。
 
-2012 版已通过本地完整科研、旧档迁移、离线图片与窄屏验证，正在更新现有 Pages 站点。
+2012 版已更新至 Pages，线上完整科研、旧档迁移、图标加载与窄屏验证通过。[试玩2012版](https://lep-ton.github.io/graduate-desktop-simulator/?v=2012)。
 
 线上存档保存在访问者自己的浏览器中，与离线版分开；跨版本转移进度请导出、导入 JSON。
 
