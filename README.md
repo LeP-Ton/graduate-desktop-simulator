@@ -4,6 +4,8 @@
 
 当前支持本地离线试玩，并按用户要求发布源码到 GitHub 私有仓库。托管站点部署未启用。
 
+源码仓库：[LeP-Ton/graduate-desktop-simulator](https://github.com/LeP-Ton/graduate-desktop-simulator)，默认分支 `main`。
+
 ## 本地运行
 
 需要 Node.js 20+。
