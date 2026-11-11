@@ -2,9 +2,17 @@
 
 在一张可以自由切换软件的桌面上，度过四周研究生生活。先提出问题，再用有限的时间与算力验证它；也可以认真做工程、结识同门，或者给自己放个假。
 
-当前支持本地离线试玩，并按用户要求发布源码到 GitHub 私有仓库。托管站点部署未启用。
+当前支持本地离线试玩，源码保存在 GitHub 私有仓库；按用户要求新增 GitHub Pages 在线试玩部署。
 
 源码仓库：[LeP-Ton/graduate-desktop-simulator](https://github.com/LeP-Ton/graduate-desktop-simulator)，默认分支 `main`。
+
+## 在线试玩部署
+
+使用独立的公开 Pages 仓库 `LeP-Ton/graduate-desktop-simulator-pages` 托管构建产物，源码仓库保持私有。执行 `npm run package:pages` 生成 `artifacts/pages/`，将其发布到试玩仓库的 `main` 分支，Pages 来源选择根目录。Vite 使用相对资源路径，适配项目子目录。
+
+当前构建与本机子目录试玩验证通过，公开仓库创建被自动审批拒绝，等待用户明确授权公开这 5 个构建文件；尚无已部署的在线地址。
+
+线上存档保存在访问者自己的浏览器中，与离线版分开；跨版本转移进度请导出、导入 JSON。
 
 ## 本地运行
 

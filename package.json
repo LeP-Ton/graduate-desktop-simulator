@@ -8,6 +8,7 @@
     "build": "tsc -b && vite build",
     "preview": "vite preview --host 127.0.0.1",
     "package:local": "npm run build && node scripts/package-local.mjs",
+    "package:pages": "npm run build && node scripts/prepare-pages.mjs",
     "test": "node --import tsx --test tests/*.test.ts"
   },
   "dependencies": {
